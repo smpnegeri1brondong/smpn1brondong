@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SMPN 1 Brondong - Lamongan</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{font-family:Poppins,system-ui} body{margin:0;background:#f6f8fc}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;border:0}
+.btn-blue{background:#0e4a8a;color:#fff;box-shadow:0 8px 24px rgba(14,74,138,.25)}
+.btn-white{background:#fff;color:#334155;border:1px solid #e2e8f0}
+.card{border-radius:20px;background:#fff;border:1px solid #f1f5f9;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+</style>
+</head>
+<body>
+
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);background:rgba(255,255,255,.9);border-bottom:1px solid #f1f5f9">
+<div style="max-width:1180px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:10px">
+<img id="logo-smp-img" style="width:25px;height:30px;border-radius:10px;object-fit:cover;background:#fff;display:block">
+<script>
+(function(){
+  const el = document.getElementById('logo-smp-img');
+  const candidates = ['logo-smp.jpg','logo-smp.jpeg','logo-smp.png','logo-smp.JPG','logo-smp','logo-smp.webp','logo-smp.jpg.jpg'];
+  let i=0;
+  function tryNext(){
+    if(i>=candidates.length){
+      el.style.display='none';
+      const fallback = document.createElement('div');
+      fallback.style.cssText='width:36px;height:36px;border-radius:10px;background:#0e4a8a;color:#fff;display:grid;place-items:center;font-weight:700';
+      fallback.textContent='S';
+      el.parentNode.insertBefore(fallback, el);
+      return;
+    }
+    el.src = candidates[i++];
+  }
+  el.onerror = tryNext;
+  tryNext();
+})();
+</script>
+<div><div style="font-weight:700;color:#0e4a8a;font-size:15px">SMPN 1 BRONDONG</div><div style="font-size:11px;color:#64748b">Lamongan • Jawa Timur</div></div></div>
+<nav style="display:flex;gap:6px"><a href="#beranda" style="padding:8px 14px;border-radius:999px;font-size:13px;color:#475569;text-decoration:none">Beranda</a><a href="#profil" style="padding:8px 14px;border-radius:999px;font-size:13px;color:#475569;text-decoration:none">Profil</a><a href="#visi-misi" style="padding:8px 14px;border-radius:999px;font-size:13px;color:#475569;text-decoration:none">Visi Misi</a><a href="#ekskul" style="padding:8px 14px;border-radius:999px;font-size:13px;color:#475569;text-decoration:none">Ekskul</a><a href="#kontak" style="padding:8px 14px;border-radius:999px;font-size:13px;color:#475569;text-decoration:none">Kontak</a></nav>
+</div>
+</header>
+
+<section id="beranda" style="max-width:1180px;margin:0 auto;padding:40px 20px 60px">
+<div style="display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center">
+<div>
+<h1 style="font-size:46px;line-height:1.08;font-weight:800;letter-spacing:-.02em;color:#0f172a;margin:0">SMP Negeri 1 Brondong<br><span style="color:#0e4a8a">Beriman, Gemilang, Mandiri</span></h1>
+<p style="margin-top:16px;font-size:15px;line-height:26px;color:#475569;max-width:56ch">Sekolah negeri unggulan di pesisir Lamongan yang berkomitmen mencetak generasi cerdas, berakhlak mulia, dan siap bersaing di era digital. Fasilitas lengkap, guru profesional, lingkungan Islami.</p>
+<div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap"><a href="#profil" class="btn btn-blue">Lihat Profil Sekolah →</a><a href="#visi-misi" class="btn btn-white">Lihat Visi Misi Sekolah</a></div>
+<div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;max-width:420px">
+<div class="card" style="padding:12px"><div style="font-size:20px;font-weight:700;color:#0e4a8a">440+</div><div style="font-size:11px;color:#64748b">Siswa Aktif</div></div>
+<div class="card" style="padding:12px"><div style="font-size:20px;font-weight:700;color:#0e4a8a">44</div><div style="font-size:11px;color:#64748b">Guru & Tendik</div></div>
+<div class="card" style="padding:12px"><div style="font-size:20px;font-weight:700;color:#0e4a8a">11</div><div style="font-size:11px;color:#64748b">Ekskul</div></div>
+</div>
+</div>
+
+<div style="position:relative">
+<div style="border-radius:28px;background:linear-gradient(135deg,#0e4a8a,#1660ad,#2d8bff);padding:1px;box-shadow:0 20px 60px rgba(14,74,138,.2)">
+<div style="border-radius:27px;overflow:hidden;background:#fff">
+
+<div id="carousel-gedung" style="position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#e2e8f0;border-radius:16px;line-height:0">
+  <div id="carousel-track" style="display:flex;width:100%;height:100%;aspect-ratio:4/3;transition:transform .6s cubic-bezier(.4,0,.2,1)">
+    <img class="carousel-img" data-base="gedung-smp" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0">
+    <img class="carousel-img" data-base="gedung-smp2" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0">
+    <img class="carousel-img" data-base="hari-pramuka" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0">
+    <img class="carousel-img" data-base="pramuka" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0">
+    <img class="carousel-img" data-base="karnaval" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0">
+  </div>
+  <div style="position:absolute;bottom:14px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:5">
+    <span class="dot" onclick="goSlide(0)" style="width:24px;height:6px;border-radius:999px;background:#fff;opacity:0.9;cursor:pointer;transition:.3s"></span>
+    <span class="dot" onclick="goSlide(1)" style="width:6px;height:6px;border-radius:999px;background:#fff;opacity:0.5;cursor:pointer;transition:.3s"></span>
+    <span class="dot" onclick="goSlide(2)" style="width:6px;height:6px;border-radius:999px;background:#fff;opacity:0.5;cursor:pointer;transition:.3s"></span>
+    <span class="dot" onclick="goSlide(3)" style="width:6px;height:6px;border-radius:999px;background:#fff;opacity:0.5;cursor:pointer;transition:.3s"></span>
+    <span class="dot" onclick="goSlide(4)" style="width:6px;height:6px;border-radius:999px;background:#fff;opacity:0.5;cursor:pointer;transition:.3s"></span>
+  </div>
+  <button onclick="prevSlide()" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:999px;border:0;background:rgba(0,0,0,.4);color:#fff;cursor:pointer;backdrop-filter:blur(6px);font-size:20px">‹</button>
+  <button onclick="nextSlide()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:999px;border:0;background:rgba(0,0,0,.4);color:#fff;cursor:pointer;backdrop-filter:blur(6px);font-size:20px">›</button>
+</div>
+<div id="gedung-fallback" style="display:none;aspect-ratio:4/3;background:linear-gradient(to bottom right,#f1f5f9,#e2e8f0);place-items:center;text-align:center;padding:24px">
+<div>📷<br><b style="color:#0e4a8a">FOTO TIDAK KETEMU</b><br><small style="color:#64748b">Pastikan file ada di folder yang sama</small><br><small id="gedung-debug" style="color:red;font-size:10px"></small></div>
+</div>
+<script>
+(function(){
+  const imgs = document.querySelectorAll('.carousel-img');
+  const track = document.getElementById('carousel-track');
+  const dots = document.querySelectorAll('.dot');
+  const label = document.getElementById('carousel-label');
+  const dbg = document.getElementById('gedung-debug');
+  const bases = ['gedung-smp', 'gedung-smp2', 'hari-pramuka', 'pramuka', 'karnaval'];
+  let current = 0;
+  let totalLoaded = 0;
+  const exts = ['.jpg','.jpeg','.png','.JPG','','.webp','.JPG.jpg','.jpg.jpg'];
+
+  function loadImg(el, cb){
+    const base = el.dataset.base;
+    let i=0;
+    function tryNext(){
+      if(i>=exts.length){ el.dataset.failed='1'; cb(false); return; }
+      const src = base + exts[i++];
+      el.src = src;
+    }
+    el.onerror = tryNext;
+    el.onload = function(){ cb(true); };
+    tryNext();
+  }
+
+  let checked=0;
+  imgs.forEach(img=>{
+    loadImg(img, function(ok){
+      checked++;
+      if(ok) totalLoaded++;
+      if(checked===imgs.length){
+        if(totalLoaded===0){
+          document.getElementById('carousel-gedung').style.display='none';
+          document.getElementById('gedung-fallback').style.display='grid';
+        }
+        // hide failed but keep track width correct
+        imgs.forEach(im=>{ if(im.dataset.failed) im.style.display='none'; });
+      }
+    });
+  });
+
+  window.goSlide = function(n){
+    current = n;
+    track.style.transform = 'translateX(-'+(current*100)+'%)';
+    dots.forEach((d,idx)=>{
+      d.style.width = idx===current ? '24px' : '6px';
+      d.style.opacity = idx===current ? '0.9' : '0.5';
+    });
+    if(label) label.textContent = (current+1)+' / '+bases.length+' • '+bases[current];
+  }
+  window.nextSlide = function(){ current=(current+1)%imgs.length; goSlide(current); }
+  window.prevSlide = function(){ current=(current-1+imgs.length)%imgs.length; goSlide(current); }
+
+  setInterval(()=>{ nextSlide(); }, 3500);
+  goSlide(0);
+
+  // swipe support HP
+  let startX=0;
+  track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', e=>{
+    let diff = e.changedTouches[0].clientX - startX;
+    if(diff<-50) nextSlide();
+    if(diff>50) prevSlide();
+  });
+})();
+</script>
+
+
+<div style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:999px;background:#1c2e6c;display:grid;place-items:center">📌</div><div style="font-size:12px;line-height:1.2"><div style="font-weight:600;color:#1e293b">Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno,</div><div style="color:#64748b">Kec. Brondong, Lamongan</div></div></div>
+</div>
+</div>
+</div>                                                   
+</div>
+</div>
+</div>
+</section>
+
+<section id="profil" style="background:#fff;border-top:1px solid #f1f5f9;border-bottom:1px solid #f1f5f9;padding:60px 20px"><div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:360px 1fr;gap:56px"><div style="border-radius:24px;background:#f8fbff;border:1px solid #f1f5f9;padding:20px">
+<div style="aspect-ratio:3/4;border-radius:18px;overflow:hidden;background:#e2e8f0;position:relative">
+<img id="kepsek-img" alt="Kepala Sekolah" style="width:100%;height:100%;object-fit:cover;display:block">
+<div id="kepsek-fallback" style="position:absolute;inset:0;display:none;place-items:center;text-align:center;background:linear-gradient(to bottom right,#e2e8f0,#f1f5f9);padding:16px">
+<div><div style="width:96px;height:96px;margin:0 auto;border-radius:999px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.1);display:grid;place-items:center;font-size:28px;font-weight:800;color:#0e4a8a">KS</div><div style="margin-top:12px;font-size:11px;color:#64748b">File kepala-sekolah.jpg tidak ketemu</div><small id="kepsek-debug" style="color:red;font-size:9px"></small></div>
+</div>
+</div>
+<script>
+(function(){
+  const el = document.getElementById('kepsek-img');
+  const fb = document.getElementById('kepsek-fallback');
+  const dbg = document.getElementById('kepsek-debug');
+  const candidates = ['kepala-sekolah.jpg','kepala-sekolah.jpeg','kepala-sekolah.png','kepala-sekolah.JPG','kepala-sekolah','kepala-sekolah.webp','kepala-sekolah.jpg.jpg'];
+  let i=0;
+  function tryNext(){
+    if(i>=candidates.length){
+      el.style.display='none';
+      fb.style.display='grid';
+      if(dbg) dbg.textContent = 'Coba: '+candidates.join(', ');
+      return;
+    }
+    const src = candidates[i++];
+    if(dbg) dbg.textContent = 'Mencoba: '+src;
+    el.src = src;
+  }
+  el.onerror = tryNext;
+  el.onload = function(){ fb.style.display='none'; el.style.display='block'; };
+  tryNext();
+})();
+</script>
+<div style="margin-top:16px;text-align:center"><div style="font-weight:700">H. Husnul Anam S.Pd.,M.Pd</div><div style="font-size:13px;color:#0e4a8a">Kepala SMPN 1 Brondong</div><div style="margin-top:8px;font-size:12px;color:#64748b;font-style:italic">"Mendidik dengan hati, menginspirasi dengan aksi."</div></div></div><div><div style="font-size:12px;font-weight:700;color:#0e4a8a;letter-spacing:.2em">— PROFIL SEKOLAH</div><h2 style="margin-top:8px;font-size:32px;font-weight:800;color:#0f172a">Sekolah Pesisir yang Membanggakan Lamongan</h2><p style="margin-top:12px;color:#475569;line-height:28px">SMP Negeri 1 Brondong merupakan salah satu lembaga pendidikan yang memiliki peran penting dalam mencetak generasi muda yang berprestasi dan berkarakter. Berdiri pada tanggal 22 Februari 1985, berlokasi di wilayah Kecamatan Brondong, sekolah ini telah melalui perjalanan panjang dalam mengembangkan kualitas pendidikan serta memberikan kontribusi nyata bagi masyarakat.</p><p style="margin-top:12px;color:#475569;line-height:28px">Dengan mengusung motto BERGEMA (Beriman, Mandiri, Gemilang), SMP Negeri 1 Brondong menanamkan nilai-nilai keimanan sebagai landasan utama, membentuk kemandirian dalam belajar dan bersikap, serta mendorong peserta didik untuk meraih prestasi yang gemilang dalam berbagai bidang. Motto ini menjadi semangat bersama dalam mewujudkan lingkungan pendidikan yang unggul dan berdaya saing.</p></div></div></section>
+
+<section id="visi-misi" style="max-width:1180px;margin:0 auto;padding:60px 20px">
+<h2 style="font-size:32px;font-weight:800">Visi & Misi</h2><p style="color:#64748b;margin-top:4px">Arah dan komitmen SMPN 1 Brondong untuk masa depan.</p>
+<div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="border-radius:24px;background:#0e4a8a;color:#fff;padding:28px"><div style="font-size:12px;font-weight:700;letter-spacing:.2em;color:#facc15">VISI</div><p style="margin-top:12px;font-size:20px;line-height:28px;font-weight:600">"Terwujudnya Siswa yang Beriman dan Berkarakter, Cerdas, Berprestasi, Peduli Lingkungan, dan Berwawasan Global"</p></div>
+<div class="card"><div style="font-size:12px;font-weight:700;color:#0e4a8a;letter-spacing:.2em">MISI</div><ol style="margin-top:12px;padding-left:20px;font-size:14px;line-height:24px;color:#334155"><li>Menumbuhkan nilai-nilai keimanan, ketakwaan, dan akhlak mulia melalui pembiasaan dan keteladanan.</li><li>Membangun karakter Pelajar Pancasila melalui praktik nyata dalam pembelajaran.</li><li>Meningkatkan kecerdasan intelektual, emosional, dan spiritual melalui pembelajaran bermutu.</li><li>Memfasilitasi pengembangan bakat dan minat untuk prestasi optimal.</li><li>Menanamkan kesadaran cinta lingkungan melalui aksi nyata.</li><li>Mengembangkan kompetensi global dengan tetap mencintai budaya Indonesia.</li></ol></div>
+</div>
+</section>
+
+<section id="ekskul" style="background:#f8fafc;border-top:1px solid #f1f5f9;border-bottom:1px solid #f1f5f9;padding:60px 20px"><div style="max-width:1180px;margin:0 auto">
+<h2 style="font-size:32px;font-weight:800;color:#0f172a">Ekstrakurikuler</h2><p style="color:#64748b;margin-top:4px">Wadah pengembangan bakat, minat, dan karakter siswa.</p>
+
+
+<!-- CAROUSEL FOTO EKSKUL - 4:3 SAMA KAYAK GEDUNG - CENTER - FILE ekskul-1 s/d ekskul-11 -->
+<div style="margin-top:28px;display:flex;justify-content:center">
+  <div style="width:100%;max-width:760px">
+    <div id="carousel-ekskul" style="position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(to bottom right,#e2e8f0,#f1f5f9);border-radius:20px;box-shadow:0 8px 32px rgba(14,74,138,.12);line-height:0;border:1px solid #f1f5f9">
+      <div id="track-ekskul" style="display:flex;width:100%;height:100%;aspect-ratio:4/3;transition:transform .6s cubic-bezier(.4,0,.2,1)">
+        <img class="ekskul-img" data-base="ekskul-1" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-2" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-3" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-4" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-5" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-6" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-7" style="min-width:100%;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+      </div>
+      <!-- placeholder kalau foto belum ada - selalu kelihatan kotaknya -->
+      <div id="ekskul-placeholder" style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;background:linear-gradient(to bottom right,#f1f5f9,#e2e8f0)">
+        <div>
+          <div style="font-size:40px">📸</div>
+          <b style="color:#0e4a8a;font-size:14px">FOTO EKSKUL BELUM ADA</b><br>
+          <small style="color:#64748b;font-size:12px">Taruh file ekskul-1.jpg sampai ekskul-11.jpg di folder yang sama</small><br>
+          <small style="color:#94a3b8;font-size:11px;margin-top:6px;display:block">Ukuran sama kayak foto gedung (4:3)</small>
+        </div>
+      </div>
+      <div id="dots-ekskul" style="position:absolute;bottom:14px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:5"></div>
+      
+      <button onclick="prevEkskul()" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:999px;border:0;background:rgba(0,0,0,.45);color:#fff;cursor:pointer;backdrop-filter:blur(6px);font-size:20px;z-index:5">‹</button>
+      <button onclick="nextEkskul()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:999px;border:0;background:rgba(0,0,0,.45);color:#fff;cursor:pointer;backdrop-filter:blur(6px);font-size:20px;z-index:5">›</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const imgs = document.querySelectorAll('.ekskul-img');
+  const track = document.getElementById('track-ekskul');
+  const dotsWrap = document.getElementById('dots-ekskul');
+  const label = null;
+  const placeholder = document.getElementById('ekskul-placeholder');
+  if(!track) return;
+  let current = 0;
+  let validFound = false;
+
+  // buat 11 dots sesuai ekskul-1 sampai 11
+  imgs.forEach((_,i)=>{
+    const d = document.createElement('span');
+    d.style.cssText = 'width:6px;height:6px;border-radius:999px;background:#fff;opacity:.5;cursor:pointer;transition:.3s;display:inline-block;box-shadow:0 1px 4px rgba(0,0,0,.2)';
+    d.onclick = ()=> goEkskul(i);
+    dotsWrap.appendChild(d);
+  });
+  const dots = dotsWrap.children;
+  const exts = ['.jpg','.jpeg','.png','.JPG','.webp',''];
+
+  function loadOne(el, done){
+    let ei=0;
+    function tryNext(){
+      if(ei>=exts.length){ done(false); return; }
+      const src = el.dataset.base + exts[ei++];
+      el.src = src;
+    }
+    el.onerror = tryNext;
+    el.onload = ()=> { validFound = true; if(placeholder) placeholder.style.display='none'; done(true); };
+    tryNext();
+  }
+
+  imgs.forEach((img, idx)=>{
+    loadOne(img, (ok)=>{
+      if(!ok){
+        // kalau gagal, tetap kasih warna placeholder per slide
+        img.style.background = 'linear-gradient(to bottom right,#f1f5f9,#e2e8f0)';
+        img.alt = img.dataset.label + ' - foto belum ada';
+      }
+    });
+  });
+
+  // selalu tampilkan kotak, jangan di-hide
+  window.goEkskul = function(n){
+    current = n;
+    track.style.transform = 'translateX(-'+(current*100)+'%)';
+    Array.from(dots).forEach((d,i)=>{
+      d.style.width = i===current ? '24px' : '6px';
+      d.style.opacity = i===current ? '0.9' : '0.5';
+    });
+    const curImg = imgs[current];
+
+  }
+  window.nextEkskul = function(){ goEkskul((current+1)%imgs.length); }
+  window.prevEkskul = function(){ goEkskul((current-1+imgs.length)%imgs.length); }
+  setInterval(()=>{ nextEkskul(); }, 3500);
+  let startX=0;
+  track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', e=>{
+    let diff = e.changedTouches[0].clientX - startX;
+    if(diff<-50) nextEkskul();
+    if(diff>50) prevEkskul();
+  });
+  goEkskul(0);
+})();
+</script>
+
+
+<div id="ekskul-grid" style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px">
+<div class="card" style="text-align:center;padding:18px 12px">🏕️<br><b style="font-size:13px">Pramuka</b></div>
+<div class="card" style="text-align:center;padding:18px 12px">⚽<br><b style="font-size:13px">Futsal</b></div>
+<div class="card" style="text-align:center;padding:18px 12px">🏸<br><b style="font-size:13px">Badminton</b></div>
+<div class="card" style="text-align:center;padding:18px 12px">💃🏻<br><b style="font-size:13px">Seni Tari</b></div>
+<div class="card" style="text-align:center;padding:18px 12px">🏀<br><b style="font-size:13px">Basket</b></div>
+<div class="card" style="text-align:center;padding:18px 12px">🏐<br><b style="font-size:13px">Voli</b></div>
+<!-- HIDDEN PART -->
+<div class="ekskul-hidden card" style="text-align:center;padding:18px 12px;display:none">🎸<br><b style="font-size:13px">Band Al Farabi</b></div>
+<div class="ekskul-hidden card" style="text-align:center;padding:18px 12px;display:none">🏹<br><b style="font-size:13px">Memanah</b></div>
+<div class="ekskul-hidden card" style="text-align:center;padding:18px 12px;display:none">🎭<br><b style="font-size:13px">Teater</b></div>
+<div class="ekskul-hidden card" style="text-align:center;padding:18px 12px;display:none">🧍🏻🧍🏻🧍🏻‍♂️<br><b style="font-size:13px">Paskibra</b></div>
+<div class="ekskul-hidden card" style="text-align:center;padding:18px 12px;display:none">🧑🏻‍🏫<br><b style="font-size:13px">Pembinaan Olimpiade</b></div>
+</div>
+
+<div style="margin-top:20px;text-align:center">
+<button id="btn-ekskul" onclick="toggleEkskul()" style="padding:10px 22px;border-radius:999px;border:1px solid #0e4a8a;background:#fff;color:#0e4a8a;font-weight:600;font-size:13px;cursor:pointer">▼ Lihat Semua 18 Ekskul</button>
+</div>
+
+<script>5555555
+let ekskulOpen = false;
+function toggleEkskul(){
+  const hidden = document.querySelectorAll('.ekskul-hidden');
+  const btn = document.getElementById('btn-ekskul');
+  ekskulOpen = !ekskulOpen;
+  hidden.forEach(el=>{
+    el.style.display = ekskulOpen ? 'block' : 'none';
+    if(ekskulOpen){ el.animate([{transform:'translateY(10px)',opacity:0},{transform:'translateY(0)',opacity:1}],{duration:300}); }
+  });
+  btn.textContent = ekskulOpen ? '▲ Sembunyikan' : '▼ Lihat Semua 11 Ekskul';
+  btn.style.background = ekskulOpen ? '#0e4a8a' : '#fff';
+  btn.style.color = ekskulOpen ? '#fff' : '#0e4a8a';
+}
+</script>
+
+</div></section>
+
+<section id="kontak" style="background:#f8fbff;padding:60px 20px">
+<div style="max-width:1180px;margin:0 auto">
+<div style="max-width:640px">
+<h2 style="font-size:34px;font-weight:800;color:#0f172a;letter-spacing:-.02em;margin:0">Kontak & Lokasi</h2>
+<p style="margin-top:8px;color:#64748b;font-size:14px;line-height:22px">Kunjungi kami di SMP Negeri 1 Brondong atau hubungi untuk informasi PPDB, kerjasama, dan layanan pendidikan.</p>
+</div>
+
+<div style="margin-top:28px;display:grid;gap:14px;max-width:720px">
+
+<div style="display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.03)">
+<div style="width:40px;height:40px;min-width:40px;border-radius:999px;background:#0e4a8a;display:grid;place-items:center;color:#fff"> 
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</div>
+<div>
+<div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#94a3b8">ALAMAT</div>
+<div style="font-size:13px;font-weight:500;color:#1e293b;margin-top:2px">Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno, Kec. Brondong, Kabupaten Lamongan, Jawa Timur 62263</div>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.03)">
+<div style="width:40px;height:40px;min-width:40px;border-radius:999px;background:#0e4a8a;display:grid;place-items:center;color:#fff">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 5 12.07 19.79 19.79 0 0 1 1.93 3.44 2 2 0 0 1 3.91 1.18h3a2 2 0 0 1 2 1.72c.12 1.21.37 2.39.74 3.52a2 2 0 0 1-.45 2.11L9 9a16 16 0 0 0 6 6l.77-.77a2 2 0 0 1 2.11-.45c1.13.37 2.31.62 3.52.74a2 2 0 0 1 1.72 2V22Z"/></svg>
+</div>
+<div>
+<div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#94a3b8">TELEPON / WA</div>
+<a href="https://wa.me/628213351952" target="_blank" 
+   style="font-size:13px;font-weight:500;color:#1e293b;margin-top:2px;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+   0821-3351-952 (Admin)
+   <span style="background:#25D366;color:#fff;padding:2px 8px;border-radius:999px;font-size:11px">Chat WA</span>
+</a>
+<a href="https://wa.me/6282230594747" target="_blank" 
+   style="font-size:13px;font-weight:500;color:#1e293b;margin-top:2px;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+   0822-3059-4747 (Humas)
+   <span style="background:#25D366;color:#fff;padding:2px 8px;border-radius:999px;font-size:11px">Chat WA</span>
+</a>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.03)">
+<div style="width:40px;height:40px;min-width:40px;border-radius:999px;background:#0e4a8a;display:grid;place-items:center;color:#fff">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6 12 13 2 6"/></svg>
+</div>
+<div>
+<div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#94a3b8">EMAIL</div>
+<div style="margin-top:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+  <a href="mailto:smpnegeri1brondong@gmail.com" style="font-size:13px;font-weight:500;color:#1e293b;text-decoration:none">smpnegeri1brondong@gmail.com</a>
+  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=smpnegeri1brondong@gmail.com" target="_blank" style="background:#0e4a8a;color:#fff;padding:2px 8px;border-radius:999px;font-size:11px;text-decoration:none">Kirim Email</a>
+</div>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.03)">
+<div style="width:40px;height:40px;min-width:40px;border-radius:999px;background:#0e4a8a;display:grid;place-items:center;color:#fff">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+</div>
+<div>
+<div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#94a3b8">JAM OPERASIONAL</div>
+<div style="font-size:13px;font-weight:500;color:#1e293b;margin-top:2px">Senin - Jumat, 07.00 - 15.00 WIB</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<footer style="background:#091f3a;color:rgba(255,255,255,.7);padding:40px 20px;text-align:center"><h3 style="color:#fff;margin:0">SMP Negeri 1 Brondong</h3><p style="max-width:600px;margin:8px auto 0">Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno, Kec. Brondong, Kabupaten Lamongan, Jawa Timur 62263</p><div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:rgba(255,255,255,.4)">© 2026 SMP Negeri 1 Brondong </div></footer>
+
+</body>
+</html>
