@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="logo-smp2.png" />
+<title>Ekstrakurikuler - SMPN 1 Brondong</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{font-family:Poppins,system-ui} body{margin:0;background:#f6f8fc}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;border:0}
+.btn-blue{background:#0e4a8a;color:#fff;box-shadow:0 8px 24px rgba(14,74,138,.25)}
+.btn-white{background:#fff;color:#334155;border:1px solid #e2e8f0}
+.card{border-radius:20px;background:#fff;border:1px solid #f1f5f9;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+</style>
+</head>
+<body>
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);background:rgba(255,255,255,.9);border-bottom:1px solid #f1f5f9">
+<div style="max-width:1180px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:10px">
+<img id="logo-smp-img" style="width:25px;height:30px;border-radius:10px;object-fit:cover;background:#fff;display:block">
+<script>
+(function(){
+  const el = document.getElementById('logo-smp-img');
+  const candidates = ['logo-smp.jpg','logo-smp.jpeg','logo-smp.png','logo-smp.JPG','logo-smp','logo-smp.webp','logo-smp.jpg.jpg'];
+  let i=0;
+  function tryNext(){
+    if(i>=candidates.length){
+      el.style.display='none';
+      const fallback = document.createElement('div');
+      fallback.style.cssText='width:36px;height:36px;border-radius:10px;background:#0e4a8a;color:#fff;display:grid;place-items:center;font-weight:700';
+      fallback.textContent='S';
+      el.parentNode.insertBefore(fallback, el);
+      return;
+    }
+    el.src = candidates[i++];
+  }
+  el.onerror = tryNext;
+  tryNext();
+})();
+</script>
+<div><div style="font-weight:700;color:#0e4a8a;font-size:15px">SMPN 1 BRONDONG</div><div style="font-size:11px;color:#64748b">Lamongan • Jawa Timur</div></div>
+</div>
+<nav style="display:flex;gap:10px;align-items:center;font-size:13px">
+<a href="index.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Beranda</a>
+<a href="profil.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Profil</a>
+<a href="program-sekolah.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Program Sekolah</a>
+<a href="ekskul.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#0e4a8a;font-weight:700;background:#e0f2fe">Ekskul</a>
+<a href="kontak.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Kontak</a>
+</nav>
+</div>
+</header>
+<section id="ekskul" style="background:#f8fafc;border-top:1px solid #f1f5f9;border-bottom:1px solid #f1f5f9;padding:60px 20px"><div style="max-width:1180px;margin:0 auto">
+<h2 style="font-size:32px;font-weight:800;color:#0f172a">Ekstrakurikuler</h2><p style="color:#64748b;margin-top:4px">Wadah pengembangan bakat, minat, dan karakter siswa.</p>
+
+
+<!-- CAROUSEL FOTO EKSKUL - 4:3 SAMA KAYAK GEDUNG - CENTER - FILE ekskul-1 s/d ekskul-11 -->
+<div style="margin-top:28px;display:flex;justify-content:center">
+  <div style="width:100%;max-width:560px">
+    <div id="carousel-ekskul" style="position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(to bottom right,#e2e8f0,#f1f5f9);border-radius:20px;box-shadow:0 8px 32px rgba(14,74,138,.12);line-height:0;border:1px solid #f1f5f9">
+      <div id="track-ekskul" style="display:flex;width:100%;height:100%;aspect-ratio:4/3;transition:transform .6s cubic-bezier(.4,0,.2,1)">
+        <img class="ekskul-img" data-base="ekskul-1" style="min-width:100%;width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-2" style="min-width:100%;width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-3" style="min-width:100%;width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-4" style="min-width:100%;width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-5" style="min-width:100%;width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-6" style="min-width:100%;width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+        <img class="ekskul-img" data-base="ekskul-7" style="min-width:100%;width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;display:block;flex-shrink:0;background:#e2e8f0">
+      </div>
+      <!-- placeholder kalau foto belum ada - selalu kelihatan kotaknya -->
+      <div id="ekskul-placeholder" style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;background:linear-gradient(to bottom right,#f1f5f9,#e2e8f0)">
+        <div>
+          <div style="font-size:40px">📸</div>
+          <b style="color:#0e4a8a;font-size:14px">FOTO EKSKUL BELUM ADA</b><br>
+          <small style="color:#64748b;font-size:12px">Taruh file ekskul-1.jpg sampai ekskul-11.jpg di folder yang sama</small><br>
+          <small style="color:#94a3b8;font-size:11px;margin-top:6px;display:block">Ukuran sama kayak foto gedung (4:3)</small>
+        </div>
+      </div>
+      <div id="dots-ekskul" style="position:absolute;bottom:14px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:5"></div>
+      
+      <button onclick="prevEkskul()" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:999px;border:0;background:rgba(0,0,0,.45);color:#fff;cursor:pointer;backdrop-filter:blur(6px);font-size:20px;z-index:5">‹</button>
+      <button onclick="nextEkskul()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:999px;border:0;background:rgba(0,0,0,.45);color:#fff;cursor:pointer;backdrop-filter:blur(6px);font-size:20px;z-index:5">›</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const imgs = document.querySelectorAll('.ekskul-img');
+  const track = document.getElementById('track-ekskul');
+  const dotsWrap = document.getElementById('dots-ekskul');
+  const label = null;
+  const placeholder = document.getElementById('ekskul-placeholder');
+  if(!track) return;
+  let current = 0;
+  let validFound = false;
+
+  // buat 11 dots sesuai ekskul-1 sampai 11
+  imgs.forEach((_,i)=>{
+    const d = document.createElement('span');
+    d.style.cssText = 'width:6px;height:6px;border-radius:999px;background:#fff;opacity:.5;cursor:pointer;transition:.3s;display:inline-block;box-shadow:0 1px 4px rgba(0,0,0,.2)';
+    d.onclick = ()=> goEkskul(i);
+    dotsWrap.appendChild(d);
+  });
+  const dots = dotsWrap.children;
+  const exts = ['.jpg','.jpeg','.png','.JPG','.webp',''];
+
+  function loadOne(el, done){
+    let ei=0;
+    function tryNext(){
+      if(ei>=exts.length){ done(false); return; }
+      const src = el.dataset.base + exts[ei++];
+      el.src = src;
+    }
+    el.onerror = tryNext;
+    el.onload = ()=> { validFound = true; if(placeholder) placeholder.style.display='none'; done(true); };
+    tryNext();
+  }
+
+  imgs.forEach((img, idx)=>{
+    loadOne(img, (ok)=>{
+      if(!ok){
+        // kalau gagal, tetap kasih warna placeholder per slide
+        img.style.background = 'linear-gradient(to bottom right,#f1f5f9,#e2e8f0)';
+        img.alt = img.dataset.label + ' - foto belum ada';
+      }
+    });
+  });
+
+  // selalu tampilkan kotak, jangan di-hide
+  window.goEkskul = function(n){
+    current = n;
+    track.style.transform = 'translateX(-'+(current*100)+'%)';
+    Array.from(dots).forEach((d,i)=>{
+      d.style.width = i===current ? '24px' : '6px';
+      d.style.opacity = i===current ? '0.9' : '0.5';
+    });
+    const curImg = imgs[current];
+
+  }
+  window.nextEkskul = function(){ goEkskul((current+1)%imgs.length); }
+  window.prevEkskul = function(){ goEkskul((current-1+imgs.length)%imgs.length); }
+  setInterval(()=>{ nextEkskul(); }, 3500);
+  let startX=0;
+  track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', e=>{
+    let diff = e.changedTouches[0].clientX - startX;
+    if(diff<-50) nextEkskul();
+    if(diff>50) prevEkskul();
+  });
+  goEkskul(0);
+})();
+</script>
+
+
+<div id="ekskul-grid" style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px">
+<div class="card" style="text-align:center;padding:18px 12px">🏕️<br><b style="font-size:13px">Pramuka</b></div>
+<div class="card" style="text-align:center;padding:18px 12px">⚽<br><b style="font-size:13px">Futsal</b></div>
+<div class="card" style="text-align:center;padding:18px 12px">🏸<br><b style="font-size:13px">Badminton</b></div>
+<div class="card" style="text-align:center;padding:18px 12px">💃🏻<br><b style="font-size:13px">Seni Tari</b></div>
+<div class="card" style="text-align:center;padding:18px 12px">🏀<br><b style="font-size:13px">Basket</b></div>
+<div class="card" style="text-align:center;padding:18px 12px">🏐<br><b style="font-size:13px">Voli</b></div>
+<!-- HIDDEN PART -->
+<div class="ekskul-hidden card" style="text-align:center;padding:18px 12px;display:none">🎸<br><b style="font-size:13px">Band Al Farabi</b></div>
+<div class="ekskul-hidden card" style="text-align:center;padding:18px 12px;display:none">🏹<br><b style="font-size:13px">Memanah</b></div>
+<div class="ekskul-hidden card" style="text-align:center;padding:18px 12px;display:none">🎭<br><b style="font-size:13px">Teater</b></div>
+<div class="ekskul-hidden card" style="text-align:center;padding:18px 12px;display:none">🧍🏻🧍🏻🧍🏻‍♂️<br><b style="font-size:13px">Paskibra</b></div>
+<div class="ekskul-hidden card" style="text-align:center;padding:18px 12px;display:none">🧑🏻‍🏫<br><b style="font-size:13px">Pembinaan Olimpiade</b></div>
+</div>
+
+<div style="margin-top:20px;text-align:center">
+<button id="btn-ekskul" onclick="toggleEkskul()" style="padding:10px 22px;border-radius:999px;border:1px solid #0e4a8a;background:#fff;color:#0e4a8a;font-weight:600;font-size:13px;cursor:pointer">▼ Lihat Semua 11 Ekskul</button>
+</div>
+
+<script>5555555
+let ekskulOpen = false;
+function toggleEkskul(){
+  const hidden = document.querySelectorAll('.ekskul-hidden');
+  const btn = document.getElementById('btn-ekskul');
+  ekskulOpen = !ekskulOpen;
+  hidden.forEach(el=>{
+    el.style.display = ekskulOpen ? 'block' : 'none';
+    if(ekskulOpen){ el.animate([{transform:'translateY(10px)',opacity:0},{transform:'translateY(0)',opacity:1}],{duration:300}); }
+  });
+  btn.textContent = ekskulOpen ? '▲ Sembunyikan' : '▼ Lihat Semua 11 Ekskul';
+  btn.style.background = ekskulOpen ? '#0e4a8a' : '#fff';
+  btn.style.color = ekskulOpen ? '#fff' : '#0e4a8a';
+}
+</script>
+</div></section>
+
+<footer style="background:#091f3a;color:rgba(255,255,255,.7);padding:40px 20px;text-align:center">
+  <h3 style="color:#fff;margin:0">SMP Negeri 1 Brondong</h3>
+  <p style="max-width:600px;margin:8px auto 0">Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno, Kec. Brondong, Kabupaten Lamongan, Jawa Timur 62263</p>
+  <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:rgba(255,255,255,.4)">© 2026 SMP Negeri 1 Brondong </div>
+</footer>
+</body>
+</html>
