@@ -49,7 +49,27 @@
 </nav>
 </div>
 </header>
-<section id="beranda" style="max-width:1180px;margin:0 auto;padding:40px 20px 60px">
+<div style="position:absolute;inset:0;z-index:0">
+  <img id="bg-foto" style="width:100%;height:100%;object-fit:cover;opacity:0.28" alt="bg">
+  <!-- gradasi putih lebih tipis biar foto keliatan -->
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(246,248,252,0.88) 0%, rgba(246,248,252,0.65) 45%, rgba(246,248,252,0.30) 100%)"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 75% 50%, rgba(14,74,138,0.18) 0%, transparent 60%)"></div>
+</div>
+<script>
+(function(){
+  const bg=document.getElementById('bg-foto');
+  const cands=['gedung-smp.jpg','gedung-smp2.jpg','gedung-smp2.jpeg','gedung-smp.jpeg','ekskul-1.jpeg','ekskul-1.jpg'];
+  let i=0;
+  function nxt(){
+    if(i>=cands.length){ bg.style.display='none'; return; }
+    bg.src=cands[i++];
+  }
+  bg.onerror=nxt;
+  nxt();
+})();
+</script>
+<div style="position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:40px 20px 60px">
+  
 <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center">
 <div>
 <h1 style="font-size:46px;line-height:0.95;font-weight:800;margin:0">
