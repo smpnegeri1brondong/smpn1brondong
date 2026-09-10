@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="logo-smp2.png" />
+<title>Profil - SMPN 1 Brondong</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{font-family:Poppins,system-ui} body{margin:0;background:#f6f8fc}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;border:0}
+.btn-blue{background:#0e4a8a;color:#fff;box-shadow:0 8px 24px rgba(14,74,138,.25)}
+.btn-white{background:#fff;color:#334155;border:1px solid #e2e8f0}
+.card{border-radius:20px;background:#fff;border:1px solid #f1f5f9;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+</style>
+</head>
+<body>
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);background:rgba(255,255,255,.9);border-bottom:1px solid #f1f5f9">
+<div style="max-width:1180px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:10px">
+<img id="logo-smp-img" style="width:25px;height:30px;border-radius:10px;object-fit:cover;background:#fff;display:block">
+<script>
+(function(){
+  const el = document.getElementById('logo-smp-img');
+  const candidates = ['logo-smp.jpg','logo-smp.jpeg','logo-smp.png','logo-smp.JPG','logo-smp','logo-smp.webp','logo-smp.jpg.jpg'];
+  let i=0;
+  function tryNext(){
+    if(i>=candidates.length){
+      el.style.display='none';
+      const fallback = document.createElement('div');
+      fallback.style.cssText='width:36px;height:36px;border-radius:10px;background:#0e4a8a;color:#fff;display:grid;place-items:center;font-weight:700';
+      fallback.textContent='S';
+      el.parentNode.insertBefore(fallback, el);
+      return;
+    }
+    el.src = candidates[i++];
+  }
+  el.onerror = tryNext;
+  tryNext();
+})();
+</script>
+<div><div style="font-weight:700;color:#0e4a8a;font-size:15px">SMPN 1 BRONDONG</div><div style="font-size:11px;color:#64748b">Lamongan • Jawa Timur</div></div>
+</div>
+<nav style="display:flex;gap:10px;align-items:center;font-size:13px">
+<a href="index.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Beranda</a>
+<a href="profil.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#0e4a8a;font-weight:700;background:#e0f2fe">Profil</a>
+<a href="program-sekolah.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Program Sekolah</a>
+<a href="ekskul.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Ekskul</a>
+<a href="kontak (3).html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Kontak</a>
+</nav>
+</div>
+</header>
+
+<section id="profil" style="background:#fff;border-top:1px solid #f1f5f9;border-bottom:1px solid #f1f5f9;padding:60px 20px"><div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:360px 1fr;gap:56px"><div style="border-radius:24px;background:#f8fbff;border:1px solid #f1f5f9;padding:20px">
+<div style="aspect-ratio:3/4;border-radius:18px;overflow:hidden;background:#e2e8f0;position:relative">
+<img id="kepsek-img" alt="Kepala Sekolah" style="width:100%;height:100%;object-fit:cover;display:block">
+<div id="kepsek-fallback" style="position:absolute;inset:0;display:none;place-items:center;text-align:center;background:linear-gradient(to bottom right,#e2e8f0,#f1f5f9);padding:16px">
+<div><div style="width:96px;height:96px;margin:0 auto;border-radius:999px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.1);display:grid;place-items:center;font-size:28px;font-weight:800;color:#0e4a8a">KS</div><div style="margin-top:12px;font-size:11px;color:#64748b">File kepala-sekolah.jpg tidak ketemu</div><small id="kepsek-debug" style="color:red;font-size:9px"></small></div>
+</div>
+</div>
+<script>
+(function(){
+  const el = document.getElementById('kepsek-img');
+  const fb = document.getElementById('kepsek-fallback');
+  const dbg = document.getElementById('kepsek-debug');
+  const candidates = ['kepala-sekolah.jpg','kepala-sekolah.jpeg','kepala-sekolah.png','kepala-sekolah.JPG','kepala-sekolah','kepala-sekolah.webp','kepala-sekolah.jpg.jpg'];
+  let i=0;
+  function tryNext(){
+    if(i>=candidates.length){
+      el.style.display='none';
+      fb.style.display='grid';
+      if(dbg) dbg.textContent = 'Coba: '+candidates.join(', ');
+      return;
+    }
+    const src = candidates[i++];
+    if(dbg) dbg.textContent = 'Mencoba: '+src;
+    el.src = src;
+  }
+  el.onerror = tryNext;
+  el.onload = function(){ fb.style.display='none'; el.style.display='block'; };
+  tryNext();
+})();
+</script>
+<div style="margin-top:16px;text-align:center"><div style="font-weight:700">Husnul Anam S.Pd.,M.Pd</div><div style="font-size:13px;color:#0e4a8a">Kepala SMPN 1 Brondong</div><div style="margin-top:8px;font-size:12px;color:#64748b;font-style:italic">"Mendidik dengan hati, menginspirasi dengan aksi."</div></div></div>
+<div>
+  <div style="font-size:21px;font-weight:700;color:#0e4a8a;letter-spacing:.2em">— PROFIL SEKOLAH</div>
+  <h2 style="margin-top:8px;font-size:32px;font-weight:800;color:#0f172a">Sekolah Pesisir yang Membanggakan Lamongan</h2>
+  <p style="margin-top:12px;color:#475569;line-height:28px">SMP Negeri 1 Brondong merupakan salah satu lembaga pendidikan yang memiliki peran penting dalam mencetak generasi muda yang berprestasi dan berkarakter. Berdiri pada tanggal 22 Februari 1985, berlokasi di wilayah Kecamatan Brondong, sekolah ini telah melalui perjalanan panjang dalam mengembangkan kualitas pendidikan serta memberikan kontribusi nyata bagi masyarakat.</p>
+  <p style="margin-top:12px;color:#475569;line-height:28px">Dengan mengusung motto BERGEMA (Beriman, Mandiri, Gemilang), SMP Negeri 1 Brondong menanamkan nilai-nilai keimanan sebagai landasan utama, membentuk kemandirian dalam belajar dan bersikap, serta mendorong peserta didik untuk meraih prestasi yang gemilang dalam berbagai bidang. Motto ini menjadi semangat bersama dalam mewujudkan lingkungan pendidikan yang unggul dan berdaya saing.</p>
+</div>
+</div>
+</section>
+
+<section id="visi-misi" style="max-width:1180px;margin:0 auto;padding:60px 20px">
+<h2 style="font-size:32px;font-weight:800">Visi & Misi</h2><p style="color:#64748b;margin-top:4px">Arah dan komitmen SMPN 1 Brondong untuk masa depan.</p>
+<div style="display:grid;grid-template-columns:1fr 1.2fr;gap:16px">
+<div style="background:#0e4a8a;color:#fff;border-radius:16px;padding:24px"><div style="font-size:10px;font-weight:700;letter-spacing:.2em;color:#facc15;margin-bottom:10px">VISI</div><p style="font-size:14px;line-height:20px;font-weight:600;margin:0">"Terwujudnya Murid yang Beriman, Berkarakter, Cerdas, Berprestasi, Peduli Lingkungan, dan Berwawasan Global"</p></div>
+<div style="background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:24px 24px 24px 28px;font-size:11px;line-height:18px;color:#334155;overflow:visible">
+<div style="font-size:10px;font-weight:700;letter-spacing:.2em;color:#0e4a8a;margin-bottom:12px;padding-left:2px">MISI</div>
+<ol style="margin:0;padding-left:16px">
+<li>Menumbuhkan nilai-nilai keimanan, ketakwaan, dan akhlak mulia melalui pembiasaan dan keteladanan.</li>
+<li>Membangun karakter Pelajar Pancasila melalui praktik nyata dalam pembelajaran dan keseharian.</li>
+<li>Meningkatkan kecerdasan intelektual, emosional, dan spiritual melalui pembelajaran bermutu.</li>
+<li>Memfasilitasi pengembangan bakat dan minat untuk prestasi optimal.</li>
+<li>Menanamkan kesadaran cinta lingkungan melalui aksi nyata.</li>
+<li>Mengembangkan kompetensi global dengan tetap menjaga budaya Indonesia.</li>
+</ol>
+</div>
+</div>
+</section>
+
+<footer style="text-align:center;padding:40px 20px;color:#94a3b8;font-size:12px;border-top:1px solid #f1f5f9;margin-top:40px">© 2025 SMPN 1 Brondong • Lamongan Jawa Timur</footer><footer style="background:#091f3a;color:rgba(255,255,255,.7);padding:40px 20px;text-align:center">
+  <h3 style="color:#fff;margin:0">SMP Negeri 1 Brondong</h3>
+  <p style="max-width:600px;margin:8px auto 0">Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno, Kec. Brondong, Kabupaten Lamongan, Jawa Timur 62263</p>
+  <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:rgba(255,255,255,.4)">© 2026 SMP Negeri 1 Brondong </div>
+</footer>
+
+</body>
+</html>

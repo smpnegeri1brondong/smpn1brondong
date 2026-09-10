@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="logo-smp2.png" />
+<title>10 Program Unggulan BERGEMA - SMPN 1 Brondong</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{font-family:Poppins,system-ui;box-sizing:border-box} body{margin:0;background:#f6f8fc;color:#0f172a}
+.card{background:#fff;border:1.5px solid #e2e8f0;border-radius:20px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+.program-card{background:#fff !important;border:1.5px solid #cbd5e1 !important;border-radius:20px !important;padding:0 !important;overflow:hidden !important;box-shadow:0 2px 10px rgba(0,0,0,.03) !important;transition:.2s !important}
+.program-card:hover{transform:translateY(-3px) !important;box-shadow:0 12px 24px rgba(14,74,138,.12) !important}
+.program-grid{display:grid !important;grid-template-columns:repeat(auto-fill,minmax(240px,1fr)) !important;gap:18px !important}
+.program-grid .program-card img{width:100% !important;height:180px !important;aspect-ratio:4/3 !important;object-fit:cover !important;display:block !important;max-width:100% !important;max-height:180px !important}
+.program-content{padding:14px 14px 16px !important}
+.hidden{display:none !important}
+.btn-more{display:inline-flex !important;align-items:center;gap:8px;margin:28px auto 0 !important;padding:12px 28px !important;border-radius:999px !important;background:#0e4a8a !important;color:#fff !important;font-weight:600 !important;font-size:14px !important;border:0 !important;cursor:pointer !important;box-shadow:0 8px 20px rgba(14,74,138,.25) !important}
+.btn-more:hover{background:#0c3d73 !important}
+.stat-card{background:#fff;border-radius:999px !important;padding:12px 18px !important;border:1.5px solid #e2e8f0;box-shadow:0 2px 8px rgba(0,0,0,.04);overflow:visible !important}
+.ekskul-wrapper{max-width:680px !important;margin:20px auto 0 !important;border-radius:20px !important;overflow:hidden !important;position:relative !important;box-shadow:0 8px 24px rgba(0,0,0,.08) !important}
+.ekskul-wrapper img{width:100% !important;height:380px !important;max-height:380px !important;object-fit:cover !important;display:block !important}
+.ekskul-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45) !important;color:#fff;border:0;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(4px)}
+.ekskul-dots{display:flex;gap:6px;justify-content:center;position:absolute;bottom:12px;left:0;right:0}
+.ekskul-dot{width:18px;height:6px;border-radius:999px;background:rgba(255,255,255,.5)}
+.ekskul-dot.active{background:#fff;width:28px}
+.ekskul-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:18px;max-width:720px;margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body>
+
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);background:rgba(255,255,255,.9);border-bottom:1px solid #f1f5f9">
+<div style="max-width:1180px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:10px">
+<img id="logo-smp-img" style="width:25px;height:30px;border-radius:10px;object-fit:cover;background:#fff;display:block">
+<script>
+(function(){
+  const el = document.getElementById('logo-smp-img');
+  const candidates = ['logo-smp.jpg','logo-smp.jpeg','logo-smp.png','logo-smp.JPG','logo-smp','logo-smp.webp','logo-smp.jpg.jpg'];
+  let i=0;
+  function tryNext(){
+    if(i>=candidates.length){
+      el.style.display='none';
+      const fallback = document.createElement('div');
+      fallback.style.cssText='width:36px;height:36px;border-radius:10px;background:#0e4a8a;color:#fff;display:grid;place-items:center;font-weight:700';
+      fallback.textContent='S';
+      el.parentNode.insertBefore(fallback, el);
+      return;
+    }
+    el.src = candidates[i++];
+  }
+  el.onerror = tryNext;
+  tryNext();
+})();
+</script>
+<div><div style="font-weight:700;color:#0e4a8a;font-size:15px">SMPN 1 BRONDONG</div><div style="font-size:11px;color:#64748b">Lamongan • Jawa Timur</div></div>
+</div>
+<nav style="display:flex;gap:10px;align-items:center;font-size:13px">
+<a href="index.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Beranda</a>
+<a href="profil.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Profil</a>
+<a href="program-sekolah.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#0e4a8a;font-weight:700;background:#e0f2fe">Program Sekolah</a>
+<a href="ekskul.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Ekskul</a>
+<a href="kontak (3).html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Kontak</a>
+</nav>
+</div>
+</header>
+
+<section id="program-sekolah" style="max-width:1180px;margin:0 auto;padding:40px 20px">
+<div style="font-size:11px;font-weight:700;color:#0e4a8a;letter-spacing:.2em">— 10 PROGRAM UNGGULAN BERGEMA</div>
+<h2 style="margin:8px 0 4px;font-size:28px;font-weight:800">Program Sekolah</h2>
+<p style="margin:0;color:#64748b;font-size:13px">Awal tampil 4 dulu, klik tombol untuk lihat selanjutnya. Fix anti-gede, MISI & STATS tidak kepotong.</p>
+<div class="program-grid" style="margin-top:24px">
+<div class="program-card"><img src="program1.jpg" alt="SESASI"><div class="program-content"><div style="font-weight:700;font-size:14px">1. SESASI</div><div style="font-size:12px;color:#0e4a8a;font-weight:600">Semangat Sambut Siswa</div><div style="font-size:11px;color:#64748b;margin-top:4px">Sambut pagi dengan senyum & salam</div></div></div>
+<div class="program-card"><img src="program2.jpg" alt="GERGAJI"><div class="program-content"><div style="font-weight:700;font-size:14px">2. GERGAJI</div><div style="font-size:12px;color:#0e4a8a;font-weight:600">Gerakan Pagi Mengaji</div><div style="font-size:11px;color:#64748b;margin-top:4px">Siswi berkerudung ngaji bersama</div></div></div>
+<div class="program-card"><img src="program3.jpg" alt="SE-SEMAR"><div class="program-content"><div style="font-weight:700;font-size:14px">3. SE-SEMAR</div><div style="font-size:12px;color:#0e4a8a;font-weight:600">Senin Selasa Beramal Seribu</div><div style="font-size:11px;color:#64748b;margin-top:4px">Siswi berkerudung beramal</div></div></div>
+<div class="program-card"><img src="program4.jpg" alt="DIKAJI"><div class="program-content"><div style="font-weight:700;font-size:14px">4. DIKAJI</div><div style="font-size:12px;color:#0e4a8a;font-weight:600">Disiplin, Ikhtiar, Kreatif, Aktif, Jujur, Istiqomah</div><div style="font-size:11px;color:#64748b;margin-top:4px">Siswi berkerudung disiplin belajar</div></div></div>
+<div class="program-card hidden"><img src="program5.jpg" alt="SEDULUR BRO"><div class="program-content"><div style="font-weight:700;font-size:14px">5. SEDULUR BRO</div><div style="font-size:12px;color:#0e4a8a;font-weight:600">Sholat Dluhur Berjamaah & Berdoa</div><div style="font-size:11px;color:#64748b;margin-top:4px">Jamaah dzuhur bersama</div></div></div>
+<div class="program-card hidden"><img src="program6.jpg" alt="GAMBUS PATY"><div class="program-content"><div style="font-weight:700;font-size:14px">6. GAMBUS PATY</div><div style="font-size:12px;color:#0e4a8a;font-weight:600">Gerakan Buang Sampah Pada Tempatnya</div><div style="font-size:11px;color:#64748b;margin-top:4px">Pilah sampah 4 warna</div></div></div>
+<div class="program-card hidden"><img src="program7.jpg" alt="JUROH"><div class="program-content"><div style="font-weight:700;font-size:14px">7. JUROH</div><div style="font-size:12px;color:#0e4a8a;font-weight:600">Jumat Muhadhoroh</div><div style="font-size:11px;color:#64748b;margin-top:4px">Latih public speaking</div></div></div>
+<div class="program-card hidden"><img src="program8.jpg" alt="JUMBERK"><div class="program-content"><div style="font-weight:700;font-size:14px">8. JUMBERK</div><div style="font-size:12px;color:#0e4a8a;font-weight:600">Jumat Bersih & Berkah</div><div style="font-size:11px;color:#64748b;margin-top:4px">Siswi berkerudung bersih-bersih</div></div></div>
+<div class="program-card hidden"><img src="program9.jpg" alt="JUSEN"><div class="program-content"><div style="font-weight:700;font-size:14px">9. JUSEN</div><div style="font-size:12px;color:#0e4a8a;font-weight:600">Jumat Senam</div><div style="font-size:11px;color:#64748b;margin-top:4px">Siswi berkerudung senam pagi</div></div></div>
+<div class="program-card hidden"><img src="program10.jpg" alt="BERKAH"><div class="program-content"><div style="font-weight:700;font-size:14px">10. BERKAH</div><div style="font-size:12px;color:#0e4a8a;font-weight:600">Berakhlak Mulia dan Adab Sopan</div><div style="font-size:11px;color:#64748b;margin-top:4px">Salam & sopan santun</div></div></div>
+</div>
+<div style="text-align:center">
+<button id="btnMore" class="btn-more">Lihat Selanjutnya ↓ <span style="opacity:.8">(6 lagi)</span></button>
+</div>
+</section>
+<script>
+const btn = document.getElementById('btnMore');
+const hiddenCards = document.querySelectorAll('.program-card.hidden');
+let expanded = false;
+btn.addEventListener('click', () => {
+  if(!expanded){
+    hiddenCards.forEach(c => c.classList.remove('hidden'));
+    btn.innerHTML = 'Sembunyikan ↑';
+    expanded = true;
+  } else {
+    hiddenCards.forEach(c => c.classList.add('hidden'));
+    btn.innerHTML = 'Lihat Selanjutnya ↓ <span style="opacity:.8">(6 lagi)</span>';
+    expanded = false;
+  }
+});
+</script>
+
+<footer style="background:#091f3a;color:rgba(255,255,255,.7);padding:40px 20px;text-align:center">
+  <h3 style="color:#fff;margin:0">SMP Negeri 1 Brondong</h3>
+  <p style="max-width:600px;margin:8px auto 0">Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno, Kec. Brondong, Kabupaten Lamongan, Jawa Timur 62263</p>
+  <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:rgba(255,255,255,.4)">© 2026 SMP Negeri 1 Brondong </div>
+</footer>
+</body>
+</html>
