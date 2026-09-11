@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="logo-smp2.png" />
+<title>Buku Tamu - SMPN 1 Brondong</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{font-family:Poppins,system-ui;box-sizing:border-box}body{margin:0;background:#f6f8fc;color:#0f172a}
+.input{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid #e2e8f0;background:#fff;font-size:14px;outline:none}
+.input:focus{border-color:#0e4a8a}
+.btn{padding:12px 24px;border-radius:999px;border:0;font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-blue{background:#0e4a8a;color:#fff}.btn-dark{background:#0f172a;color:#fff}.btn:disabled{opacity:.5;pointer-events:none}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+video{width:100%;height:100%;object-fit:cover;display:block;transform:scaleX(-1)}
+</style>
+</head>
+<body>
+<header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid #f1f5f9">
+<div style="max-width:1180px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:10px">
+<img id="logo-smp-img" style="width:25px;height:30px;border-radius:10px;object-fit:cover;background:#fff;display:block">
+<script>
+(function(){
+  const el = document.getElementById('logo-smp-img');
+  const candidates = ['logo-smp.jpg','logo-smp.jpeg','logo-smp.png','logo-smp.JPG','logo-smp','logo-smp.webp','logo-smp.jpg.jpg'];
+  let i=0;
+  function tryNext(){
+    if(i>=candidates.length){
+      el.style.display='none';
+      const fallback = document.createElement('div');
+      fallback.style.cssText='width:36px;height:36px;border-radius:10px;background:#0e4a8a;color:#fff;display:grid;place-items:center;font-weight:700';
+      fallback.textContent='S';
+      el.parentNode.insertBefore(fallback, el);
+      return;
+    }
+    el.src = candidates[i++];
+  }
+  el.onerror = tryNext;
+  tryNext();
+})();
+</script>
+<div><div style="font-weight:700;color:#0e4a8a;font-size:15px">SMPN 1 BRONDONG</div><div style="font-size:11px;color:#64748b">Lamongan • Jawa Timur</div></div>
+</div>
+<nav style="display:flex;gap:8px">
+  <a href="index.html" style="text-decoration:none;color:#475569;font-size:13px;padding:8px 12px">Beranda</a>
+  <a href="buku-tamu-admin.html" style="padding:8px 14px;border-radius:999px;background:#0e4a8a;color:#fff;text-decoration:none;font-size:12px">Admin →</a></nav>
+</div>
+</header>
+<section style="max-width:1000px;margin:0 auto;padding:20px 20px 60px">
+<div style="background:#dcfce7;border:1px solid #86efac;border-radius:12px;padding:12px 14px;font-size:12px;margin-bottom:16px;line-height:1.5">
+<b>✅</b>Status: <span id="firebaseStatus">Connecting...</span>
+<div id="ruleHelp" style="display:none;margin-top:8px;background:#fff3cd;border:1px solid #fbbf24;border-radius:8px;padding:8px">
+<b>⚠️ Rules belum Test Mode!</b> Buka Firestore → Rules → ganti jadi allow read, write: if true; → Publish
+</div>
+</div>
+<h1 style="font-size:24px;font-weight:800;margin:0">Buku Tamu Virtual</h1>
+<p style="color:#64748b;font-size:13px;margin:6px 0 18px">Kamera auto ON, foto selfie wajib.</p>
+<div style="display:grid;grid-template-columns:360px 1fr;gap:18px">
+<div class="card" style="padding:12px">
+<div style="position:relative;width:100%;aspect-ratio:3/4;background:#0f172a;border-radius:16px;overflow:hidden">
+<video id="video" autoplay playsinline muted></video>
+<canvas id="canvas" style="display:none"></canvas>
+<div id="camOff" style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;text-align:center;padding:20px">📷<br><small>Meminta izin kamera...</small></div>
+<div style="position:absolute;bottom:10px;left:10px;right:10px;display:flex;gap:8px">
+<button class="btn btn-dark" style="flex:1;font-size:11px;padding:10px" onclick="startCamera()">Kamera</button>
+<button class="btn" style="flex:1;background:#fff;font-size:11px;padding:10px" onclick="takePhoto()">📸 Foto</button>
+</div>
+</div>
+<div id="previewBox" style="display:none;margin-top:12px">
+<img id="previewImg" style="width:100%;border-radius:12px;border:1px solid #e2e8f0">
+<div style="display:flex;gap:8px;margin-top:8px">
+<button class="btn" style="flex:1;background:#f1f5f9;font-size:11px" onclick="document.getElementById('previewBox').style.display='none'">Ulang</button>
+<button class="btn btn-blue" style="flex:1;font-size:11px" onclick="usePhoto()">Pakai Foto ✓</button>
+</div>
+</div>
+<div style="margin-top:10px;display:flex;align-items:center;gap:8px">
+<img id="thumb" style="width:40px;height:40px;border-radius:8px;object-fit:cover;display:none;background:#e2e8f0">
+<div id="fotoStatus" style="font-size:11px;color:#64748b">Belum ada foto — Foto dulu!</div>
+</div>
+</div>
+<div class="card">
+<div style="display:grid;gap:10px">
+<input id="nama" class="input" placeholder="Nama Lengkap *Wajib">
+<input id="instansi" class="input" placeholder="Asal Instansi / Wali Murid">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<input id="tanggal" class="input" type="date">
+<input id="jam" class="input" type="time">
+</div>
+<select id="tujuan" class="input"><option value="">Tujuan ke...</option><option>Kepala Sekolah</option><option>TU</option><option>Guru</option><option>Waka Kesiswaan</option><option>Waka Kurikulum</option><option>Lainnya</option></select>
+<textarea id="keperluan" class="input" rows="2" placeholder="Keperluan"></textarea>
+<button id="btnSimpan" class="btn btn-blue" style="width:100%" onclick="simpanFirebase()">Kirim</button>
+<div id="status" style="font-size:11px;text-align:center;min-height:18px;color:#0e4a8a;white-space:pre-wrap"></div>
+</div>
+</div>
+</div>
+<div id="list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px"></div>
+</section>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyCBw7cC2wAxAMNfEJyPD-_62_qmlIw5ZyE",
+  authDomain: "smpn1-brondong.firebaseapp.com",
+  projectId: "smpn1-brondong",
+  storageBucket: "smpn1-brondong.firebasestorage.app",
+  messagingSenderId: "918473388225",
+  appId: "1:918473388225:web:10074c05297aa3c9dce440",
+  measurementId: "G-TNNR7EKEYH"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+document.getElementById('firebaseStatus').textContent='Terhubung ✅';
+let fotoBase64 = null;
+window.startCamera = async ()=>{
+  try{
+    const s = await navigator.mediaDevices.getUserMedia({video:{facingMode:'user', width:{ideal:480}}, audio:false});
+    document.getElementById('video').srcObject = s;
+    document.getElementById('camOff').style.display='none';
+  }catch(e){ alert('Kamera error: '+e.message); }
+}
+window.takePhoto = ()=>{
+  const v=document.getElementById('video'); const c=document.getElementById('canvas');
+  if(!v.srcObject){ alert('Aktifkan kamera dulu'); return; }
+  c.width=v.videoWidth; c.height=v.videoHeight;
+  const ctx=c.getContext('2d'); ctx.translate(c.width,0); ctx.scale(-1,1); ctx.drawImage(v,0,0);
+  document.getElementById('previewImg').src=c.toDataURL('image/jpeg',0.8);
+  document.getElementById('previewBox').style.display='block';
+}
+window.usePhoto = ()=>{
+  fotoBase64=document.getElementById('previewImg').src;
+  document.getElementById('thumb').src=fotoBase64; document.getElementById('thumb').style.display='block';
+  document.getElementById('fotoStatus').textContent='✓ Foto siap ('+Math.round(fotoBase64.length/1024)+'KB)'; document.getElementById('fotoStatus').style.color='#16a34a';
+  document.getElementById('previewBox').style.display='none';
+}
+function compressImage(b64,maxW){
+  return new Promise(res=>{
+    const img=new Image();
+    img.onload=()=>{
+      const r=Math.min(1,maxW/img.width); const w=img.width*r; const h=img.height*r;
+      const cv=document.createElement('canvas'); cv.width=w; cv.height=h;
+      cv.getContext('2d').drawImage(img,0,0,w,h);
+      res(cv.toDataURL('image/jpeg',0.7));
+    };
+    img.onerror=()=>res(b64);
+    img.src=b64;
+  });
+}
+window.simpanFirebase = async ()=>{
+  const nama=document.getElementById('nama').value.trim();
+  if(!nama){ alert('Nama wajib'); return; }
+  if(!fotoBase64){ alert('Foto dulu!'); return; }
+  const btn=document.getElementById('btnSimpan'); const st=document.getElementById('status');
+  btn.disabled=true; btn.textContent='⏳ Menyimpan...'; st.textContent='Kompress foto...';
+  const dataTamu={
+    nama, instansi:document.getElementById('instansi').value.trim(),
+    tanggal:document.getElementById('tanggal').value || new Date().toISOString().split('T')[0],
+    jam:document.getElementById('jam').value || new Date().toTimeString().slice(0,5),
+    tujuan:document.getElementById('tujuan').value, keperluan:document.getElementById('keperluan').value.trim(),
+    created:serverTimestamp(), createdLocal:new Date().toISOString()
+  };
+  try{
+    const comp=await compressImage(fotoBase64,480);
+    if(comp.length>900000){ st.textContent='❌ Foto kebesaran ('+Math.round(comp.length/1024)+'KB), foto lagi lebih terang'; st.style.color='#dc2626'; btn.disabled=false; btn.textContent='Kirim'; return; }
+    st.textContent='Menyimpan ke Firestore...';
+    await addDoc(collection(db,'buku_tamu'), {...dataTamu, fotoURL:comp});
+    st.textContent='✅ Berhasil! Masuk Firestore!'; st.style.color='#16a34a';
+    loadList();
+    document.getElementById('nama').value=''; document.getElementById('instansi').value=''; document.getElementById('tujuan').value=''; document.getElementById('keperluan').value='';
+    fotoBase64=null; document.getElementById('thumb').style.display='none'; document.getElementById('fotoStatus').textContent='Belum ada foto — Foto dulu!';
+    setTimeout(()=>{st.textContent='';},3000);
+  }catch(e){
+    console.error(e);
+    let m=e.message;
+    if(m.includes('permission') || m.includes('Missing')){ m='❌ PERMISSION DENIED\nRules belum test mode!\nBuka Firestore → Rules → allow read, write: if true → Publish'; document.getElementById('ruleHelp').style.display='block'; }
+    st.textContent=m; st.style.color='#dc2626';
+  }finally{ btn.disabled=false; btn.textContent='Kirim'; }
+}
+async function loadList(){
+  const el=document.getElementById('list'); el.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#94a3b8;font-size:12px">Loading...</div>';
+  try{
+    const snap=await getDocs(collection(db,'buku_tamu'));
+    let datas=snap.docs.map(d=>d.data()); datas.sort((a,b)=>(b.createdLocal||'').localeCompare(a.createdLocal||''));
+    if(datas.length===0){ el.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#94a3b8;font-size:12px">Belum ada tamu, jadi yang pertama!</div>'; return; }
+    el.innerHTML=datas.slice(0,12).map(t=>`<div style="border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;background:#fff"><img src="${t.fotoURL||''}" style="width:100%;aspect-ratio:4/3;object-fit:cover;background:#f1f5f9"><div style="padding:10px"><b style="font-size:13px">${t.nama}</b><br><span style="font-size:11px;color:#64748b">${t.tanggal||''} ${t.jam||''} • ${t.instansi||''}</span><br><span style="font-size:11px">${t.tujuan||''}</span></div></div>`).join('');
+    document.getElementById('firebaseStatus').textContent='Terhubung ✅ '+datas.length+' data';
+  }catch(e){ el.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#dc2626;font-size:12px">Gagal load: '+e.message+'</div>'; }
+}
+window.addEventListener('load',()=>{ document.getElementById('tanggal').valueAsDate=new Date(); document.getElementById('jam').value=new Date().toTimeString().slice(0,5); setTimeout(()=>{ startCamera(); },800); loadList(); });
+</script>
+
+<footer style="background:#091f3a;color:rgba(255,255,255,.7);padding:40px 20px;text-align:center">
+  <h3 style="color:#fff;margin:0">SMP Negeri 1 Brondong</h3>
+  <p style="max-width:600px;margin:8px auto 0">Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno, Kec. Brondong, Kabupaten Lamongan, Jawa Timur 62263</p>
+  <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:rgba(255,255,255,.4)">© 2026 SMP Negeri 1 Brondong </div>
+</footer>
+
+</body>
+</html>
