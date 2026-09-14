@@ -6,7 +6,99 @@
 <title>Kontak - SMPN 1 Brondong</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+*{font-family:Poppins,system-ui;box-sizing:border-box} body{margin:0;background:#f6f8fc;color:#0f172a}<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="logo-smp2.png" />
+<title>Kontak - SMPN 1 Brondong</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
 *{font-family:Poppins,system-ui;box-sizing:border-box} body{margin:0;background:#f6f8fc;color:#0f172a}
+.card{background:#fff;border:1px solid #eef2f7;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.badge-icon{width:32px;height:32px;border-radius:50%;background:#1e3a8a;display:grid;place-items:center;flex-shrink:0}
+.badge-icon svg{width:16px;height:16px;fill:#fff}
+.label{font-size:10px;letter-spacing:1px;color:#94a3b8;font-weight:600}
+.wa-btn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#25D366;border-radius:50%}
+.wa-btn img{width:14px;height:14px;display:block}
+</style>
+</head>
+<body>
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);background:rgba(255,255,255,.9);border-bottom:1px solid #f1f5f9">
+<div style="max-width:1180px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:10px"><img src="logo-smp2.png" style="width:28px;height:32px;border-radius:8px;object-fit:cover" alt="logo"><div><div style="font-weight:700;color:#0e4a8a;font-size:15px">SMPN 1 BRONDONG</div><div style="font-size:11px;color:#64748b">Lamongan • Jawa Timur</div></div></div>
+<nav style="display:flex;gap:10px"><a href="index.html" style="padding:8px 14px;color:#475569;text-decoration:none;font-size:13px">Beranda</a><a href="profil.html" style="padding:8px 14px;color:#475569;text-decoration:none;font-size:13px">Profil</a><a href="program-sekolah.html" style="padding:8px 14px;color:#475569;text-decoration:none;font-size:13px">Program Sekolah</a><a href="ekskul.html" style="padding:8px 14px;color:#475569;text-decoration:none;font-size:13px">Ekskul</a><a href="kontak.html" style="padding:8px 14px;border-radius:999px;background:#e6eef8;color:#0e4a8a;text-decoration:none;font-size:13px;font-weight:600">Kontak</a><a href="buku-tamu.html" style="padding:8px 14px;color:#475569;text-decoration:none;font-size:13px">Buku Tamu</a></nav>
+</div>
+</header>
+
+<section style="max-width:1180px;margin:0 auto;padding:28px 20px 50px">
+<h1 style="font-size:24px;font-weight:800;margin:0">Kontak & Lokasi</h1>
+<p style="color:#64748b;font-size:13px;max-width:500px;margin:8px 0 20px">Kunjungi kami di SMP Negeri 1 Brondong atau hubungi untuk informasi PPDB, kerjasama, dan layanan pendidikan.</p>
+
+<div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:20px;align-items:start">
+
+<!-- KIRI - INFO KONTAK -->
+<div style="display:flex;flex-direction:column;gap:14px">
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+<!-- ALAMAT -->
+<div class="card" style="display:flex;gap:12px">
+<div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></div>
+<div><div class="label">ALAMAT</div><div style="font-size:12px;line-height:1.5;margin-top:4px;font-weight:500">Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno, Kec. Brondong, Kabupaten Lamongan, Jawa Timur 62263</div></div>
+</div>
+
+
+<!-- JAM OPERASIONAL -->
+<div class="card" style="display:flex;gap:12px">
+<div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+<div style="flex:1"><div class="label">JAM OPERASIONAL</div><div style="font-size:12px;margin-top:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">Senin - Kamis, 07.00 - 15.00 WIB<br>Jum'at, 07.00 - 11.00 WIB</div></div>
+</div>
+</div>
+
+<!-- TELEPON / WA -->
+<div class="card" style="display:flex;gap:12px">
+<div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+<div><div class="label">TELEPON / WA</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;align-items:center;gap:8px;font-size:13px"><span>0821-3351-1952 (Admin)</span><a class="wa-btn" href="https://wa.me/6282133511952" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"></a></div>
+<div style="display:flex;align-items:center;gap:8px;font-size:13px"><span>0822-3059-4747 (Humas)</span><a class="wa-btn" href="https://wa.me/6282230594747" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"></a></div>
+</div>
+</div>
+</div>
+
+<!-- EMAIL -->
+<div class="card" style="display:flex;gap:12px">
+<div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2zm1 11h5v2h-6V7h2z"/></svg></div>
+<div><div class="label">EMAIL</div><div style="font-size:12px;line-height:1.6;margin-top:4px"><span style="font-weight:500">smpnegeri1brondong@gmail.com </span><a href="mailto:smpnegeri1brondong@gmail.com" style="padding:4px 10px;background:#1e3a8a;color:#fff;border-radius:999px;text-decoration:none;font-size:10px;font-weight:600">Kirim Email</a></div></div>
+</div>
+
+</div>
+
+<!-- KANAN - MAP FULL -->
+<div class="card" style="padding:0;overflow:hidden;position:sticky;top:84px">
+<div style="padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f1f5f9"><b style="font-size:13px">Lokasi di Google Maps</b><a href="https://www.google.com/maps/search/SMPN+1+Brondong" target="_blank" style="font-size:11px;color:#1e3a8a;text-decoration:none;font-weight:600">Buka di Google Maps ↗</a></div>
+<div style="width:100%;height:420px;background:#e2e8f0">
+<iframe src="https://www.google.com/maps?q=SMPN%201%20Brondong&z=16&output=embed" width="100%" height="420" style="border:0;display:block" loading="lazy"></iframe>
+</div>
+<div style="padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<a href="https://www.google.com/maps/dir//SMPN+1+Brondong" target="_blank" style="padding:10px;border-radius:999px;background:#1e3a8a;color:#fff;text-align:center;text-decoration:none;font-size:12px;font-weight:600">Petunjuk Arah</a>
+<a href="https://www.google.com/maps/search/SMPN+1+Brondong" target="_blank" style="padding:10px;border-radius:999px;background:#fff;border:1px solid #e2e8f0;color:#334155;text-align:center;text-decoration:none;font-size:12px;font-weight:600">Lihat Lebih Besar</a>
+</div>
+<div style="text-align:center;font-size:10px;color:#94a3b8;padding:0 0 10px">Klik map untuk buka Google Maps • Koordinat: -6.8073, 112.2109</div>
+</div>
+
+</div>
+</section>
+
+<footer style="background:#0f274e;color:rgba(255,255,255,.7);padding:30px 20px;text-align:center">
+<h3 style="color:#fff;margin:0;font-size:14px">SMP Negeri 1 Brondong</h3>
+<p style="max-width:600px;margin:8px auto 0;font-size:12px">Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno, Kec. Brondong, Kabupaten Lamongan, Jawa Timur 62263</p>
+<div style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.4)">© 2026 SMP Negeri 1 Brondong</div>
+</footer>
+
+</body>
+</html>
+
 .card{background:#fff;border:1px solid #eef2f7;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
 .badge-icon{width:32px;height:32px;border-radius:50%;background:#1e3a8a;display:grid;place-items:center;flex-shrink:0}
 .badge-icon svg{width:16px;height:16px;fill:#fff}
