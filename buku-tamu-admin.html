@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="logo-smp2.png" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin Buku Tamu - SMPN 1 Brondong</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{font-family:Poppins,system-ui;box-sizing:border-box}
-body{margin:0;background:#f1f5f9;color:#0f172a}
-.input{width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid #e2e8f0;background:#fff;font-size:13px;outline:none}
+*{font-family:Poppins,system-ui;box-sizing:border-box} body{margin:0;background:#f1f5f9;color:#0f172a}
+.input{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid #e2e8f0;background:#fff;font-size:14px;outline:none}
 .input:focus{border-color:#0e4a8a}
-.btn{padding:9px 16px;border-radius:10px;border:0;font-weight:600;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;justify-content:center}
-.btn-blue{background:#0e4a8a;color:#fff}.btn-blue:hover{background:#0c3d73}
-.btn-white{background:#fff;border:1px solid #e2e8f0;color:#334155}
+.btn{padding:10px 18px;border-radius:999px;border:0;font-weight:600;font-size:13px;cursor:pointer}
+.btn-blue{background:#0e4a8a;color:#fff}
+.btn-white{background:#fff;border:1px solid #e2e8f0}
 .btn-red{background:#fee2e2;color:#dc2626}
 .card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{text-align:left;padding:10px 12px;background:#f8fafc;border-bottom:1px solid #e2e8f0;color:#64748b;font-weight:600;font-size:11px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:10px 12px;background:#f8fafc;border-bottom:1px solid #e2e8f0;color:#475569;font-weight:600}
 td{padding:10px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top}
 tr:hover td{background:#f8fafc}
-.stat-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:18px}
 </style>
 </head>
 <body>
@@ -45,82 +43,113 @@ tr:hover td{background:#f8fafc}
 
 <!-- ADMIN -->
 <div id="adminScreen" style="display:none">
-<header style="position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e2e8f0">
+<header style="position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e2e8f0">
 <div style="max-width:1200px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between">
-<div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#0e4a8a;color:#fff;display:grid;place-items:center;font-weight:800">A</div><b>SMPN 1 Brondong</b><span style="font-size:11px;color:#64748b;background:#f1f5f9;padding:4px 8px;border-radius:999px">Admin</span></div>
-<div style="display:flex;gap:8px"><span id="todayDate" style="font-size:11px;color:#64748b"></span><button class="btn btn-white" onclick="loadData()">🔄 Refresh</button><button class="btn btn-white" onclick="logout()">🚪 Logout</button></div>
+<div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#0e4a8a;color:#fff;display:grid;place-items:center;font-weight:800">A</div><b>SMPN 1 Brondong</b><span style="font-size:12px;color:#64748b">Admin</span></div>
+<div style="display:flex;gap:8px"><button class="btn btn-white" onclick="loadData()">🔄 Refresh</button><button class="btn btn-white" onclick="logout()">🚪 Logout</button></div>
 </div>
 </header>
 
-<div style="max-width:1200px;margin:0 auto;padding:18px 20px 40px">
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px">
-<div class="card" style="display:flex;gap:12px;align-items:center"><div class="stat-icon" style="background:#e0f2fe">📅</div><div><div style="font-size:10px;color:#64748b;font-weight:700">HARI INI</div><div id="statHariIni" style="font-size:20px;font-weight:800">0</div></div></div>
-<div class="card" style="display:flex;gap:12px;align-items:center"><div class="stat-icon" style="background:#dcfce7">👥</div><div><div style="font-size:10px;color:#64748b;font-weight:700">TOTAL</div><div id="statTotal" style="font-size:20px;font-weight:800">0</div></div></div>
-<div class="card" style="display:flex;gap:12px;align-items:center"><div class="stat-icon" style="background:#ffedd5">🏢</div><div><div style="font-size:10px;color:#64748b;font-weight:700">INSTANSI</div><div id="statInstansi" style="font-size:20px;font-weight:800">0</div></div></div>
-<div class="card" style="display:flex;gap:12px;align-items:center"><div class="stat-icon" style="background:#f3e8ff">✅</div><div><div style="font-size:10px;color:#64748b;font-weight:700">DIPILIH</div><div id="statDipilih" style="font-size:20px;font-weight:800">0</div></div></div>
+<div style="max-width:1200px;margin:0 auto;padding:20px;display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start">
+<div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px">
+<div class="card"><div style="font-size:11px;color:#64748b">TOTAL</div><div id="statTotal" style="font-size:20px;font-weight:800">0</div></div>
+<div class="card"><div style="font-size:11px;color:#64748b">HARI INI</div><div id="statHariIni" style="font-size:20px;font-weight:800">0</div></div>
+<div class="card"><div style="font-size:11px;color:#64748b">INSTANSI</div><div id="statInstansi" style="font-size:20px;font-weight:800">0</div></div>
+<div class="card"><div style="font-size:11px;color:#64748b">DIPILIH</div><div id="statDipilih" style="font-size:20px;font-weight:800">0</div></div>
 </div>
 
+<!-- BULK BAR - KAYAK DI SCREENSHOT -->
 <div id="bulkBar" style="display:none;background:#0e4a8a;color:#fff;border-radius:12px;padding:10px 14px;align-items:center;justify-content:space-between;margin-bottom:12px">
 <div style="font-size:12px"><b><span id="bulkCount">0</span> dipilih</b> • centang beberapa lalu hapus sekaligus</div>
 <div style="display:flex;gap:8px"><button class="btn" style="background:#fff;color:#0e4a8a;font-size:11px;padding:6px 12px" onclick="exportSelected()">📥 Export Terpilih</button><button class="btn" style="background:#ef4444;color:#fff;font-size:11px;padding:6px 12px" onclick="hapusTerpilih()">🗑️ Hapus Terpilih</button><button class="btn" style="background:rgba(255,255,255,.2);color:#fff;font-size:11px;padding:6px 12px" onclick="clearSelection()">✕ Batal</button></div>
 </div>
 
-<div style="display:grid;grid-template-columns:1fr 340px;gap:16px;align-items:start">
-<div>
-<div class="card" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
-<input id="searchInput" class="input" style="flex:1;min-width:160px" placeholder="🔍 Cari nama / instansi..." oninput="renderTamu()">
+<div class="card" style="display:flex;gap:8px;margin-bottom:12px">
+<input id="searchInput" class="input" style="flex:1" placeholder="🔍 Cari nama / instansi..." oninput="renderTamu()">
 <input id="filterTanggal" class="input" style="width:140px" type="date" onchange="renderTamu()">
 <button class="btn btn-white" onclick="clearFilter()">Clear</button>
 <button class="btn btn-blue" onclick="exportCSV()">Export CSV</button>
 </div>
+
 <div class="card" style="padding:0;overflow:hidden">
 <div style="padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f1f5f9"><b style="font-size:13px">Daftar Tamu <span id="countLabel" style="color:#64748b;font-weight:400"></span></b><label style="font-size:11px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="checkAll" onchange="toggleAll(this)"> Pilih Semua</label></div>
-<div style="overflow:auto;max-height:600px"><table><thead><tr><th style="width:32px">✓</th><th style="width:48px">Foto</th><th>Nama & Waktu</th><th>Instansi</th><th style="width:80px">Aksi</th></tr></thead><tbody id="tableBody"></tbody></table><div id="emptyState" style="display:none;padding:30px;text-align:center;color:#94a3b8;font-size:12px">Belum ada data tamu</div></div>
+<table>
+<thead><tr><th style="width:32px">✓</th><th style="width:56px">Foto</th><th>Nama & Waktu</th><th>Instansi</th><th style="width:70px">Aksi</th></tr></thead>
+<tbody id="tableBody"></tbody>
+</table>
+<div id="emptyState" style="display:none;padding:30px;text-align:center;color:#94a3b8;font-size:13px">Belum ada data tamu.</div>
 </div>
 </div>
-<div style="display:flex;flex-direction:column;gap:12px;position:sticky;top:76px">
-<div class="card"><div style="font-weight:700;font-size:13px;margin-bottom:10px">Preview Foto</div><div id="detailFotoWrap" style="display:none"><img id="detailFoto" style="width:100%;border-radius:12px;border:1px solid #e2e8f0;aspect-ratio:3/4;object-fit:cover"><div id="detailInfo" style="margin-top:10px;font-size:12px;line-height:1.5"></div><div style="display:flex;gap:8px;margin-top:10px"><a id="detailDownload" class="btn btn-white" style="flex:1" download>Download</a><button class="btn btn-red" style="flex:1" onclick="hapusTamu()">Hapus</button></div></div><div id="detailEmpty" style="padding:20px;text-align:center;color:#94a3b8;font-size:11px">Klik baris untuk lihat detail. Centang untuk hapus banyak.</div></div>
+
+<div class="card" style="position:sticky;top:80px">
+<div style="font-weight:700;font-size:14px;margin-bottom:10px">Preview Foto</div>
+<div id="detailFotoWrap" style="display:none">
+<img id="detailFoto" style="width:100%;border-radius:12px;border:1px solid #e2e8f0;aspect-ratio:3/4;object-fit:cover;background:#f1f5f9">
+<div id="detailInfo" style="margin-top:10px;font-size:12px;line-height:1.5"></div>
+<div style="display:flex;gap:8px;margin-top:12px">
+<a id="detailDownload" class="btn btn-white" style="flex:1;text-align:center;text-decoration:none;font-size:11px" download>Download Foto</a>
+<button class="btn btn-red" style="flex:1;font-size:11px" onclick="hapusTamu()">Hapus Data</button>
 </div>
 </div>
+<div id="detailEmpty" style="padding:20px;text-align:center;color:#94a3b8;font-size:12px">Klik foto untuk lihat besar. Centang untuk hapus banyak.</div>
+</div>
+</div>
+
 </div>
 </div>
 
 <script>
-const ADMIN_PASSWORD='snebron555';
-let allData=[]; let selectedIndex=null; let selectedIds=new Set(); let lastFiltered=[];
-
-// --- FIX BACK/FORWARD AUTO LOGOUT ---
-// 1. Jika navigasi back_forward (browser back lalu forward), langsung logout
+// ===== SECURITY FIX: AUTO LOGOUT PAS REFRESH / BACK-FORWARD =====
 (function(){
+  // Jika reload, langsung hapus session
   const nav = performance.getEntriesByType('navigation')[0];
-  if(nav && nav.type==='back_forward'){
+  if(nav){
+    if(nav.type === 'reload' || nav.type === 'back_forward'){
+      sessionStorage.removeItem('admin_login');
+      localStorage.removeItem('admin_login');
+    }
+  }
+  // Fallback untuk browser lama
+  if(performance.navigation && performance.navigation.type === 1){
     sessionStorage.removeItem('admin_login');
     localStorage.removeItem('admin_login');
   }
 })();
-// 2. Jika halaman di-restore dari bfcache (back/forward), logout
 window.addEventListener('pageshow', function(e){
   if(e.persisted){
     sessionStorage.removeItem('admin_login');
     localStorage.removeItem('admin_login');
     location.reload();
   }
+  // Jika datang dari bfcache atau back-forward, cek lagi
+  const nav = performance.getEntriesByType('navigation')[0];
+  if(nav && nav.type === 'back_forward'){
+    sessionStorage.removeItem('admin_login');
+    localStorage.removeItem('admin_login');
+    if(document.getElementById('adminScreen').style.display !== 'none'){
+      logout();
+    }
+  }
 });
-// 3. Saat tab di-hide (user pencet back), hapus session agar forward harus login lagi
-window.addEventListener('pagehide', function(){
-  sessionStorage.removeItem('admin_login');
-});
+
+const ADMIN_PASSWORD='snebron555';
+let selectedIndex=null;
+let allData=[];
+let docIds=[];
+let selectedIds=new Set();
+let lastFiltered=[];
 
 function login(){
   const pass=document.getElementById('passInput').value;
   if(pass===ADMIN_PASSWORD){
-    // pakai sessionStorage, bukan localStorage -> hilang pas tab ditutup / back
+    // Simpan di sessionStorage SAJA, tapi dengan timestamp
     sessionStorage.setItem('admin_login','1');
-    sessionStorage.setItem('admin_login_time', Date.now());
-    localStorage.removeItem('admin_login'); // bersihin yang lama
+    sessionStorage.setItem('admin_login_time', Date.now().toString());
+    localStorage.removeItem('admin_login');
     showAdmin();
-  } else {
-    document.getElementById('loginError').textContent='Password salah!';
+  }else{
+    document.getElementById('loginError').textContent='Password salah! Default: snebron555';
   }
 }
 function logout(){
@@ -132,43 +161,56 @@ function logout(){
 function showAdmin(){
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('adminScreen').style.display='block';
-  document.getElementById('todayDate').textContent=new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'short'});
   loadData();
 }
-// cek login hanya dari sessionStorage
-if(sessionStorage.getItem('admin_login')==='1'){
-  // optional: expired setelah 30 menit
-  const t=parseInt(sessionStorage.getItem('admin_login_time')||'0');
-  if(Date.now()-t > 30*60*1000){ logout(); } else { showAdmin(); }
-}
+
+// Cek login - tapi JANGAN auto-login kalau ini hasil reload
+(function(){
+  const nav = performance.getEntriesByType('navigation')[0];
+  const isReload = nav && nav.type === 'reload';
+  if(isReload){
+    sessionStorage.removeItem('admin_login');
+    return;
+  }
+  if(sessionStorage.getItem('admin_login')==='1'){
+    showAdmin();
+  }
+})();
 
 async function loadData(){
-  let firebaseData=[];
+  let fbData=[]; let fbIds=[];
   try{
     if(window.firebaseGetAll){
-      firebaseData = await window.firebaseGetAll();
+      const res=await window.firebaseGetAll();
+      if(res.length>0 && res[0].id){
+        fbIds=res.map(r=>r.id);
+        fbData=res.map(r=>r.data);
+      }else{
+        fbData=res;
+        fbIds=res.map((_,i)=>'fb-'+i);
+      }
     }
-  }catch(e){ console.warn('Firebase read error, pakai local saja', e); }
-  const a = JSON.parse(localStorage.getItem('buku_tamu_kamera')||'[]');
-  const b = JSON.parse(localStorage.getItem('buku_tamu')||'[]');
-  const localData = [...a, ...b.map(x=>({...x, foto: x.foto||'', fotoURL: x.foto||''}))];
-  // Gabung Firebase + Local, hindari duplikat berdasarkan nama+tanggal+jam
-  const seen=new Set(firebaseData.map(t=>(t.nama||'')+'|'+(t.tanggal||'')+'|'+(t.jam||'')));
-  const merged=[...firebaseData];
+  }catch(e){ console.warn(e); }
+  const a=JSON.parse(localStorage.getItem('buku_tamu_kamera')||'[]');
+  const b=JSON.parse(localStorage.getItem('buku_tamu')||'[]');
+  const localData=[...a, ...b.map(x=>({...x, foto: x.foto||'', fotoURL: x.fotoURL||x.foto||''}))];
+  allData=[...fbData];
+  docIds=[...fbIds];
+  const seen=new Set(fbData.map(t=>(t.nama||'')+'|'+(t.tanggal||'')+'|'+(t.jam||'')));
   localData.forEach(t=>{
-    const key=(t.nama||'')+'|'+(t.tanggal||'')+'|'+(t.jam||'');
-    if(!seen.has(key)){ merged.push(t); }
+    const k=(t.nama||'')+'|'+(t.tanggal||'')+'|'+(t.jam||'');
+    if(!seen.has(k)){ allData.push(t); docIds.push('local-'+docIds.length); }
   });
-  allData = merged;
   renderTamu();
 }
+
 function renderTamu(){
   const search=document.getElementById('searchInput').value.toLowerCase();
   const filterTgl=document.getElementById('filterTanggal').value;
   let filtered=allData.map((t,i)=>({...t,_realIdx:i})).filter(t=>{
-    const m1=!search || (t.nama+t.instansi+t.tujuan).toLowerCase().includes(search);
-    const m2=!filterTgl || t.tanggal===filterTgl;
-    return m1 && m2;
+    const ms=!search || (t.nama+t.instansi+t.tujuan).toLowerCase().includes(search);
+    const mt=!filterTgl || t.tanggal===filterTgl;
+    return ms && mt;
   });
   lastFiltered=filtered;
   document.getElementById('statTotal').textContent=allData.length;
@@ -177,17 +219,17 @@ function renderTamu(){
   document.getElementById('statInstansi').textContent=new Set(allData.map(t=>t.instansi).filter(Boolean)).size;
   document.getElementById('statDipilih').textContent=selectedIds.size;
   document.getElementById('countLabel').textContent='('+filtered.length+' dari '+allData.length+')';
-  const tbody=document.getElementById('tableBody'); const empty=document.getElementById('emptyState');
-  if(filtered.length===0){tbody.innerHTML=''; empty.style.display='block'; updateBulkBar(); return;} empty.style.display='none';
-  tbody.innerHTML=filtered.map(t=>{
-    const real=t._realIdx; const checked=selectedIds.has(real)?'checked':''; const bg=selectedIds.has(real)?'background:#e0f2fe':'';
-    return `<tr style="${bg};cursor:pointer" onclick="selectTamu(${real})">
-      <td onclick="event.stopPropagation()"><input type="checkbox" ${checked} onchange="toggleOne(${real}, this)"></td>
-      <td><img src="${t.foto||'https://via.placeholder.com/60'}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;background:#f1f5f9" onerror="this.src='https://via.placeholder.com/60'"></td>
-      <td><b style="font-size:12px">${t.nama}</b><br><span style="font-size:10px;color:#64748b">${t.tanggal||''} ${t.jam||''}</span></td>
-      <td><div style="font-size:11px">${t.instansi||'-'}</div><div style="font-size:10px;color:#64748b">${t.tujuan||''}</div></td>
-      <td><button class="btn btn-white" style="font-size:10px;padding:5px 8px" onclick="event.stopPropagation(); selectTamu(${real})">Lihat</button></td>
-    </tr>`;
+  const tbody=document.getElementById('tableBody');
+  const empty=document.getElementById('emptyState');
+  if(filtered.length===0){ tbody.innerHTML=''; empty.style.display='block'; updateBulkBar(); return; }
+  empty.style.display='none';
+  tbody.innerHTML=filtered.map((t)=>{
+    const real=t._realIdx;
+    const checked=selectedIds.has(real)?'checked':'';
+    const bg=selectedIds.has(real)?'background:#e0f2fe':'';
+    const fotoSrc=(t.fotoURL||t.foto||'').trim();
+    const img=fotoSrc ? `<img src="${fotoSrc}" style="width:48px;height:48px;border-radius:8px;object-fit:cover;background:#f1f5f9" onerror="this.src='https://via.placeholder.com/60'">` : `<div style="width:48px;height:48px;border-radius:8px;background:#f1f5f9;display:grid;place-items:center;font-size:9px;color:#94a3b8">No</div>`;
+    return `<tr style="${bg};cursor:pointer" onclick="selectTamu(${real})"><td onclick="event.stopPropagation()"><input type="checkbox" ${checked} onchange="toggleOne(${real}, this)"></td><td>${img}</td><td><b style="font-size:13px">${t.nama||'-'}</b><br><span style="font-size:11px;color:#64748b">${t.tanggal||''} ${t.jam||''}</span></td><td><div style="font-size:12px">${t.instansi||'-'}</div><div style="font-size:11px;color:#64748b">${t.tujuan||''}</div></td><td><button class="btn btn-white" style="font-size:10px;padding:6px 10px" onclick="event.stopPropagation(); selectTamu(${real})">Lihat</button></td></tr>`;
   }).join('');
   const checkAll=document.getElementById('checkAll');
   if(checkAll){ const allChecked=filtered.length>0 && filtered.every(t=>selectedIds.has(t._realIdx)); const some=filtered.some(t=>selectedIds.has(t._realIdx)); checkAll.checked=allChecked; checkAll.indeterminate=!allChecked && some; }
@@ -195,21 +237,74 @@ function renderTamu(){
 }
 function toggleOne(real, el){ if(el.checked) selectedIds.add(real); else selectedIds.delete(real); renderTamu(); }
 function toggleAll(el){ if(el.checked){ lastFiltered.forEach(t=>selectedIds.add(t._realIdx)); } else { lastFiltered.forEach(t=>selectedIds.delete(t._realIdx)); } renderTamu(); }
-function updateBulkBar(){ const bar=document.getElementById('bulkBar'); const cnt=document.getElementById('bulkCount'); const stat=document.getElementById('statDipilih'); stat.textContent=selectedIds.size; if(selectedIds.size>0){ bar.style.display='flex'; cnt.textContent=selectedIds.size; } else { bar.style.display='none'; } }
+function updateBulkBar(){ const bar=document.getElementById('bulkBar'); const cnt=document.getElementById('bulkCount'); if(selectedIds.size>0){ bar.style.display='flex'; cnt.textContent=selectedIds.size; } else { bar.style.display='none'; } }
 function clearSelection(){ selectedIds.clear(); renderTamu(); }
 function clearFilter(){ document.getElementById('searchInput').value=''; document.getElementById('filterTanggal').value=''; renderTamu(); }
-function selectTamu(idx){ selectedIndex=idx; const t=allData[idx]; document.getElementById('detailFotoWrap').style.display='block'; document.getElementById('detailEmpty').style.display='none'; document.getElementById('detailFoto').src=t.foto||''; document.getElementById('detailDownload').href=t.foto||'#'; document.getElementById('detailInfo').innerHTML=`<b>${t.nama}</b><br>Instansi: ${t.instansi||'-'}<br>Tanggal: ${t.tanggal||''} ${t.jam||''}<br>Tujuan: ${t.tujuan||'-'}<br>Keperluan: ${t.keperluan||'-'}`; }
-function saveAll(){ localStorage.setItem('buku_tamu_kamera', JSON.stringify(allData.filter(t=>t.foto))); localStorage.setItem('buku_tamu', JSON.stringify(allData.filter(t=>!t.foto))); }
-function hapusTamu(){ if(selectedIndex===null) return; if(!confirm('Hapus '+allData[selectedIndex].nama+' ?')) return; allData.splice(selectedIndex,1); selectedIds.delete(selectedIndex); const ns=new Set(); selectedIds.forEach(i=>{ns.add(i>selectedIndex?i-1:i);}); selectedIds=ns; saveAll(); selectedIndex=null; document.getElementById('detailFotoWrap').style.display='none'; document.getElementById('detailEmpty').style.display='block'; renderTamu(); }
-function hapusTerpilih(){ if(selectedIds.size===0) return; if(!confirm('Hapus '+selectedIds.size+' data terpilih?')) return; const sorted=[...selectedIds].sort((a,b)=>b-a); sorted.forEach(idx=>{ allData.splice(idx,1); }); selectedIds.clear(); selectedIndex=null; saveAll(); document.getElementById('detailFotoWrap').style.display='none'; document.getElementById('detailEmpty').style.display='block'; renderTamu(); }
-function exportCSV(){ if(allData.length===0){alert('Tidak ada data');return;} const header=['Waktu','Nama','Instansi','Tanggal','Jam','Tujuan','Keperluan']; const rows=allData.map(t=>[t.created||'',t.nama,t.instansi,t.tanggal,t.jam,t.tujuan,t.keperluan]); const csv=[header,...rows].map(r=>r.map(v=>`"${(v||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n'); const blob=new Blob([csv],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='buku-tamu.csv'; a.click(); }
-function exportSelected(){ if(selectedIds.size===0){alert('Centang dulu!');return;} const data=[...selectedIds].map(i=>allData[i]); const header=['Waktu','Nama','Instansi','Tanggal','Jam','Tujuan','Keperluan']; const rows=data.map(t=>[t.created||'',t.nama,t.instansi,t.tanggal,t.jam,t.tujuan,t.keperluan]); const csv=[header,...rows].map(r=>r.map(v=>`"${(v||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n'); const blob=new Blob([csv],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='buku-tamu-terpilih.csv'; a.click(); }
+function selectTamu(idx){
+  selectedIndex=idx;
+  const t=allData[idx];
+  document.getElementById('detailFotoWrap').style.display='block';
+  document.getElementById('detailEmpty').style.display='none';
+  const fsrc=t.fotoURL||t.foto||'';
+  const imgEl=document.getElementById('detailFoto');
+  imgEl.src=fsrc||'https://via.placeholder.com/400x500?text=No+Foto';
+  imgEl.onerror=function(){ this.src='https://via.placeholder.com/400x500?text=No+Foto'; };
+  document.getElementById('detailDownload').href=fsrc||'#';
+  document.getElementById('detailInfo').innerHTML=`<b>${t.nama||'-'}</b><br>Instansi: ${t.instansi||'-'}<br>Tanggal: ${t.tanggal||''} ${t.jam||''}<br>Tujuan: ${t.tujuan||'-'}<br>Keperluan: ${t.keperluan||t.pesan||'-'}<br><small style="color:#94a3b8">${t.createdLocal||t.created||''}</small>`;
+}
+async function hapusTamu(){
+  if(selectedIndex===null) return;
+  if(!confirm('Hapus data tamu '+allData[selectedIndex].nama+' ?')) return;
+  const id=docIds[selectedIndex];
+  try{ if(window.firebaseDelete && id && !String(id).startsWith('local-') && !String(id).startsWith('fb-')){ await window.firebaseDelete(id); } }catch(e){ alert('Gagal hapus Firebase: '+e.message); return; }
+  allData.splice(selectedIndex,1); docIds.splice(selectedIndex,1);
+  const ns=new Set(); selectedIds.forEach(i=>{ if(i!==selectedIndex) ns.add(i>selectedIndex?i-1:i); }); selectedIds=ns;
+  localStorage.setItem('buku_tamu_kamera', JSON.stringify(allData.filter(t=>t.foto||t.fotoURL)));
+  localStorage.setItem('buku_tamu', JSON.stringify(allData.filter(t=>!t.foto && !t.fotoURL)));
+  selectedIndex=null;
+  document.getElementById('detailFotoWrap').style.display='none';
+  document.getElementById('detailEmpty').style.display='block';
+  renderTamu();
+}
+async function hapusTerpilih(){
+  if(selectedIds.size===0) return;
+  if(!confirm('Hapus '+selectedIds.size+' data terpilih? Akan dihapus permanen dari Firebase!')) return;
+  const sorted=[...selectedIds].sort((a,b)=>b-a);
+  for(const idx of sorted){
+    const id=docIds[idx];
+    try{ if(window.firebaseDelete && id && !String(id).startsWith('local-') && !String(id).startsWith('fb-')){ await window.firebaseDelete(id); } }catch(e){}
+  }
+  sorted.forEach(idx=>{ allData.splice(idx,1); docIds.splice(idx,1); });
+  selectedIds.clear(); selectedIndex=null;
+  localStorage.setItem('buku_tamu_kamera', JSON.stringify(allData.filter(t=>t.foto||t.fotoURL)));
+  localStorage.setItem('buku_tamu', JSON.stringify(allData.filter(t=>!t.foto && !t.fotoURL)));
+  document.getElementById('detailFotoWrap').style.display='none';
+  document.getElementById('detailEmpty').style.display='block';
+  renderTamu();
+}
+function exportCSV(){
+  if(allData.length===0){ alert('Tidak ada data'); return; }
+  const header=['Waktu','Nama','Instansi','Tanggal','Jam','Tujuan','Keperluan'];
+  const rows=allData.map(t=>[t.createdLocal||t.created||'',t.nama,t.instansi,t.tanggal,t.jam,t.tujuan,t.keperluan||t.pesan||'']);
+  const csv=[header,...rows].map(r=>r.map(v=>'"'+(v||'').toString().replace(/"/g,'""')+'"').join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='buku-tamu.csv'; a.click();
+}
+function exportSelected(){
+  if(selectedIds.size===0){ alert('Centang dulu!'); return; }
+  const data=[...selectedIds].map(i=>allData[i]);
+  const header=['Waktu','Nama','Instansi','Tanggal','Jam','Tujuan','Keperluan'];
+  const rows=data.map(t=>[t.createdLocal||t.created||'',t.nama,t.instansi,t.tanggal,t.jam,t.tujuan,t.keperluan||t.pesan||'']);
+  const csv=[header,...rows].map(r=>r.map(v=>'"'+(v||'').toString().replace(/"/g,'""')+'"').join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='buku-tamu-terpilih.csv'; a.click();
+}
 document.getElementById('passInput').addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
 </script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyCBw7cC2wAxAMNfEJyPD-_62_qmlIw5ZyE",
   authDomain: "smpn1-brondong.firebaseapp.com",
@@ -217,23 +312,24 @@ const firebaseConfig = {
   storageBucket: "smpn1-brondong.firebasestorage.app",
   messagingSenderId: "918473388225",
   appId: "1:918473388225:web:10074c05297aa3c9dce440",
-  measurementId: "G-TNNR7EKEYH"
 };
 let db=null;
-try{ const app=initializeApp(firebaseConfig); db=getFirestore(app); }catch(e){ console.warn(e); }
+try{ const app=initializeApp(firebaseConfig); db=getFirestore(app); }catch(e){}
 window.firebaseGetAll = async ()=>{
   if(!db) return [];
   try{
-    const q = query(collection(db,'buku_tamu'), orderBy('created','desc'));
-    const snap = await getDocs(q);
-    return snap.docs.map(d=>d.data());
+    const q=query(collection(db,'buku_tamu'), orderBy('created','desc'));
+    const snap=await getDocs(q);
+    return snap.docs.map(d=>({id:d.id, data:d.data()}));
   }catch(e){
-    // fallback tanpa orderBy kalau field created belum ada
-    const snap = await getDocs(collection(db,'buku_tamu'));
-    return snap.docs.map(d=>d.data());
+    const snap=await getDocs(collection(db,'buku_tamu'));
+    return snap.docs.map(d=>({id:d.id, data:d.data()}));
   }
 };
-window.firebaseDeleteAll = async ()=>{ /* optional */ };
+window.firebaseDelete = async (docId)=>{
+  if(!db) throw new Error('DB belum siap');
+  await deleteDoc(doc(db,'buku_tamu', docId));
+};
 </script>
 
 </body>
