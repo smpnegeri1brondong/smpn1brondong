@@ -103,6 +103,7 @@ document.addEventListener('click', function(e){
 <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:rgba(255,255,255,.4)">© 2026 SMP Negeri 1 Brondong</div>
 </footer>
 
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
@@ -113,7 +114,6 @@ const firebaseConfig = {
   storageBucket: "smpn1-brondong.firebasestorage.app",
   messagingSenderId: "918473388225",
   appId: "1:918473388225:web:10074c05297aa3c9dce440",
-  measurementId: "G-TNNR7EKEYH"
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -168,53 +168,18 @@ window.simpanFirebase = async ()=>{
   };
   try{
     const comp=await compressImage(fotoBase64,480);
-    if(comp.length>900000){ st.textContent='❌ Foto kebesaran ('+Math.round(comp.length/1024)+'KB), coba foto lagi'; st.style.color='#dc2626'; btn.disabled=false; btn.textContent='💾 Kirim'; return; }
+    if(comp.length>900000){ st.textContent='❌ Foto kebesaran ('+Math.round(comp.length/1024)+'KB), coba foto lagi'; st.style.color='#dc2626'; btn.disabled=false; btn.textContent='Kirim'; return; }
     st.textContent='Menyimpan...';
     await addDoc(collection(db,'buku_tamu'), {...dataTamu, fotoURL:comp});
-    st.textContent='✅ Berhasil! Terima kasih, data Anda telah tercatat.\nData tamu lain tidak ditampilkan demi privasi.'; st.style.color='#16a34a';
+    st.textContent='✅ Berhasil! Terima kasih, data Anda telah tercatat.'; st.style.color='#16a34a';
     document.getElementById('nama').value=''; document.getElementById('instansi').value=''; document.getElementById('tujuan').value=''; document.getElementById('keperluan').value='';
-    fotoBase64=null; document.getElementById('thumb').style.display='none'; document.getElementById('fotoStatus').textContent='Belum ada foto — Foto dulu!'; document.getElementById('fotoStatus').style.color='#64748b';
+    fotoBase64=null; document.getElementById('thumb').style.display='none'; document.getElementById('fotoStatus').textContent='Belum ada foto — Foto dulu!';
     setTimeout(()=>{st.textContent='';},5000);
   }catch(e){
-    console.error(e);
     st.textContent='❌ Error: '+e.message; st.style.color='#dc2626';
   }finally{ btn.disabled=false; btn.textContent='Kirim'; }
 }
 window.addEventListener('load',()=>{ document.getElementById('tanggal').valueAsDate=new Date(); document.getElementById('jam').value=new Date().toTimeString().slice(0,5); setTimeout(()=>{ startCamera(); },800); });
-</script>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyCBw7cC2wAxAMNfEJyPD-_62_qmlIw5ZyE",
-  authDomain: "smpn1-brondong.firebaseapp.com",
-  projectId: "smpn1-brondong",
-  storageBucket: "smpn1-brondong.firebasestorage.app",
-  messagingSenderId: "918473388225",
-  appId: "1:918473388225:web:10074c05297aa3c9dce440",
-  measurementId: "G-TNNR7EKEYH"
-};
-let db=null;
-try{ const app=initializeApp(firebaseConfig); db=getFirestore(app); }catch(e){ console.warn('Firebase init error', e); }
-window.firebaseAdd = async (data)=>{
-  if(!db) throw new Error('Firebase belum terhubung');
-  const payload={
-    nama: data.nama||'',
-    instansi: data.instansi||'',
-    jabatan: data.jabatan||'',
-    tanggal: data.tanggal || new Date().toISOString().split('T')[0],
-    jam: data.jam || new Date().toTimeString().slice(0,5),
-    tujuan: data.tujuan||'',
-    pesan: data.pesan||'',
-    keperluan: data.pesan||'',
-    foto: '',
-    fotoURL: '',
-    created: data.created || new Date().toISOString(),
-    createdLocal: new Date().toLocaleString('id-ID')
-  };
-  await addDoc(collection(db,'buku_tamu'), payload);
-};
 </script>
 
 </body>
