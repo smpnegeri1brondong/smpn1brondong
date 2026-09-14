@@ -103,6 +103,35 @@ btn.addEventListener('click', () => {
 });
 </script>
 
+<!-- WA FLOAT KECIL - VERSI KLIK FIX -->
+<style>
+.wa-float{position:fixed;bottom:16px;right:16px;z-index:9999}
+.wa-main{width:44px;height:44px;background:#25D366;border-radius:50%;display:grid;place-items:center;box-shadow:0 3px 10px rgba(0,0,0,.2);cursor:pointer}
+.wa-list{display:none;position:absolute;bottom:54px;right:0;flex-direction:column;gap:6px;align-items:flex-end}
+.wa-list.show{display:flex}
+.wa-item{display:flex;align-items:center;gap:6px;background:#fff;padding:6px 10px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.15);text-decoration:none;color:#0f172a;font-size:11px;font-weight:600;white-space:nowrap}
+.wa-item span{width:22px;height:22px;background:#25D366;border-radius:50%;display:grid;place-items:center}
+.wa-item img{width:12px;height:12px}
+</style>
+
+<div class="wa-float" id="waFloat">
+  <div class="wa-list" id="waList">
+    <a class="wa-item" href="https://wa.me/6282133511952" target="_blank"><span><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"></span> Admin - 0821-3351-1952</a>
+    <a class="wa-item" href="https://wa.me/6282230594747" target="_blank"><span><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"></span> Humas - 0822-3059-4747</a>
+  </div>
+  <div class="wa-main" onclick="document.getElementById('waList').classList.toggle('show')">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:22px;height:22px" alt="WA">
+  </div>
+</div>
+
+<script>
+document.addEventListener('click', function(e){
+  const f=document.getElementById('waFloat'), l=document.getElementById('waList');
+  if(!f.contains(e.target)) l.classList.remove('show');
+});
+</script>
+
+
 <footer style="background:#091f3a;color:rgba(255,255,255,.7);padding:40px 20px;text-align:center">
   <h3 style="color:#fff;margin:0">SMP Negeri 1 Brondong</h3>
   <p style="max-width:600px;margin:8px auto 0">Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno, Kec. Brondong, Kabupaten Lamongan, Jawa Timur 62263</p>
