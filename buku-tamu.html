@@ -182,5 +182,40 @@ window.simpanFirebase = async ()=>{
 }
 window.addEventListener('load',()=>{ document.getElementById('tanggal').valueAsDate=new Date(); document.getElementById('jam').value=new Date().toTimeString().slice(0,5); setTimeout(()=>{ startCamera(); },800); });
 </script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyCBw7cC2wAxAMNfEJyPD-_62_qmlIw5ZyE",
+  authDomain: "smpn1-brondong.firebaseapp.com",
+  projectId: "smpn1-brondong",
+  storageBucket: "smpn1-brondong.firebasestorage.app",
+  messagingSenderId: "918473388225",
+  appId: "1:918473388225:web:10074c05297aa3c9dce440",
+  measurementId: "G-TNNR7EKEYH"
+};
+let db=null;
+try{ const app=initializeApp(firebaseConfig); db=getFirestore(app); }catch(e){ console.warn('Firebase init error', e); }
+window.firebaseAdd = async (data)=>{
+  if(!db) throw new Error('Firebase belum terhubung');
+  const payload={
+    nama: data.nama||'',
+    instansi: data.instansi||'',
+    jabatan: data.jabatan||'',
+    tanggal: data.tanggal || new Date().toISOString().split('T')[0],
+    jam: data.jam || new Date().toTimeString().slice(0,5),
+    tujuan: data.tujuan||'',
+    pesan: data.pesan||'',
+    keperluan: data.pesan||'',
+    foto: '',
+    fotoURL: '',
+    created: data.created || new Date().toISOString(),
+    createdLocal: new Date().toLocaleString('id-ID')
+  };
+  await addDoc(collection(db,'buku_tamu'), payload);
+};
+</script>
+
 </body>
 </html>
