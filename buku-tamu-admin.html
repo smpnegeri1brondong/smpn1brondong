@@ -39,7 +39,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const ADMIN_PASSWORD='admin123';
+const ADMIN_PASSWORD='snebron555';
 let allData=[]; let selectedIndex=null; let docIds=[];
 function login(){ if(document.getElementById('passInput').value===ADMIN_PASSWORD){ localStorage.setItem('admin_login','1'); showAdmin(); } else { document.getElementById('loginError').textContent='Password salah!'; } }
 window.login=login;
