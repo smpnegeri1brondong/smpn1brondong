@@ -31,8 +31,40 @@
 </header>
 
 <section style="max-width:1180px;margin:0 auto;padding:28px 20px 50px">
-<h1 style="font-size:24px;font-weight:800;margin:0">Kontak & Lokasi</h1>
-<p style="color:#64748b;font-size:13px;max-width:500px;margin:8px 0 20px">Kunjungi kami di SMP Negeri 1 Brondong atau hubungi untuk informasi PPDB, kerjasama, dan layanan pendidikan.</p>
+    <!-- HEADER + JAM LIVE SEJAJAR -->
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:20px">
+  <div>
+    <h1 style="font-size:24px;font-weight:800;margin:0">Kontak & Lokasi</h1>
+    <p style="color:#64748b;font-size:13px;max-width:500px;margin:8px 0 0">Kunjungi kami di SMP Negeri 1 Brondong atau hubungi untuk informasi PPDB, kerjasama, dan layanan pendidikan.</p>
+  </div>
+
+  <!-- JAM LIVE - MASUK DI AREA MERAH -->
+  <div id="live-clock-box" style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:12px 16px;box-shadow:0 2px 8px rgba(0,0,0,.04);min-width:180px;text-align:right">
+    <div style="font-size:9px;font-weight:700;letter-spacing:.15em;color:#222934">WAKTU SAAT INI • WIB</div>
+    <div id="live-time" style="font-size:20px;font-weight:800;color:#0f172a;margin-top:2px">00:00:00</div>
+    <div id="live-date" style="font-size:11px;color:#64748b">Memuat...</div>
+    <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-top:6px">
+      <div style="width:6px;height:6px;border-radius:50%;background:#22c55e;animation:blink 1s infinite"></div>
+      <span style="font-size:10px;color:#22c55e;font-weight:600">LIVE</span>
+    </div>
+  </div>
+</div>
+
+<style>@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}</style>
+
+<script>
+function updateClock(){
+  const now = new Date();
+  const wib = new Date(now.toLocaleString("en-US",{timeZone:"Asia/Jakarta"}));
+  document.getElementById('live-time').textContent = 
+    String(wib.getHours()).padStart(2,'0')+':'+
+    String(wib.getMinutes()).padStart(2,'0')+':'+
+    String(wib.getSeconds()).padStart(2,'0');
+  document.getElementById('live-date').textContent = 
+    wib.toLocaleDateString('id-ID',{weekday:'long', day:'numeric', month:'long', year:'numeric'});
+}
+setInterval(updateClock,1000); updateClock();
+</script>
 
 <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:20px;align-items:start">
 
