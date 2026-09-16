@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="logo-smp2.png" />
 <title>Buku Tamu Virtual - SMPN 1 Brondong</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -16,7 +15,17 @@ video{width:100%;height:100%;object-fit:cover;display:block;transform:scaleX(-1)
 #canvasFoto{display:none}
 .btn{border:0;cursor:pointer;border-radius:999px;font-weight:600}
 </style>
+<script type="importmap">
+{
+  "imports": {
+    "firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
+    "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js",
+    "firebase/storage": "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js"
+  }
+}
+</script>
 <script>
+// TELEGRAM
 const TELEGRAM_BOT_TOKEN = "8698871747:AAEx0uaQQJDnav9w489HyXkND9D5v-Gknog";
 const TELEGRAM_CHAT_ID = "-1004475454449";
 function dataURLtoBlob(dataURL){
@@ -61,7 +70,7 @@ async function kirimTelegram(data){
 </div>
 <div style="display:flex;gap:8px;align-items:center">
 <a href="index.html" style="text-decoration:none;color:#64748b;font-size:13px;padding:6px 10px">Beranda</a>
-<a href="buku-tamu.html" style="text-decoration:none;background:#e8f0fb;color:#0e4a8a;font-size:13px;padding:7px 14px;border-radius:999px;font-weight:700">Buku Tamu</a>
+<a href="buku-tamu.html" style="text-decoration:none;background:#e8f0fb;color:#0e4a8a;font-size:13px;padding:7px 14px;border-radius:999px;font-weight:600">Buku Tamu</a>
 <a href="buku-tamu-admin.html" style="text-decoration:none;background:#0e4a8a;color:#fff;font-size:13px;padding:7px 14px;border-radius:999px">Admin →</a>
 </div>
 </div>
@@ -69,14 +78,13 @@ async function kirimTelegram(data){
 
 <section style="max-width:900px;margin:0 auto;padding:20px 20px 40px">
 <div style="background:#d1fae5;border:1px solid #a7f3d0;color:#065f46;padding:10px 14px;border-radius:12px;font-size:12px;display:flex;align-items:center;gap:8px;margin-bottom:16px">
-<span>✅ Buku Tamu Online — Status: Terhubung ✅</span>
+<span>✅ Buku Tamu Online — Status: <span id="fbStatus">Menghubungkan Firebase...</span> ✅</span>
 </div>
 
 <h1 style="font-size:22px;font-weight:800;margin:0 0 4px">Buku Tamu Virtual</h1>
 <p style="color:#64748b;font-size:12px;margin:0 0 18px">Kamera auto ON, foto selfie wajib. Data tamu lain tidak ditampilkan demi privasi.</p>
 
 <div style="display:grid;grid-template-columns:360px 1fr;gap:18px;align-items:start">
-<!-- KAMERA -->
 <div class="card" style="padding:10px">
 <div style="position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:#0f172a;border-radius:16px">
 <video id="video" autoplay playsinline muted></video>
@@ -99,7 +107,6 @@ async function kirimTelegram(data){
 <div style="margin-top:8px;font-size:11px;color:#94a3b8"><span id="fotoStatus">Belum ada foto — Foto dulu!</span></div>
 </div>
 
-<!-- FORM -->
 <div class="card">
 <div style="display:grid;gap:10px">
 <input id="nama" class="input" placeholder="Nama Lengkap *Wajib">
@@ -109,7 +116,7 @@ async function kirimTelegram(data){
 <input id="jam" class="input" type="time">
 </div>
 <select id="tujuan" class="input">
-<option value=""disabled selected hidden>Tujuan ke...</option>
+<option value="">Tujuan ke...</option>
 <option>Kepala Sekolah</option>
 <option>Wakasek Kurikulum</option>
 <option>Wakasek Kesiswaan</option>
@@ -130,26 +137,52 @@ async function kirimTelegram(data){
 </div>
 
 <div style="margin-top:16px;background:#e0f2fe;border:1px solid #bae6fd;padding:10px 12px;border-radius:12px;font-size:11px;color:#0c4a6e">
-<b>ℹ️ Privasi Terjaga:</b> Setelah mengirim, data Anda hanya bisa dilihat admin. Tamu lain tidak bisa melihat foto / data Anda.
+<b>ℹ️ Privasi Terjaga:</b> Data disimpan di Firebase, hanya admin yang bisa lihat. Tamu lain tidak bisa melihat foto / data Anda. Notif Telegram otomatis ke petugas.
 </div>
-
 </section>
 
-<script>
-let stream=null; let fotoBase64=null;
-async function aktifkanKamera(){
+<script type="module">
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCBw7cC2wAxAMNfEJyPD-_62_qmlIw5ZyE",
+  authDomain: "smpn1-brondong.firebaseapp.com",
+  projectId: "smpn1-brondong",
+  storageBucket: "smpn1-brondong.firebasestorage.app",
+  messagingSenderId: "918473388225",
+  appId: "1:918473388225:web:10074c05297aa3c9dce440",
+};
+
+let app, db, storage, firebaseReady=false;
+try{
+  app = initializeApp(firebaseConfig);
+  db = getFirestore(app);
+  storage = getStorage(app);
+  firebaseReady=true;
+  document.getElementById('fbStatus').textContent='Terhubung';
+}catch(e){
+  document.getElementById('fbStatus').textContent='Gagal Firebase: '+e.message;
+  console.error(e);
+}
+
+let stream=null;
+let fotoBase64=null;
+
+window.aktifkanKamera = async()=>{
   const v=document.getElementById('video'); const off=document.getElementById('cameraOff');
   try{
     stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:640},height:{ideal:480}},audio:false});
     v.srcObject=stream; off.style.display='none'; v.style.display='block';
-  }catch(e){alert('Gagal kamera: '+e.message+'\nPakai HTTPS & izinkan kamera');}
+  }catch(e){alert('Gagal kamera: '+e.message);}
 }
 window.addEventListener('load',()=>{
-  setTimeout(aktifkanKamera,600);
+  setTimeout(()=>{ window.aktifkanKamera(); },600);
   document.getElementById('tanggal').valueAsDate=new Date();
   document.getElementById('jam').value=new Date().toTimeString().slice(0,5);
 });
-function ambilFoto(){
+window.ambilFoto=()=>{
   const video=document.getElementById('video'); const canvas=document.getElementById('canvasFoto');
   if(!video.srcObject){alert('Aktifkan kamera dulu!');return;}
   const w=video.videoWidth||640; const h=video.videoHeight||480;
@@ -159,43 +192,60 @@ function ambilFoto(){
   document.getElementById('previewImg').src=dataURL;
   document.getElementById('previewWrap').style.display='block';
 }
-function retake(){document.getElementById('previewWrap').style.display='none';}
-function pakaiFoto(){
+window.retake=()=>{document.getElementById('previewWrap').style.display='none';}
+window.pakaiFoto=()=>{
   const dataURL=document.getElementById('previewImg').src;
   fotoBase64=dataURL;
   document.getElementById('fotoTamuThumb').src=dataURL;
   document.getElementById('thumbWrap').style.display='flex';
   document.getElementById('fotoStatus').innerHTML='✓ Foto siap ('+Math.round(dataURL.length/1024)+' KB)';
-  retake();
+  window.retake();
 }
-async function simpanTamu(){
+
+window.simpanTamu = async()=>{
   const nama=document.getElementById('nama').value.trim();
   if(!nama){alert('Nama wajib!');return;}
-  if(!fotoBase64){alert('Foto dulu! Klik Ambil Foto → Pakai Foto');return;}
-  const data={
+  if(!fotoBase64){alert('Foto dulu!');return;}
+  const dataLocal={
     nama:nama,
     instansi:document.getElementById('instansi').value.trim(),
     tanggal:document.getElementById('tanggal').value||new Date().toISOString().split('T')[0],
     jam:document.getElementById('jam').value||new Date().toTimeString().slice(0,5),
     tujuan:document.getElementById('tujuan').value.trim(),
     keperluan:document.getElementById('keperluan').value.trim(),
-    foto:fotoBase64,
-    created:new Date().toISOString(),
-    createdLocal:new Date().toLocaleString('id-ID')
+    created: new Date().toISOString(),
+    createdLocal:new Date().toLocaleString('id-ID'),
+    foto:fotoBase64
   };
-  document.getElementById('status').textContent='Mengirim ke Petugas';
+  document.getElementById('status').textContent='Menyimpan ke Firebase + Telegram...';
   try{
-    const list=JSON.parse(localStorage.getItem('buku_tamu')||'[]');
-    list.unshift(data); localStorage.setItem('buku_tamu',JSON.stringify(list));
-    const tg=await kirimTelegram(data);
+    const namaFile = `tamu/${Date.now()}_${nama.replace(/\s+/g,'_')}.jpg`;
+    const fotoRef = ref(storage, namaFile);
+    await uploadString(fotoRef, fotoBase64, 'data_url');
+    const fotoURL = await getDownloadURL(fotoRef);
+    await addDoc(collection(db, 'buku_tamu'), {
+      nama:dataLocal.nama,
+      instansi:dataLocal.instansi,
+      tanggal:dataLocal.tanggal,
+      jam:dataLocal.jam,
+      tujuan:dataLocal.tujuan,
+      keperluan:dataLocal.keperluan,
+      fotoURL:fotoURL,
+      created:serverTimestamp(),
+      createdLocal:dataLocal.createdLocal
+    });
+    const tg=await kirimTelegram({...dataLocal, foto:fotoBase64});
     if(tg&&tg.ok){
-      document.getElementById('status').innerHTML='✅ Terkirim ke Admin!';
-      document.getElementById('nama').value=''; document.getElementById('instansi').value=''; document.getElementById('tujuan').value=''; document.getElementById('keperluan').value='';
-      fotoBase64=null; document.getElementById('thumbWrap').style.display='none'; document.getElementById('fotoStatus').textContent='Belum ada foto — Foto dulu!';
+      document.getElementById('status').innerHTML='✅ Tersimpan di Firebase & Telegram terkirim!';
     }else{
-      document.getElementById('status').innerHTML='❌ Gagal Telegram: '+(tg.description||tg.error||'cek bot sudah jadi admin grup');
+      document.getElementById('status').innerHTML='✅ Firebase OK, Telegram error: '+(tg.description||'');
     }
-  }catch(e){document.getElementById('status').textContent='Error: '+e.message;}
+    document.getElementById('nama').value=''; document.getElementById('instansi').value=''; document.getElementById('tujuan').value=''; document.getElementById('keperluan').value='';
+    fotoBase64=null; document.getElementById('thumbWrap').style.display='none'; document.getElementById('fotoStatus').textContent='Belum ada foto — Foto dulu!';
+  }catch(e){
+    document.getElementById('status').textContent='Error: '+e.message;
+    console.error(e);
+  }
 }
 </script>
 </body>
