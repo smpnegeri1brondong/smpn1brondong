@@ -24,7 +24,7 @@ async function kirimTelegram(data){const cap=`🔔 TAMU BARU - SMPN 1 BRONDONG\n
 <header style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eef2f7">
 <div style="max-width:1180px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between">
 <div style="display:flex;align-items:center;gap:10px"><img src="logo-smp2.png" style="width:32px;height:32px"><div><div style="font-weight:700;color:#0e4a8a;font-size:14px">SMPN 1 BRONDONG</div><div style="font-size:11px;color:#64748b">Lamongan • Jawa Timur</div></div></div>
-<div style="display:flex;gap:8px"><a href="index.html" style="text-decoration:none;color:#64748b;font-size:13px;padding:6px 10px">Beranda</a><a href="buku-tamu.html" style="text-decoration:none;background:#e8f0fb;color:#0e4a8a;font-size:13px;padding:7px 14px;border-radius:999px;font-weight:600">Buku Tamu</a><a href="buku-tamu-admin.html" style="text-decoration:none;background:#0e4a8a;color:#fff;font-size:13px;padding:7px 14px;border-radius:999px">Admin →</a></div>
+<div style="display:flex;gap:8px"><a href="index.html" style="text-decoration:none;color:#64748b;font-size:13px;padding:6px 10px">Beranda</a><a href="buku-tamu.html" style="text-decoration:none;background:#e8f0fb;color:#0e4a8a;font-size:13px;padding:7px 14px;border-radius:999px;font-weight:700">Buku Tamu</a><a href="buku-tamu-admin.html" style="text-decoration:none;background:#0e4a8a;color:#fff;font-size:13px;padding:7px 14px;border-radius:999px">Admin →</a></div>
 </div>
 </header>
 <section style="max-width:900px;margin:0 auto;padding:20px 20px 40px">
@@ -46,7 +46,7 @@ async function kirimTelegram(data){const cap=`🔔 TAMU BARU - SMPN 1 BRONDONG\n
 <input id="nama" class="input" placeholder="Nama Lengkap *Wajib">
 <input id="instansi" class="input" placeholder="Asal Instansi">
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input id="tanggal" class="input" type="date"><input id="jam" class="input" type="time"></div>
-<select id="tujuan" class="input"><option value="">Tujuan ke...</option><option>Kepala Sekolah</option><option>Wakasek Kurikulum</option><option>Wakasek Kesiswaan</option><option>TU / Tata Usaha</option><option>BK / Konseling</option><option>Guru Mapel</option><option>Lainnya</option></select>
+<select id="tujuan" class="input"><option value="" disabled selected hidden>Tujuan ke...</option><option>Kepala Sekolah</option><option>Wakasek Kurikulum</option><option>Wakasek Kesiswaan</option><option>TU / Tata Usaha</option><option>BK / Konseling</option><option>Guru Mapel</option><option>Lainnya</option></select>
 <textarea id="keperluan" class="input" rows="3" placeholder="Keperluan"></textarea>
 <div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:10px;display:none" id="thumbWrap"><img id="fotoTamuThumb" style="width:36px;height:36px;border-radius:8px;object-fit:cover"><span style="font-size:11px;color:#0e4a8a">✓ Foto siap</span></div>
 <button class="btn" style="width:100%;background:#164f8a;color:#fff;padding:12px;font-size:14px;font-weight:700" onclick="simpanTamu()">Kirim</button>
