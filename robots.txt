@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /buku-tamu-admin.html
 
 Sitemap: https://smpnegeri1brondong.github.io/smpn1brondong/sitemap.xml
