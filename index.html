@@ -3,10 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="https://smpnegeri1brondong.github.io/smpn1brondong/logo-smp2.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://smpnegeri1brondong.github.io/smpn1brondong/logo-smp2.png">
-<link rel="apple-touch-icon" href="https://smpnegeri1brondong.github.io/smpn1brondong/logo-smp2.png">
-<link rel="shortcut icon" href="https://smpnegeri1brondong.github.io/smpn1brondong/logo-smp2.png">
+<link rel="icon" href="https://smpnegeri1brondong.github.io/smpn1brondong/logo-smp2.png">
 <meta property="og:site_name" content="SMPN 1 Brondong">
 <title>SMPN 1 Brondong - Official Website SMP Negeri 1 Brondong Lamongan</title>
 <meta name="description" content="SMP Negeri 1 Brondong - Sekolah negeri unggulan di pesisir Lamongan, Jawa Timur. Akreditasi A, 440 siswa, 44 guru. BERGEMA Beriman, Gemilang, Mandiri." />
@@ -17,9 +14,6 @@
 <meta property="og:title" content="SMPN 1 Brondong - SMP Negeri 1 Brondong Lamongan" />
 <meta property="og:description" content="Sekolah unggulan di pesisir Lamongan. Cerdas, berakhlak, siap era digital." />
 <meta property="og:image" content="https://smpnegeri1brondong.github.io/smpn1brondong/logo-smp2.png" />
-<meta property="og:image:width" content="512" />
-<meta property="og:image:height" content="512" />
-<meta property="og:type" content="website" />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{font-family:Poppins,system-ui} body{margin:0;background:#f6f8fc}
@@ -28,8 +22,38 @@
 .btn-white{background:#fff;color:#334155;border:1px solid #e2e8f0}
 .card{border-radius:20px;background:#fff;border:1px solid #f1f5f9;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
 </style>
+
+<style>
+/* === RESPONSIVE PATCH - tanpa ubah tampilan desktop === */
+@media (max-width: 900px){
+  /* hero grid jadi 1 kolom */
+  #beranda div[style*="grid-template-columns:1.1fr"]{grid-template-columns:1fr !important; gap:28px !important;}
+  #beranda h1{font-size:34px !important;}
+  #beranda h1 div:last-child{font-size:18px !important;}
+}
+@media (max-width: 768px){
+  header div[style*="height:64px"]{height:60px !important;}
+  #nav-desktop{display:none !important;}
+  #btn-hamburger{display:flex !important;}
+  #nav-mobile{display:none;}
+  #nav-mobile.show{display:flex !important;}
+  #beranda div[style*="max-width:1180px"]{padding:28px 16px 40px !important;}
+  #galeri-youtube{padding:20px 16px !important;}
+  #galeri-youtube div[style*="repeat(auto-fit"]{grid-template-columns:1fr !important;}
+}
+@media (max-width: 480px){
+  #beranda h1{font-size:28px !important; line-height:1.05 !important;}
+  .btn{padding:10px 18px !important; font-size:13px !important;}
+}
+/* hamburger animation */
+#btn-hamburger{width:40px;height:40px;border-radius:10px;border:1px solid #e2e8f0;background:#fff;display:none;align-items:center;justify-content:center;cursor:pointer}
+#btn-hamburger span{width:18px;height:2px;background:#0e4a8a;display:block;position:relative;transition:.2s}
+#btn-hamburger span:before,#btn-hamburger span:after{content:'';position:absolute;left:0;width:18px;height:2px;background:#0e4a8a;transition:.2s}
+#btn-hamburger span:before{top:-6px} #btn-hamburger span:after{top:6px}
+</style>
+
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"School","name":"SMPN 1 Brondong","alternateName":"SMP Negeri 1 Brondong Lamongan","url":"https://smpnegeri1brondong.github.io/smpn1brondong/"}
+{"@context":"https://schema.org","@type":"School","name":"SMP Negeri 1 Brondong","url":"https://smpnegeri1brondong.github.io/smpn1brondong/"}
 </script>
 </head>
 <body>
@@ -58,7 +82,7 @@
 })();
 </script>
 <div><div style="font-weight:700;color:#0e4a8a;font-size:15px">SMPN 1 BRONDONG</div><div style="font-size:11px;color:#64748b">Lamongan • Jawa Timur</div></div></div>
-<nav style="display:flex;gap:10px;align-items:center;font-size:13px">
+<nav id="nav-desktop" style="display:flex;gap:10px;align-items:center;font-size:13px">
 <a href="index.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#0e4a8a;font-weight:700;background:#e0f2fe">Beranda</a>
 <a href="profil.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Profil</a>
 <a href="program-sekolah.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Program Sekolah</a>
@@ -66,8 +90,20 @@
 <a href="kontak.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Kontak</a>
 <a href="buku-tamu.html" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#475569">Buku Tamu</a>
 </nav>
+<button id="btn-hamburger" aria-label="menu"><span></span></button>
 </div>
 </header>
+
+<!-- MOBILE MENU - tidak ubah desktop -->
+<div id="nav-mobile" style="display:none;flex-direction:column;gap:6px;padding:12px 16px 16px;background:rgba(255,255,255,.97);border-bottom:1px solid #f1f5f9;position:sticky;top:60px;z-index:49">
+<a href="index.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#0e4a8a;font-weight:700;background:#e0f2fe">Beranda</a>
+<a href="profil.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#334155;background:#f8fafc">Profil</a>
+<a href="program-sekolah.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#334155;background:#f8fafc">Program Sekolah</a>
+<a href="ekskul.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#334155;background:#f8fafc">Ekskul</a>
+<a href="kontak.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#334155;background:#f8fafc">Kontak</a>
+<a href="buku-tamu.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#334155;background:#f8fafc">Buku Tamu</a>
+</div>
+
 <section id="beranda" style="position:relative;overflow:hidden;background:#f6f8fc">
   <!-- BG LAYER - CUMA DI DALAM HERO INI -->
   <div style="position:absolute;inset:0;z-index:0;pointer-events:none">
@@ -285,6 +321,19 @@ document.addEventListener('click', function(e){
   <p style="max-width:600px;margin:8px auto 0">Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno, Kec. Brondong, Kabupaten Lamongan, Jawa Timur 62263</p>
   <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:rgba(255,255,255,.4)">© 2026 SMP Negeri 1 Brondong </div>
 </footer>
+
+
+<script>
+// hamburger toggle - responsive only
+(function(){
+  const btn = document.getElementById('btn-hamburger');
+  const menu = document.getElementById('nav-mobile');
+  if(!btn||!menu) return;
+  btn.addEventListener('click', ()=>{menu.classList.toggle('show')});
+  // close when click link
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>menu.classList.remove('show')));
+})();
+</script>
 
 </body>
 </html>
