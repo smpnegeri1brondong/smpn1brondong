@@ -19,13 +19,63 @@ const TELEGRAM_BOT_TOKEN="8698871747:AAEx0uaQQJDnav9w489HyXkND9D5v-Gknog"; const
 function dataURLtoBlob(d){const a=d.split(','),m=a[0].match(/:(.*?);/)[1],b=atob(a[1]);let n=b.length;const u=new Uint8Array(n);while(n--)u[n]=b.charCodeAt(n);return new Blob([u],{type:m});}
 async function kirimTelegram(data){const cap=`🔔 TAMU BARU - SMPN 1 BRONDONG\n━━━━━━━━━━━━━━\n👤 Nama: ${data.nama}\n🏢 Instansi: ${data.instansi||'-'}\n📅 ${data.tanggal} ⏰ ${data.jam}\n🎯 Tujuan: ${data.tujuan||'-'}\n📝 Keperluan: ${data.keperluan||'-'}\n━━━━━━━━━━━━━━\n⏱️ ${data.createdLocal}`; try{if(data.foto){const blob=dataURLtoBlob(data.foto);const fd=new FormData();fd.append('chat_id',TELEGRAM_CHAT_ID);fd.append('photo',blob,'tamu.jpg');fd.append('caption',cap);const r=await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`,{method:'POST',body:fd});const j=await r.json();if(j.ok)return j;} const r2=await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:TELEGRAM_CHAT_ID,text:cap})});return await r2.json();}catch(e){return{ok:false,error:e.message};} }
 </script>
+
+<style id="responsive-patch">
+*{box-sizing:border-box} img{max-width:100%}
+#nav-mobile{display:none !important;}
+#btn-hamburger{width:40px;height:40px;border-radius:10px;border:1px solid #e2e8f0;background:#fff;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:101}
+#btn-hamburger span{width:18px;height:2px;background:#0e4a8a;display:block;position:relative;transition:.2s}
+#btn-hamburger span:before,#btn-hamburger span:after{content:'';position:absolute;left:0;width:18px;height:2px;background:#0e4a8a;transition:.2s}
+#btn-hamburger span:before{top:-6px} #btn-hamburger span:after{top:6px}
+#btn-hamburger.active span{background:transparent}
+#btn-hamburger.active span:before{top:0;transform:rotate(45deg)}
+#btn-hamburger.active span:after{top:0;transform:rotate(-45deg)}
+@media (max-width: 900px){
+  div[style*="grid-template-columns:360px 1fr"]{grid-template-columns:1fr !important; gap:18px !important;}
+  div[style*="grid-template-columns:1.1fr 0.9fr"]{grid-template-columns:1fr !important; gap:20px !important;}
+  div[style*="grid-template-columns:1fr 360px"]{grid-template-columns:1fr !important; gap:16px !important;}
+}
+@media (max-width: 768px){
+  header div[style*="height:60px"]{height:56px !important; padding:0 14px !important;}
+  #nav-desktop{display:none !important;}
+  #btn-hamburger{display:flex !important;}
+  #nav-mobile{position:fixed; top:56px; left:0; right:0; z-index:100; background:#fff; border-bottom:1px solid #e2e8f0; box-shadow:0 8px 24px rgba(0,0,0,.08); padding:12px 14px 16px; flex-direction:column; gap:6px;}
+  #nav-mobile.show{display:flex !important;}
+  section{padding-left:14px !important; padding-right:14px !important;}
+  div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr !important;}
+  div[style*="repeat(4,1fr)"]{grid-template-columns:1fr 1fr !important;}
+  #loginScreen{padding:20px 14px !important; min-height:auto !important; padding-top:30px !important; padding-bottom:30px !important;}
+  #loginScreen div[style*="grid-template-columns:1.1fr"]{grid-template-columns:1fr !important;}
+}
+@media (min-width: 769px){
+  #nav-mobile{display:none !important;}
+  #btn-hamburger{display:none !important;}
+  #nav-desktop{display:flex !important;}
+}
+@media (max-width: 480px){
+  div[style*="repeat(4,1fr)"]{grid-template-columns:1fr 1fr !important;}
+  .card{padding:12px !important;}
+}
+</style>
+
 </head>
 <body>
 <header style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eef2f7">
 <div style="max-width:1180px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between">
 <div style="display:flex;align-items:center;gap:10px"><img src="logo-smp2.png" style="width:32px;height:32px"><div><div style="font-weight:700;color:#0e4a8a;font-size:14px">SMPN 1 BRONDONG</div><div style="font-size:11px;color:#64748b">Lamongan • Jawa Timur</div></div></div>
-<div style="display:flex;gap:8px"><a href="index.html" style="text-decoration:none;color:#64748b;font-size:13px;padding:6px 10px">Beranda</a><a href="buku-tamu.html" style="text-decoration:none;background:#e8f0fb;color:#0e4a8a;font-size:13px;padding:7px 14px;border-radius:999px;font-weight:700">Buku Tamu</a><a href="buku-tamu-admin.html" style="text-decoration:none;background:#0e4a8a;color:#fff;font-size:13px;padding:7px 14px;border-radius:999px">Admin →</a></div>
+<nav id="nav-desktop" style="display:flex;gap:8px;align-items:center"><a href="index.html" style="text-decoration:none;color:#64748b;font-size:13px;padding:6px 10px">Beranda</a><a href="buku-tamu.html" style="text-decoration:none;background:#e8f0fb;color:#0e4a8a;font-size:13px;padding:7px 14px;border-radius:999px;font-weight:700">Buku Tamu</a><a href="buku-tamu-admin.html" style="text-decoration:none;background:#0e4a8a;color:#fff;font-size:13px;padding:7px 14px;border-radius:999px">Admin →</a></nav>
+<button id="btn-hamburger" aria-label="menu"><span></span></button></div>
 </div>
+
+<div id="nav-mobile">
+<a href="index.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#334155;background:#f8fafc;font-weight:600;font-size:14px">Beranda</a>
+<a href="profil.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#334155;background:#f8fafc;font-weight:600;font-size:14px">Profil</a>
+<a href="program-sekolah.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#334155;background:#f8fafc;font-weight:600;font-size:14px">Program Sekolah</a>
+<a href="ekskul.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#334155;background:#f8fafc;font-weight:600;font-size:14px">Ekskul</a>
+<a href="kontak.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#334155;background:#f8fafc;font-weight:600;font-size:14px">Kontak</a>
+<a href="buku-tamu.html" style="padding:12px 14px;border-radius:12px;text-decoration:none;color:#0e4a8a;background:#e0f2fe;font-weight:700;font-size:14px">Buku Tamu</a>
+</div>
+
 </header>
 <section style="max-width:900px;margin:0 auto;padding:20px 20px 40px">
 <div style="background:#d1fae5;border:1px solid #a7f3d0;color:#065f46;padding:10px 14px;border-radius:12px;font-size:12px;margin-bottom:16px">✅ Buku Tamu Online — <span id="fbStatus">Menghubungkan Firebase...</span> ✅</div>
@@ -115,5 +165,20 @@ document.addEventListener('click', function(e){
   if(!f.contains(e.target)) l.classList.remove('show');
 });
 </script>
+
+<script id="hamburger-fix">
+(function(){
+  function init(){
+    const btn=document.getElementById('btn-hamburger');
+    const menu=document.getElementById('nav-mobile');
+    if(!btn||!menu) return;
+    btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.toggle('show');btn.classList.toggle('active');});
+    document.addEventListener('click',function(e){if(!menu.contains(e.target)&&!btn.contains(e.target)){menu.classList.remove('show');btn.classList.remove('active');}});
+    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('show');btn.classList.remove('active');}));
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+})();
+</script>
+
 </body>
 </html>
