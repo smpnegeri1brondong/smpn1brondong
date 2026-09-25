@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan SMPN 1 Brondong</title>
+  <link rel="icon" href="logo-smp2.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons untuk icon Facebook, Instagram, Youtube dll -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>body{font-family:'Plus Jakarta Sans',sans-serif;}</style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-800">
+
+<!-- =================================================================== -->
+<!-- 1. HEADER - Logo: logo-smp.png | Icon: lgo-smp2.png                 -->
+<!-- =================================================================== -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+  <div class="max-w-[1180px] mx-auto px-4 sm:px-6 h-[64px] flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <!-- LOGO KIRI ATAS - file: logo-smp.png -->
+      <img src="logo-smp.png" alt="Logo SMPN 1 Brondong" class="w-10 h-10 object-contain rounded-xl bg-white border border-slate-100">
+      <div class="leading-tight">
+        <div class="font-extrabold text-[#0F2D52] text-[14px]">LAPORAN SMPN 1 BRONDONG</div>
+        <div class="text-[11px] text-slate-500 -mt-0.5">SMPN 1 Brondong</div>
+      </div>
+    </div>
+    <nav class="hidden md:flex gap-1 text-[13px] font-medium">
+      <button onclick="scrollToId('beranda')" class="px-3 py-2">Beranda</button>
+      <button onclick="scrollToId('buat')" class="px-3 py-2">Buat Laporan</button>
+      <button onclick="scrollToId('lacak')" class="px-3 py-2">Lacak</button>
+      <button onclick="scrollToId('publik')" class="px-3 py-2">Transparansi</button>
+    </nav>
+    <div class="flex items-center gap-2">
+      <button onclick="scrollToId('buat')" class="hidden md:flex h-10 px-6 rounded-full bg-[#0F2D52] text-white text-[14px] font-semibold items-center gap-2 shadow-[0_2px_8px_rgba(15,45,82,0.2)] hover:bg-[#123a6a] transition">
+        <!-- Icon Megaphone persis screenshot -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.9a3 3 0 1 1-5.8-1.1"/></svg>
+        Buat Pengaduan
+      </button>
+      <button id="btnBurger" class="md:hidden w-11 h-11 rounded-full border flex items-center justify-center">☰</button>
+    </div>
+  </div>
+  <div id="mobileNav" class="hidden md:hidden bg-white border-t px-4 py-3 space-y-1">
+    <button onclick="scrollToId('beranda')" class="w-full text-left py-3 text-sm border-b">Beranda</button>
+    <button onclick="scrollToId('buat')" class="w-full text-left py-3 text-sm border-b">Buat Laporan</button>
+    <button onclick="scrollToId('lacak')" class="w-full text-left py-3 text-sm border-b">Lacak Pengaduan</button>
+    <button onclick="scrollToId('publik')" class="w-full text-left py-3 text-sm">Transparansi</button>
+  </div>
+</header>
+
+
+<!-- =================================================================== -->
+<!-- 2. HERO - Persis kayak screenshot kamu                            -->
+<!-- =================================================================== -->
+<section id="beranda" class="max-w-[1180px] mx-auto px-4 sm:px-6 pt-8 md:pt-12 pb-8">
+  <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
+    
+    <!-- Kiri: Judul + Tombol + Badge -->
+    <div>
+      <div class="inline-flex items-center gap-2 bg-white border border-amber-200 rounded-full px-3 py-1.5 text-[11px] font-bold text-amber-800">
+        <span class="w-2 h-2 bg-emerald-500 rounded-full"></span> 100% ANONIM & AMAN
+      </div>
+      <h1 class="mt-4 text-[30px] md:text-[44px] font-extrabold leading-[1.05] text-[#0F2D52]">
+        Suara Kamu<br>Berharga Untuk<br><span class="text-amber-500">Sekolah.</span>
+      </h1>
+      <p class="mt-4 text-[14px] md:text-[15px] text-slate-600 leading-6 max-w-[55ch]">
+        Sistem pengaduan resmi SMPN 1 Brondong. Laporkan perundungan, pungli, fasilitas rusak. Identitasmu dirahasiakan otomatis oleh sistem.
+      </p>
+
+      <!-- Tombol: Buat Laporan Sekarang + Lacak Tiket - PERSIS SCREENSHOT 1 -->
+      <div class="mt-6 flex flex-col sm:flex-row gap-3">
+        <button onclick="scrollToId('buat')" class="h-[48px] px-6 rounded-full bg-[#0F2D52] text-white font-bold text-[14px] flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(15,45,82,0.2)]">
+          <i data-lucide="send" class="w-4 h-4"></i> Buat Laporan Sekarang
+        </button>
+        <button onclick="scrollToId('lacak')" class="h-[48px] px-6 rounded-full bg-white border border-slate-200 font-semibold text-[14px] flex items-center justify-center gap-2">
+          <i data-lucide="search" class="w-4 h-4"></i> Lacak Tiket
+        </button>
+      </div>
+
+      <!-- 3 Badge Kecil: Anonim aman, Respon < 2x24 jam, Transparan - PERSIS SCREENSHOT 1 -->
+      <div class="mt-5 flex flex-wrap gap-2.5">
+        <div class="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 text-[13px] font-medium text-slate-700">
+          <i data-lucide="lock" class="w-4 h-4"></i> Anonim aman
+        </div>
+        <div class="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 text-[13px] font-medium text-slate-700">
+          <i data-lucide="timer" class="w-4 h-4"></i> Respon &lt; 2x24 jam
+        </div>
+        <div class="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 text-[13px] font-medium text-slate-700">
+          <i data-lucide="badge-check" class="w-4 h-4"></i> Transparan
+        </div>
+      </div>
+    </div>
+
+    <!-- Kanan: 3 Kartu Statistik + Alur Penanganan + Privasi - PERSIS SCREENSHOT 2 -->
+    <div class="space-y-4">
+      
+      <!-- 3 Kartu: Total Laporan, Diproses, Selesai -->
+      <div class="grid grid-cols-3 gap-3">
+        <!-- Kartu 1: Total Laporan -->
+        <div class="bg-white border border-slate-200 rounded-[20px] p-4 shadow-sm">
+          <div class="w-9 h-9 rounded-full bg-[#0F2D52] flex items-center justify-center"><i data-lucide="file-text" class="w-4 h-4 text-white"></i></div>
+          <div class="mt-3 text-[22px] font-extrabold text-[#0F2D52]" id="statTotal">6</div>
+          <div class="text-[12px] text-slate-500 font-medium">Total Laporan</div>
+          <div class="mt-2 text-[11px] text-emerald-600 font-semibold flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> Aktif bulan ini</div>
+        </div>
+        <!-- Kartu 2: Diproses -->
+        <div class="bg-white border border-slate-200 rounded-[20px] p-4 shadow-sm">
+          <div class="w-9 h-9 rounded-full bg-amber-400 flex items-center justify-center"><i data-lucide="clock" class="w-4 h-4 text-[#0F2D52]"></i></div>
+          <div class="mt-3 text-[22px] font-extrabold text-[#0F2D52]" id="statProses">3</div>
+          <div class="text-[12px] text-slate-500 font-medium">Diproses</div>
+          <div class="mt-2 text-[11px] text-slate-500 leading-tight">Verifikasi & tindak lanjut</div>
+        </div>
+        <!-- Kartu 3: Selesai - Biru Tua -->
+        <div class="bg-[#0F2D52] border border-[#0F2D52] rounded-[20px] p-4 shadow-sm text-white">
+          <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center"><i data-lucide="check-circle-2" class="w-4 h-4 text-white"></i></div>
+          <div class="mt-3 text-[22px] font-extrabold">2</div>
+          <div class="text-[12px] text-white/70 font-medium">Selesai</div>
+          <div class="mt-2 text-[11px] text-amber-300 font-medium">100% ditindaklanjuti</div>
+        </div>
+      </div>
+
+      <!-- Alur Penanganan: 01 02 03 04 -->
+      <div class="bg-white border border-slate-200 rounded-[20px] p-5 shadow-sm">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2 font-bold text-[14px] text-[#0F2D52]"><i data-lucide="message-square" class="w-4 h-4"></i> Alur Penanganan</div>
+          <div class="text-[11px] bg-amber-100 border border-amber-200 text-amber-800 px-2.5 py-1 rounded-full font-bold">4 Langkah</div>
+        </div>
+        <div class="mt-5 grid grid-cols-4 gap-2 text-center">
+          <div><div class="w-11 h-11 mx-auto rounded-full bg-[#F1F5F9] border border-slate-200 flex items-center justify-center font-bold text-[13px] text-[#0F2D52]">01</div><div class="mt-2 text-[13px] font-bold text-[#0F2D52]">Lapor</div><div class="text-[11px] text-slate-500">Isi form</div></div>
+          <div><div class="w-11 h-11 mx-auto rounded-full bg-[#F1F5F9] border border-slate-200 flex items-center justify-center font-bold text-[13px] text-[#0F2D52]">02</div><div class="mt-2 text-[13px] font-bold text-[#0F2D52]">Verifikasi</div><div class="text-[11px] text-slate-500">Tim cek</div></div>
+          <div><div class="w-11 h-11 mx-auto rounded-full bg-[#F1F5F9] border border-slate-200 flex items-center justify-center font-bold text-[13px] text-[#0F2D52]">03</div><div class="mt-2 text-[13px] font-bold text-[#0F2D52]">Tindak Lanjut</div><div class="text-[11px] text-slate-500">Eksekusi</div></div>
+          <div><div class="w-11 h-11 mx-auto rounded-full bg-[#F1F5F9] border border-slate-200 flex items-center justify-center font-bold text-[13px] text-[#0F2D52]">04</div><div class="mt-2 text-[13px] font-bold text-[#0F2D52]">Selesai</div><div class="text-[11px] text-slate-500">Feedback</div></div>
+        </div>
+      </div>
+
+      <!-- Box Privasi Kuning -->
+      <div class="bg-amber-50 border border-amber-200 rounded-[16px] p-4 flex gap-3">
+        <div class="w-8 h-8 rounded-full bg-white border border-amber-200 flex items-center justify-center flex-shrink-0"><i data-lucide="info" class="w-4 h-4 text-amber-700"></i></div>
+        <div class="text-[12px] leading-5 text-slate-700">
+          <span class="font-bold text-[#0F2D52]">Privasi terjaga:</span> Laporan sensitif seperti perundungan otomatis disamarkan di daftar publik. Identitas pelapor tidak tampil.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =================================================================== -->
+<!-- 3. FORM - Formulir Pengaduan + Jaminan + Yang perlu disiapkan       -->
+<!-- =================================================================== -->
+<section id="buat" class="max-w-[1180px] mx-auto px-4 sm:px-6 pb-10">
+  <div class="grid lg:grid-cols-[380px_1fr] gap-6 items-start">
+    
+    <!-- KIRI: Judul + Jaminan Sekolah + Yang perlu disiapkan - PERSIS SCREENSHOT -->
+    <div class="space-y-4">
+      <div>
+        <h2 class="text-[22px] md:text-[24px] font-bold text-[#0F2D52]">Formulir Pengaduan</h2>
+        <p class="mt-2 text-[13px] leading-6 text-slate-600">
+          Isi dengan jujur dan jelas. Kamu bisa memilih anonim — identitasmu tidak akan muncul di publik dan hanya dipakai untuk verifikasi internal.
+        </p>
+      </div>
+
+      <!-- Box Biru Tua: Jaminan Sekolah -->
+      <div class="bg-[#0F2D52] rounded-[20px] p-5 text-white">
+        <div class="flex items-center gap-2 font-bold text-[15px]">
+          <i data-lucide="shield-check" class="w-5 h-5 text-amber-300"></i> Jaminan Sekolah
+        </div>
+        <ul class="mt-3 space-y-2.5 text-[13px] leading-5">
+          <li class="flex gap-2"><span class="text-amber-300">•</span> Tidak ada hukuman untuk pelapor yang jujur</li>
+          <li class="flex gap-2"><span class="text-amber-300">•</span> Data sensitif dijaga, konseling tersedia</li>
+          <li class="flex gap-2"><span class="text-amber-300">•</span> Laporan bullying diprioritaskan darurat</li>
+        </ul>
+      </div>
+
+      <!-- Box Putih: Yang perlu disiapkan -->
+      <div class="bg-white border border-slate-200 rounded-[20px] p-5 shadow-sm">
+        <div class="font-bold text-[14px] text-[#0F2D52]">Yang perlu disiapkan</div>
+        <div class="mt-3 space-y-2.5 text-[13px] text-slate-700">
+          <div class="flex items-center gap-2.5"><i data-lucide="image" class="w-4 h-4 text-slate-600"></i> Foto bukti (maks 3)</div>
+          <div class="flex items-center gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-slate-600"></i> Lokasi kejadian</div>
+          <div class="flex items-center gap-2.5"><i data-lucide="clock" class="w-4 h-4 text-slate-600"></i> Waktu & kronologi singkat</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KANAN: Form nya -->
+    <div class="bg-white border border-slate-200 rounded-[24px] p-5 md:p-8 shadow-sm">
+      <h3 class="text-[16px] font-bold text-[#0F2D52]">Buat Laporan Baru</h3>
+      <p class="text-[12px] text-slate-500 mt-1">Tiket <b>LAPOR-2026-XXXX</b> dibuat otomatis oleh sistem saat kamu klik Kirim.</p>
+
+    <form id="formLapor" class="mt-6 space-y-5">
+      <!-- Anonim -->
+      <label class="flex items-start gap-3 p-3 rounded-xl bg-[#F8FAFC] border cursor-pointer">
+        <input type="checkbox" id="isAnonim" checked class="mt-1 w-4 h-4">
+        <div class="text-sm"><div class="font-bold">Laporkan sebagai Anonim</div><div class="text-xs text-slate-500">Nama akan jadi "Anonim" di publik. Aman.</div></div>
+      </label>
+
+      <!-- Nama Peran -->
+      <div id="boxIdentitas" class="hidden grid md:grid-cols-2 gap-3">
+        <div><label class="text-[11px] font-bold">Nama (Opsional)</label><input id="inNama" type="text" placeholder="Ahmad" class="w-full mt-1 border rounded-xl px-4 py-3 text-sm"></div>
+        <div><label class="text-[11px] font-bold">Peran / Kelas</label><select id="inPeran" class="w-full mt-1 border rounded-xl px-4 py-3 text-sm"><option>Siswa Kelas 7</option><option>Siswa Kelas 8</option><option>Siswa Kelas 9</option><option>Guru</option><option>Orang Tua / Wali</option><option>Masyarakat</option></select></div>
+      </div>
+
+      <!-- Kategori -->
+      <div>
+        <label class="text-[11px] font-bold">Kategori Laporan (8 Pilihan)</label>
+        <div class="mt-2 grid grid-cols-2 gap-2">
+          <label class="border rounded-xl px-3 py-2.5 text-[13px] cursor-pointer has-[:checked]:bg-[#0F2D52] has-[:checked]:text-white has-[:checked]:border-[#0F2D52]"><input type="radio" name="kat" value="Akademik" class="hidden" checked> Akademik</label>
+          <label class="border rounded-xl px-3 py-2.5 text-[13px] cursor-pointer has-[:checked]:bg-[#0F2D52] has-[:checked]:text-white has-[:checked]:border-[#0F2D52]"><input type="radio" name="kat" value="Fasilitas & Sarana" class="hidden"> Fasilitas & Sarana</label>
+          <label class="border rounded-xl px-3 py-2.5 text-[13px] cursor-pointer has-[:checked]:bg-[#0F2D52] has-[:checked]:text-white has-[:checked]:border-[#0F2D52]"><input type="radio" name="kat" value="Kebersihan & Lingkungan" class="hidden"> Kebersihan</label>
+          <label class="border rounded-xl px-3 py-2.5 text-[13px] cursor-pointer has-[:checked]:bg-[#0F2D52] has-[:checked]:text-white has-[:checked]:border-[#0F2D52]"><input type="radio" name="kat" value="Perundungan/Bullying" class="hidden"> Perundungan/Bullying</label>
+          <label class="border rounded-xl px-3 py-2.5 text-[13px] cursor-pointer has-[:checked]:bg-[#0F2D52] has-[:checked]:text-white has-[:checked]:border-[#0F2D52]"><input type="radio" name="kat" value="Keamanan" class="hidden"> Keamanan</label>
+          <label class="border rounded-xl px-3 py-2.5 text-[13px] cursor-pointer has-[:checked]:bg-[#0F2D52] has-[:checked]:text-white has-[:checked]:border-[#0F2D52]"><input type="radio" name="kat" value="Kedisiplinan" class="hidden"> Kedisiplinan</label>
+          <label class="border rounded-xl px-3 py-2.5 text-[13px] cursor-pointer has-[:checked]:bg-[#0F2D52] has-[:checked]:text-white has-[:checked]:border-[#0F2D52]"><input type="radio" name="kat" value="Pelayanan TU" class="hidden"> Pelayanan TU</label>
+          <label class="border rounded-xl px-3 py-2.5 text-[13px] cursor-pointer has-[:checked]:bg-[#0F2D52] has-[:checked]:text-white has-[:checked]:border-[#0F2D52]"><input type="radio" name="kat" value="Lainnya" class="hidden"> Lainnya</label>
+        </div>
+      </div>
+
+      <!-- Urgensi -->
+      <div>
+        <label class="text-[11px] font-bold">Tingkat Urgensi (4 Level)</label>
+        <div class="mt-2 grid grid-cols-2 md:grid-cols-4 gap-2">
+          <label class="border rounded-xl p-3 cursor-pointer has-[:checked]:bg-emerald-50 has-[:checked]:border-emerald-300"><input type="radio" name="urg" value="Rendah" class="hidden"><div class="flex gap-2 text-[13px] font-semibold"><span class="w-2 h-2 bg-emerald-500 rounded-full mt-1.5"></span>Rendah</div><div class="text-[11px] text-slate-500 mt-1">Tidak mendesak</div></label>
+          <label class="border rounded-xl p-3 cursor-pointer has-[:checked]:bg-amber-50 has-[:checked]:border-amber-300"><input type="radio" name="urg" value="Sedang" checked class="hidden"><div class="flex gap-2 text-[13px] font-semibold"><span class="w-2 h-2 bg-amber-500 rounded-full mt-1.5"></span>Sedang</div><div class="text-[11px] text-slate-500 mt-1">Perlu perhatian</div></label>
+          <label class="border rounded-xl p-3 cursor-pointer has-[:checked]:bg-orange-50 has-[:checked]:border-orange-300"><input type="radio" name="urg" value="Tinggi" class="hidden"><div class="flex gap-2 text-[13px] font-semibold"><span class="w-2 h-2 bg-orange-500 rounded-full mt-1.5"></span>Tinggi</div><div class="text-[11px] text-slate-500 mt-1">Segera ditangani</div></label>
+          <label class="border rounded-xl p-3 cursor-pointer has-[:checked]:bg-red-50 has-[:checked]:border-red-300"><input type="radio" name="urg" value="Darurat" class="hidden"><div class="flex gap-2 text-[13px] font-semibold"><span class="w-2 h-2 bg-red-600 rounded-full mt-1.5"></span>Darurat</div><div class="text-[11px] text-slate-500 mt-1">Tindakan cepat</div></label>
+        </div>
+      </div>
+
+      <div><label class="text-[11px] font-bold">Judul Laporan</label><input id="inJudul" required type="text" placeholder="Contoh: Lampu kelas 8A mati 2 hari" class="w-full mt-1 border rounded-xl px-4 py-3 text-sm"></div>
+      <div><label class="text-[11px] font-bold">Ceritakan Kejadian</label><textarea id="inDesc" required rows="4" placeholder="Tulis kronologi, kapan, di mana..." class="w-full mt-1 border rounded-xl px-4 py-3 text-sm"></textarea></div>
+      <div><label class="text-[11px] font-bold">Lokasi (Opsional)</label><input id="inLokasi" type="text" placeholder="Musholla Putra, Kelas 8A" class="w-full mt-1 border rounded-xl px-4 py-3 text-sm"></div>
+
+      <!-- Upload Foto Bukti - MAKS 3 - YANG KAMU CARI -->
+      <div>
+        <label class="text-[11px] font-bold">Foto Bukti (Maks 3) - Opsional</label>
+        <div class="mt-2 border-2 border-dashed border-slate-300 rounded-xl p-4 text-center bg-[#F8FAFC] hover:border-[#0F2D52] transition cursor-pointer" onclick="document.getElementById('inFoto').click()">
+          <div class="w-10 h-10 mx-auto rounded-full bg-white border border-slate-200 flex items-center justify-center">
+            <i data-lucide="upload-cloud" class="w-5 h-5 text-slate-600"></i>
+          </div>
+          <div class="mt-2 text-[13px] font-semibold text-[#0F2D52]">Klik untuk upload foto</div>
+          <div class="text-[11px] text-slate-500 mt-1">PNG, JPG maks 2MB per foto, maks 3 foto</div>
+          <input id="inFoto" type="file" accept="image/*" multiple class="hidden" onchange="previewFoto(this)">
+        </div>
+        <!-- Preview Foto -->
+        <div id="previewFotoContainer" class="mt-3 grid grid-cols-3 gap-2 hidden"></div>
+        <p id="fotoInfo" class="text-[11px] text-slate-400 mt-2 hidden">0/3 foto dipilih</p>
+      </div>
+
+      <!-- Checkbox Pernyataan - PERSIS SCREENSHOT -->
+      <label class="flex items-start gap-3 p-4 rounded-[16px] bg-[#F8FAFC] border border-slate-200 cursor-pointer">
+        <input type="checkbox" id="checkPernyataan" required class="mt-0.5 w-5 h-5 rounded border-slate-300">
+        <span class="text-[13px] leading-6 text-slate-700">
+          Saya menyatakan laporan ini benar, tidak mengandung fitnah, dan bersedia diproses sesuai tata tertib SMPN 1 Brondong. Saya paham laporan sensitif akan ditangani tim BK secara rahasia.
+        </span>
+      </label>
+
+      <!-- Tombol Kirim - PERSIS SCREENSHOT -->
+      <button type="submit" class="w-full h-[52px] rounded-full bg-[#0F2D52] text-white font-bold text-[15px] flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(15,45,82,0.25)] hover:bg-[#123a6a] transition">
+        <i data-lucide="send" class="w-5 h-5"></i> Kirim Laporan & Buat Tiket
+      </button>
+      <p class="text-[12px] text-center text-slate-500 leading-5">
+        Setelah terkirim, kamu akan dapat kode tiket unik seperti <span class="font-mono font-bold text-[#0F2D52]">LAPOR-2026-XXXX</span> untuk melacak status.
+      </p>
+    </form>
+  </div>
+  </div>
+</section>
+
+
+<!-- =================================================================== -->
+<!-- 4. LACAK + TRANSPARANSI                                             -->
+<!-- =================================================================== -->
+<section id="lacak" class="max-w-[760px] mx-auto px-4 sm:px-6 pb-6">
+  <h3 class="font-bold text-[#0F2D52] mb-3">Lacak Pengaduan</h3>
+  <div class="bg-white border rounded-[20px] p-4 flex flex-col md:flex-row gap-3">
+    <input id="inCekTiket" type="text" placeholder="Masukkan kode tiket, contoh: LAPOR-2026-1842" class="flex-1 border rounded-full px-5 py-3 text-sm">
+    <button onclick="cekTiket()" class="h-11 px-6 rounded-full bg-[#0F2D52] text-white font-bold text-sm">Cek Status</button>
+  </div>
+  <div id="outCek" class="hidden mt-3 bg-white border rounded-2xl p-5 text-sm"></div>
+</section>
+
+<section id="publik" class="max-w-[1180px] mx-auto px-4 sm:px-6 pb-10">
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+    <h3 class="font-bold text-[#0F2D52]">Transparansi Laporan Publik</h3>
+    <div class="flex flex-col md:flex-row gap-2 w-full md:w-auto">
+      <input id="inSearch" type="text" placeholder="Cari laporan..." class="flex-1 md:w-[240px] border rounded-full px-4 py-2.5 text-sm">
+      <select id="inFilter" class="border rounded-full px-4 py-2.5 text-sm"><option value="Semua">Semua Status</option><option>Menunggu</option><option>Diverifikasi</option><option>Diproses</option><option>Selesai</option></select>
+    </div>
+  </div>
+  <div id="gridLaporan" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+</section>
+
+
+
+<!-- =================================================================== -->
+<!-- 5. ALUR PENANGANAN - Background Biru Tua - PERSIS SCREENSHOT       -->
+<!-- =================================================================== -->
+<section class="bg-[#0F2D52] w-full py-10 md:py-16">
+  <div class="max-w-[1180px] mx-auto px-4 sm:px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <h2 class="text-[22px] md:text-[28px] font-bold text-white leading-tight">Alur Penanganan Laporan</h2>
+        <p class="mt-3 text-[14px] text-white/70 max-w-[520px] leading-6">
+          Setiap laporan diproses transparan, tercatat, dan bisa kamu pantau. Laporan darurat diprioritaskan.
+        </p>
+      </div>
+      <div class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-4 py-2.5 text-[13px] text-white w-fit backdrop-blur">
+        <i data-lucide="clock" class="w-4 h-4 text-amber-300"></i> Estimasi respon awal 2×24 jam kerja
+      </div>
+    </div>
+
+    <div class="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- 1. Lapor -->
+      <div class="rounded-[20px] bg-white/[0.06] border border-white/10 p-6 backdrop-blur hover:bg-white/[0.09] transition">
+        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center">
+          <i data-lucide="megaphone" class="w-5 h-5 text-[#0F2D52]"></i>
+        </div>
+        <div class="mt-5 text-[16px] font-bold text-white">1. Lapor</div>
+        <div class="mt-2 text-[13px] leading-6 text-white/70">Isi formulir, bisa anonim. Dapatkan kode tiket LAPOR-XXXX.</div>
+      </div>
+      <!-- 2. Verifikasi -->
+      <div class="rounded-[20px] bg-white/[0.06] border border-white/10 p-6 backdrop-blur hover:bg-white/[0.09] transition">
+        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center">
+          <i data-lucide="shield-check" class="w-5 h-5 text-[#0F2D52]"></i>
+        </div>
+        <div class="mt-5 text-[16px] font-bold text-white">2. Verifikasi</div>
+        <div class="mt-2 text-[13px] leading-6 text-white/70">Tim TU & Kesiswaan cek keabsahan, klasifikasi kategori.</div>
+      </div>
+      <!-- 3. Tindak Lanjut -->
+      <div class="rounded-[20px] bg-white/[0.06] border border-white/10 p-6 backdrop-blur hover:bg-white/[0.09] transition">
+        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center">
+          <i data-lucide="building-2" class="w-5 h-5 text-[#0F2D52]"></i>
+        </div>
+        <div class="mt-5 text-[16px] font-bold text-white">3. Tindak Lanjut</div>
+        <div class="mt-2 text-[13px] leading-6 text-white/70">Diteruskan ke bidang terkait: Sarpras, BK, Kurikulum.</div>
+      </div>
+      <!-- 4. Selesai -->
+      <div class="rounded-[20px] bg-white/[0.06] border border-white/10 p-6 backdrop-blur hover:bg-white/[0.09] transition">
+        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center">
+          <i data-lucide="badge-check" class="w-5 h-5 text-[#0F2D52]"></i>
+        </div>
+        <div class="mt-5 text-[16px] font-bold text-white">4. Selesai</div>
+        <div class="mt-2 text-[13px] leading-6 text-white/70">Status diperbarui, feedback diberikan, arsip transparansi.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer id="kontak" class="bg-white border-t border-slate-200 w-full">
+  <div class="max-w-[1180px] mx-auto px-4 sm:px-6 py-10 md:py-12 grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr_0.8fr] gap-8">
+
+    <!-- Kolom 1: Alamat & Kontak -->
+    <div>
+      <div class="flex items-center gap-3">
+        <img src="logo-smp.png" alt="Logo SMPN 1 Brondong" class="w-10 h-10 object-contain rounded-xl bg-white border border-slate-100">
+        <div>
+          <div class="font-bold text-[#0F2D52] text-[15px]">SMPN 1 Brondong</div>
+          <div class="text-[12px] text-slate-500 -mt-0.5">Kab. Lamongan • Jawa Timur</div>
+        </div>
+      </div>
+      <div class="mt-4 text-[13px] leading-6 text-slate-600">
+        Jl. Raya Brondong, Dsn. Boho, Ds. Tlogoretno, Kec. Brondong, Kabupaten Lamongan, Jawa Timur 62263<br>
+        Sistem Pengaduan Terpadu BERGEMA- Beriman Gemilang Mandiri.
+      </div>
+      <div class="mt-4 flex flex-col sm:flex-row flex-wrap gap-2">
+        <a href="mailto:smpnegeri1brondong@gmail.com" class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[#F8FAFC] px-3.5 py-2 text-[12px] font-medium text-slate-700 hover:bg-white">
+          📧 smpnegeri1brondong@gmail.com
+        </a>
+        <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[#F8FAFC] px-3.5 py-2 text-[12px] font-medium text-slate-700">
+          📞 (0322) 123-456
+        </div>
+      </div>
+    </div>
+
+    <!-- Kolom 2: Jam Operasional - INI YANG HILANG KEMARIN -->
+    <div>
+      <div class="text-[13px] font-semibold text-[#0F2D52]">Operasional</div>
+      <div class="mt-3 space-y-2 text-[13px] text-slate-600">
+        <div class="flex justify-between"><span>Senin - Kamis</span><span class="font-medium">07.00 - 14.00</span></div>
+        <div class="flex justify-between"><span>Jumat</span><span class="font-medium">07.00 - 10.30</span></div>
+        <div class="mt-3 text-[11px] text-slate-500 leading-4">
+          Laporan darurat (bullying/keamanan) diproses di luar jam kerja via tim piket.
+        </div>
+      </div>
+    </div>
+
+    <!-- Kolom 3: Tautan + Sosmed -->
+    <div>
+      <div class="text-[13px] font-semibold text-[#0F2D52]">Tautan</div>
+      <div class="mt-3 grid grid-cols-2 gap-2 text-[13px]">
+        <button onclick="scrollToId('beranda')" class="text-left text-slate-600 hover:text-[#0F2D52]">Beranda</button>
+        <button onclick="scrollToId('buat')" class="text-left text-slate-600 hover:text-[#0F2D52]">Buat Laporan</button>
+        <button onclick="scrollToId('lacak')" class="text-left text-slate-600 hover:text-[#0F2D52]">Lacak</button>
+        <button onclick="scrollToId('publik')" class="text-left text-slate-600 hover:text-[#0F2D52]">Transparansi</button>
+      </div>
+      <div class="mt-5 flex items-center gap-3">
+        <!-- Icon Facebook -  -->
+        <a href="https://www.facebook.com/share/19eHmqBhpX/" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:text-[#0F2D52] hover:border-[#0F2D52] transition">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <!-- Icon Instagram -  -->
+        <a href="https://instagram.com/smpn1brondong" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:text-[#0F2D52] hover:border-[#0F2D52] transition">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <!-- Icon YouTube -  -->
+        <a href="http://www.youtube.com/@snebronofficial" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:text-[#0F2D52] hover:border-[#0F2D52] transition">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.95A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 1.95C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </a>
+        <!-- Icon TikTok - model sama -->
+        <a href="https://tiktok.com/@smpn1brondong" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:text-[#0F2D52] hover:border-[#0F2D52] transition">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V9a5 5 0 0 0 5-5"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Copyright bawah -->
+  <div class="border-t border-slate-200">
+    <div class="max-w-[1180px] mx-auto px-4 sm:px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 text-center md:text-left">
+      <span>© 2026 SMPN 1 Brondong • LAPORAN SMPN 1 BRONDONG v1.0 • Data simulasi sesi ini</span>
+      <span>🔒 Aman, transparan, untuk warga sekolah</span>
+    </div>
+  </div>
+</footer>
+<div id="modalTiket" class="hidden fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="w-full max-w-[440px] bg-white rounded-[22px] overflow-hidden shadow-xl">
+    <div class="bg-[#0F2D52] p-6 text-white relative">
+      <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">✓</div>
+      <div class="mt-3 text-[20px] font-bold">Laporan Terkirim!</div>
+      <div class="text-[13px] text-white/70">Simpan kode tiket untuk melacak progres.</div>
+      <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">✕</button>
+    </div>
+    <div class="p-6 space-y-4">
+      <div class="bg-[#F8FAFC] border rounded-xl p-4 text-center">
+        <div class="text-[11px] tracking-widest text-slate-500 font-bold">KODE TIKET</div>
+        <div id="kodeModal" class="mt-1 font-mono text-[20px] font-bold text-[#0F2D52] break-all">LAPOR-2026-XXXX</div>
+        <div class="mt-2 inline-block text-[11px] bg-amber-100 border border-amber-200 text-amber-800 px-2.5 py-1 rounded-full">Estimasi respon &lt; 2x24 jam</div>
+      </div>
+
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+// FIREBASE COMPAT - TAMPILAN ASLI TIDAK DIUBAH
+const firebaseConfig = {
+  apiKey: "AIzaSyCBw7cC2wAxAMNfEJyPD-_62_qmlIw5ZyE",
+  authDomain: "smpn1-brondong.firebaseapp.com",
+  projectId: "smpn1-brondong",
+  storageBucket: "smpn1-brondong.firebasestorage.app",
+  messagingSenderId: "918473388225",
+  appId: "1:918473388225:web:10074c05297aa3c9dce440"
+};
+let db=null, firebaseReady=false;
+try{
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+  firebaseReady=true;
+  console.log("Firebase KONEK");
+}catch(e){ console.error("Firebase init gagal", e); }
+
+let dataLaporan=[];
+function scrollToId(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:"smooth"});
+  const nav=document.getElementById("mobileNav");
+  if(nav) nav.classList.add("hidden");
+}
+const burger=document.getElementById("btnBurger");
+if(burger){ burger.addEventListener("click",()=>{ document.getElementById("mobileNav").classList.toggle("hidden"); }); }
+
+function renderLaporan(){
+  const grid=document.getElementById("gridLaporan"); if(!grid) return;
+  const q=(document.getElementById("inSearch")?.value||"").toLowerCase();
+  const f=document.getElementById("inFilter")?.value||"Semua";
+  let filtered=dataLaporan.filter(l=>{
+    const matchQ = (l.judul||"").toLowerCase().includes(q) || (l.desc||l.deskripsi||"").toLowerCase().includes(q);
+    const matchF = f==="Semua" || l.status===f;
+    return matchQ && matchF;
+  });
+  const t=document.getElementById("statTotal"); if(t) t.innerText=dataLaporan.length;
+  const p=document.getElementById("statProses"); if(p) p.innerText=dataLaporan.filter(l=>l.status==="Diproses"||l.status==="Diverifikasi"||l.status==="Menunggu").length;
+  const s=document.getElementById("statSelesai"); if(s) s.innerText=dataLaporan.filter(l=>l.status==="Selesai").length;
+  grid.innerHTML="";
+  filtered.forEach(l=>{
+    const dot = l.status==="Selesai"?"bg-emerald-500":(l.status==="Diproses"||l.status==="Diverifikasi")?"bg-amber-500":"bg-slate-400";
+    const empatDigit=(l.tiket||l.id||"").slice(-4);
+    grid.innerHTML+=`<div class="bg-white border border-slate-200 rounded-[18px] p-4 shadow-sm"><div class="flex justify-between items-start"><span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 border">${l.kategori||"Umum"}</span><span class="text-[10px] px-2.5 py-1 rounded-full border ${l.status==="Selesai"?"bg-emerald-50 border-emerald-200 text-emerald-700":(l.status==="Diproses"||l.status==="Diverifikasi")?"bg-amber-50 border-amber-200 text-amber-700":"bg-slate-50"}">${l.status||"Menunggu"}</span></div><div class="mt-3 font-bold text-[14px] text-[#0F2D52]">${l.judul}</div><div class="mt-2 text-[12px] text-slate-500 line-clamp-2">${l.desc||l.deskripsi||""}</div><div class="mt-3 flex justify-between text-[11px] text-slate-500"><span class="font-mono">${empatDigit} • ${l.tgl||l.tanggal||""}</span><span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full ${dot}"></span>${l.urgensi||"Sedang"}</span></div><div class="mt-3 pt-3 border-t border-slate-100 flex justify-between text-[11px] text-slate-500"><span>${l.anonim?'Anonim':(l.nama||'Siswa')}</span><span>${l.lokasi||''}</span></div>${l.catatanAdmin?`<div class="mt-2 bg-emerald-50 border border-emerald-200 rounded-xl p-2 text-[11px]"><b>Feedback Admin:</b> ${l.catatanAdmin}</div>`:""}</div>`;
+  });
+}
+window.renderLaporan=renderLaporan;
+
+
+let unsubscribe = null;
+function listenFirebase(){
+  if(!firebaseReady) return;
+  if(unsubscribe) unsubscribe();
+  try{
+    // pakai onSnapshot biar real-time, tanpa orderBy biar semua dokumen kebaca walau ga ada createdAt
+    unsubscribe = db.collection("laporan_smpn1_brondong").onSnapshot(snapshot=>{
+      let arr=[];
+      snapshot.forEach(docSnap=>{
+        const d=docSnap.data();
+        arr.push({ docId: docSnap.id, id: d.tiket||d.id, tiket: d.tiket||d.id, judul: d.judul, desc: d.deskripsi||d.desc, deskripsi: d.deskripsi||d.desc, kategori: d.kategori, urgensi: d.urgensi, status: d.status||"Menunggu", tgl: d.tanggal, tanggal: d.tanggal, lokasi: d.lokasi, anonim: d.anonim, nama: d.nama, fotoUrls: d.fotoUrls||[], wa: d.wa, email: d.email, catatanAdmin: d.catatanAdmin||"", createdAt: d.createdAt||null });
+      });
+      // sort manual: yang ada createdAt terbaru dulu, yang ga ada di bawah
+      arr.sort((a,b)=>{
+        const ta = a.createdAt?.seconds || 0;
+        const tb = b.createdAt?.seconds || 0;
+        if(ta!==tb) return tb-ta;
+        return 0;
+      });
+      dataLaporan = arr;
+      try{ localStorage.setItem("laporan_smpn1brondong", JSON.stringify(arr)); }catch(e){}
+      renderLaporan();
+      console.log("Real-time update", arr.length, "laporan");
+    }, err=>{
+      console.error("onSnapshot error", err);
+      // fallback ke get() tanpa orderBy
+      db.collection("laporan_smpn1_brondong").get().then(snap=>{
+        let arr=[]; snap.forEach(d=>{ const dd=d.data(); arr.push({docId:d.id, id:dd.tiket||dd.id, tiket:dd.tiket||dd.id, judul:dd.judul, desc:dd.deskripsi||dd.desc, deskripsi:dd.deskripsi||dd.desc, kategori:dd.kategori, urgensi:dd.urgensi, status:dd.status||"Menunggu", tgl:dd.tanggal, tanggal:dd.tanggal, lokasi:dd.lokasi, anonim:dd.anonim, nama:dd.nama, fotoUrls:dd.fotoUrls||[], wa:dd.wa, email:dd.email, catatanAdmin:dd.catatanAdmin||""}); });
+        dataLaporan=arr; renderLaporan();
+      });
+    });
+  }catch(e){ console.log("listen error", e); }
+}
+
+async function loadFromFirebase(){
+  listenFirebase();
+}
+
+try{
+  const saved=localStorage.getItem("laporan_smpn1brondong");
+  if(saved){ dataLaporan=JSON.parse(saved); }
+}catch(e){}
+renderLaporan();
+if(firebaseReady) loadFromFirebase();
+
+function previewFoto(input){
+  const container=document.getElementById("previewFotoContainer");
+  const info=document.getElementById("fotoInfo");
+  if(!container) return;
+  const files=input.files;
+  if(files.length>3){ alert("Maks 3 foto"); input.value=""; container.classList.add("hidden"); return; }
+  container.innerHTML="";
+  if(files.length===0){ container.classList.add("hidden"); if(info) info.classList.add("hidden"); return; }
+  container.classList.remove("hidden");
+  if(info){ info.classList.remove("hidden"); info.innerText=files.length+"/3 foto"; }
+  for(let i=0;i<files.length;i++){
+    const r=new FileReader();
+    r.onload=e=>{
+      const div=document.createElement("div");
+      div.className="relative rounded-xl overflow-hidden border bg-white";
+      div.innerHTML=`<img src="${e.target.result}" class="w-full h-24 object-cover"><div class="p-1 text-[10px] text-center truncate">${files[i].name}</div>`;
+      container.appendChild(div);
+    };
+    r.readAsDataURL(files[i]);
+  }
+}
+window.previewFoto=previewFoto;
+window.closeModal=()=>{ const m=document.getElementById("modalTiket"); if(m) m.classList.add("hidden"); };
+window.copyKode=()=>{ const k=document.getElementById("kodeModal").innerText; navigator.clipboard.writeText(k); alert("Kode disalin!"); };
+window.cekTiket=async()=>{
+  const input=document.getElementById("inCekTiket").value.trim().toUpperCase();
+  const out=document.getElementById("outCek");
+  if(!out) return;
+  out.classList.remove("hidden");
+  if(firebaseReady){
+    try{
+      const snap=await db.collection("laporan_smpn1_brondong").where("tiket","==",input).get();
+      if(!snap.empty){
+        const d=snap.docs[0].data();
+        out.innerHTML=`<div class="font-bold">Tiket Ditemukan: ${d.tiket}</div><div class="mt-2 text-sm">Judul: ${d.judul}</div><div class="text-sm">Kategori: ${d.kategori}</div><div class="text-sm mt-1">Status: <b>${d.status}</b></div>${d.catatanAdmin?`<div class="mt-3 bg-emerald-50 border p-3 text-[12px]"><b>Feedback:</b> ${d.catatanAdmin}</div>`:""}`;
+        return;
+      }
+    }catch(e){ console.log(e); }
+  }
+  const ketemu=dataLaporan.find(l=>(l.tiket||l.id)===input);
+  if(!ketemu){ out.innerHTML=`❌ Tiket <b>${input}</b> tidak ditemukan.`; return; }
+  out.innerHTML=`<div class="font-bold">Tiket: ${ketemu.tiket||ketemu.id}</div><div class="mt-2 text-sm">Judul: ${ketemu.judul}</div><div class="text-sm">Status: <b>${ketemu.status}</b></div>`;
+};
+
+const form=document.getElementById("formLapor");
+if(form){
+  form.addEventListener("submit", async function(e){
+    e.preventDefault();
+    console.log("Form submit dipanggil");
+    const btn=document.getElementById("btnKirim");
+    const orig=btn?btn.innerHTML:"";
+    if(btn){ btn.disabled=true; btn.innerHTML="Mengirim..."; }
+    const tahun=new Date().getFullYear();
+    const acak=Math.floor(1000+Math.random()*9000);
+    const kodeBaru=`LAPOR-${tahun}-${acak}`;
+    const judul=document.getElementById("inJudul").value;
+    const katEl=document.querySelector('input[name="kat"]:checked');
+    const urgEl=document.querySelector('input[name="urg"]:checked');
+    const kat=katEl?katEl.value:"Umum";
+    const urg=urgEl?urgEl.value:"Sedang";
+    const desc=document.getElementById("inDesc").value;
+    const lokasi=document.getElementById("inLokasi").value;
+    const isAnonim=document.getElementById("isAnonim")?.checked||false;
+    const nama=document.getElementById("inNama")?.value||"";
+    const peran=document.getElementById("inPeran")?.value||"";
+    const wa=document.getElementById("inWA")?.value||"";
+    const email=document.getElementById("inEmail")?.value||"";
+    const allowContact=document.getElementById("allowContact")?.checked||false;
+    const tgl=new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})+" "+new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+
+    if(firebaseReady){
+      try{
+        await db.collection("laporan_smpn1_brondong").add({
+          tiket:kodeBaru, id:kodeBaru, judul:judul, deskripsi:desc, kategori:kat, urgensi:urg,
+          lokasi:lokasi, anonim:isAnonim, nama:isAnonim?"Anonim":nama, peran:peran, wa:wa, email:email,
+          allowContact:allowContact, status:"Menunggu", fotoUrls:[], tanggal:tgl,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        console.log("Sukses Firebase", kodeBaru);
+      }catch(err){
+        console.error("Firebase error", err);
+        alert("Firebase error: "+err.message+"\nTapi tiket tetap dibuat! Cek Rules Firebase harus allow read, write: if true");
+      }
+    }
+
+    const baru={id:kodeBaru,tiket:kodeBaru,judul:judul,desc:desc,deskripsi:desc,kategori:kat,urgensi:urg,lokasi:lokasi,anonim:isAnonim,nama:nama,peran:peran,wa:wa,email:email,allowContact:allowContact,status:"Menunggu",tgl:tgl,tanggal:tgl,fotoUrls:[]};
+    dataLaporan.unshift(baru);
+    try{ localStorage.setItem("laporan_smpn1brondong", JSON.stringify(dataLaporan)); }catch(e){}
+    renderLaporan();
+    const kodeModal=document.getElementById("kodeModal");
+    if(kodeModal) kodeModal.innerText=kodeBaru;
+    const modal=document.getElementById("modalTiket");
+    if(modal) modal.classList.remove("hidden");
+    e.target.reset();
+    const box=document.getElementById("boxIdentitas"); if(box) box.classList.add("hidden");
+    const anonimCheck=document.getElementById("isAnonim"); if(anonimCheck) anonimCheck.checked=true;
+    const prev=document.getElementById("previewFotoContainer"); if(prev){ prev.innerHTML=""; prev.classList.add("hidden"); }
+    const finfo=document.getElementById("fotoInfo"); if(finfo) finfo.classList.add("hidden");
+    if(btn){ btn.disabled=false; btn.innerHTML=orig; }
+    if(firebaseReady) setTimeout(loadFromFirebase,1000);
+  });
+}
+
+const searchEl=document.getElementById("inSearch");
+if(searchEl) searchEl.addEventListener("input", renderLaporan);
+const filterEl=document.getElementById("inFilter");
+if(filterEl) filterEl.addEventListener("change", renderLaporan);
+const anonEl=document.getElementById("isAnonim");
+if(anonEl) anonEl.addEventListener("change", function(){ const box=document.getElementById("boxIdentitas"); if(box) box.classList.toggle("hidden", this.checked); });
+const fotoEl=document.getElementById("inFoto");
+if(fotoEl) fotoEl.addEventListener("change", function(){ previewFoto(this); });
+
+if(window.lucide) lucide.createIcons();
+console.log("Pengaduan JS loaded, form:", !!document.getElementById("formLapor"));
+</script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Laporan SMPN 1 Brondong</title>
+<link rel="icon" href="logo-smp2.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>body{font-family:'Plus Jakarta Sans',sans-serif}.glass{background:rgba(255,255,255,0.85);backdrop-filter:blur(12px)}</style>
+</head>
+<body class="bg-[#F5F7FB] min-h-screen text-slate-800">
+
+<div id="loginPage" class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-[#0F2D52] via-[#163a6b] to-[#1e4a85]"></div>
+  <div class="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-amber-400/20 rounded-full blur-[80px]"></div>
+  <div class="absolute bottom-[-100px] right-[-100px] w-[500px] h-[500px] bg-blue-400/20 rounded-full blur-[100px]"></div>
+  <div class="relative w-full max-w-[400px]">
+    <div class="bg-white rounded-[28px] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
+      <div class="flex items-center gap-3">
+        <img src="logo-smp.png" class="w-11 h-11 object-contain rounded-xl bg-white border shadow-sm">
+        <div><div class="font-extrabold text-[#0F2D52] text-[15px]">SMPN 1 BRONDONG</div><div class="text-[11px] text-slate-500">Dashboard Admin Laporan</div></div>
+        <div class="ml-auto w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i></div>
+      </div>
+      <div class="mt-6"><h1 class="text-[22px] font-extrabold text-[#0F2D52] leading-tight">Masuk ke Dashboard</h1><p class="text-[13px] text-slate-500 mt-1">Kelola laporan siswa secara real-time</p></div>
+      <div class="mt-5 bg-[#F8FAFC] border rounded-2xl p-3.5 flex gap-3 items-start">
+        <div class="w-9 h-9 rounded-xl bg-amber-100 flex items-center justify-center shrink-0"><i data-lucide="database" class="w-4 h-4 text-amber-600"></i></div>
+        <div class="text-[11px] leading-[1.5] text-slate-600">Menghubungkan ke<br><b>smpn1-brondong</b><br>Collection: laporan_smpn1_brondong</div>
+      </div>
+      <div class="mt-5 space-y-3">
+        <div class="relative"><i data-lucide="lock" class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i><input id="passInput" type="password" placeholder="Password admin (admin123)" class="w-full h-[48px] border border-slate-200 rounded-full pl-11 pr-5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#0F2D52]/20 focus:border-[#0F2D52]"></div>
+        <button onclick="login()" class="w-full h-[48px] rounded-full bg-[#0F2D52] text-white font-bold text-[14px] flex items-center justify-center gap-2 hover:bg-[#133967]"><i data-lucide="log-in" class="w-4 h-4"></i> Masuk Dashboard</button>
+        <p id="loginErr" class="hidden text-[12px] text-red-600 bg-red-50 border border-red-200 rounded-xl p-3 text-center"></p>
+      </div>
+    </div>
+    <p class="mt-4 text-center text-[11px] text-white/60">© 2026 SMPN 1 Brondong • Secure Admin</p>
+  </div>
+</div>
+
+<div id="adminPage" class="hidden min-h-screen">
+  <header class="sticky top-0 z-30 glass border-b">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 h-[68px] flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <img src="logo-smp.png" class="w-9 h-9 object-contain rounded-xl bg-white border shadow-sm">
+        <div class="hidden sm:block"><div class="font-extrabold text-[#0F2D52] text-[14px] leading-tight">ADMIN LAPORAN</div><div class="flex items-center gap-2 mt-0.5"><span class="text-[11px] text-slate-500">SMPN 1 Brondong</span><span class="w-1 h-1 bg-slate-300 rounded-full"></span><span class="text-[10px] bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> LIVE Firebase</span></div></div>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="hidden md:flex items-center gap-2 mr-2 text-[12px] text-slate-500 bg-white border rounded-full px-3 py-1.5"><i data-lucide="database" class="w-3.5 h-3.5"></i> smpn1-brondong</div>
+        <button onclick="window.open('pengaduan.html','_blank')" class="hidden md:flex h-9 px-4 rounded-full bg-white border text-[13px] font-medium items-center gap-1.5 hover:bg-slate-50"><i data-lucide="external-link" class="w-4 h-4"></i> Website</button>
+        <button onclick="refreshData()" class="w-9 h-9 rounded-full bg-white border flex items-center justify-center hover:bg-slate-50" title="Refresh"><i data-lucide="refresh-cw" class="w-4 h-4"></i></button>
+        <button onclick="logout()" class="h-9 px-5 rounded-full bg-[#0F2D52] text-white text-[13px] font-bold flex items-center gap-1.5 hover:bg-[#133967]"><i data-lucide="log-out" class="w-4 h-4"></i> Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-[1280px] mx-auto px-4 sm:px-6 py-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+      <div>
+        <h1 class="text-[24px] font-extrabold text-[#0F2D52]">Dashboard Laporan</h1>
+        <p class="text-[13px] text-slate-500 mt-1">Pantau & tindak lanjuti laporan siswa. Perubahan status langsung sinkron ke halaman utama.</p>
+      </div>
+      <div class="text-[12px] text-slate-500 bg-white border rounded-full px-3 py-1.5 flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4"></i> Auto-sync • Realtime</div>
+    </div>
+
+    <!-- 4 Cards Stats - PERSIS SCREENSHOT -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+      <div class="bg-white border rounded-[24px] p-5 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div class="w-11 h-11 rounded-[12px] bg-[#0F2D52] flex items-center justify-center"><i data-lucide="layers" class="w-5 h-5 text-white"></i></div>
+          <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-slate-100 border">TOTAL</span>
+        </div>
+        <div class="mt-6 text-[32px] font-extrabold text-[#0F2D52]" id="statTotal">0</div>
+        <div class="text-[13px] text-slate-500">Semua laporan</div>
+        <div class="mt-3 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-[#0F2D52] w-full rounded-full"></div></div>
+      </div>
+      <div class="bg-[#FFFBEB] border border-amber-100 rounded-[24px] p-5 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div class="w-11 h-11 rounded-[12px] bg-amber-500 flex items-center justify-center"><i data-lucide="hourglass" class="w-5 h-5 text-white"></i></div>
+          <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-100 border border-amber-200 text-amber-800">MENUNGGU</span>
+        </div>
+        <div class="mt-6 text-[32px] font-extrabold text-amber-600" id="statMenunggu">0</div>
+        <div class="text-[13px] text-slate-500">Perlu dicek</div>
+        <div class="mt-3 h-1.5 bg-amber-100 rounded-full overflow-hidden"><div id="barMenunggu" class="h-full bg-amber-400 rounded-full" style="width:0%"></div></div>
+      </div>
+      <div class="bg-[#EFF6FF] border border-blue-100 rounded-[24px] p-5 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div class="w-11 h-11 rounded-[12px] bg-blue-600 flex items-center justify-center"><i data-lucide="loader-2" class="w-5 h-5 text-white"></i></div>
+          <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-100 border border-blue-200 text-blue-800">DIPROSES</span>
+        </div>
+        <div class="mt-6 text-[32px] font-extrabold text-blue-600" id="statProses">0</div>
+        <div class="text-[13px] text-slate-500">Sedang ditangani</div>
+        <div class="mt-3 h-1.5 bg-blue-100 rounded-full overflow-hidden"><div id="barProses" class="h-full bg-blue-400 rounded-full" style="width:0%"></div></div>
+      </div>
+      <div class="bg-[#ECFDF5] border border-emerald-100 rounded-[24px] p-5 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div class="w-11 h-11 rounded-[12px] bg-emerald-600 flex items-center justify-center"><i data-lucide="check-circle-2" class="w-5 h-5 text-white"></i></div>
+          <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-800">SELESAI</span>
+        </div>
+        <div class="mt-6 text-[32px] font-extrabold text-emerald-700" id="statSelesai">0</div>
+        <div class="text-[13px] text-slate-500">Tuntas</div>
+        <div class="mt-3 h-1.5 bg-emerald-100 rounded-full overflow-hidden"><div id="barSelesai" class="h-full bg-emerald-400 rounded-full" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="mt-6 bg-white border rounded-[20px] p-3 flex flex-col md:flex-row gap-3">
+      <div class="flex-1 relative">
+        <i data-lucide="search" class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+        <input id="search" type="text" placeholder="Cari tiket LAPOR-XXXX, judul, kategori..." class="w-full h-[44px] border border-slate-200 rounded-full pl-11 pr-4 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#0F2D52]/20">
+      </div>
+      <select id="filterStatus" class="h-[44px] border border-slate-200 rounded-full px-4 text-[14px] bg-white">
+        <option value="Semua">Semua Status</option>
+        <option value="Menunggu">Menunggu</option>
+        <option value="Diverifikasi">Diverifikasi</option>
+        <option value="Diproses">Diproses</option>
+        <option value="Selesai">Selesai</option>
+      </select>
+      <button onclick="refreshData()" class="h-[44px] px-6 rounded-full bg-[#0F2D52] text-white font-bold text-[14px] flex items-center justify-center gap-2"><i data-lucide="refresh-cw" class="w-4 h-4"></i> Refresh</button>
+    </div>
+
+    <div class="mt-4 bg-white border rounded-[20px] overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead class="bg-[#F8FAFC] border-b text-[11px] font-bold tracking-wide text-slate-500">
+            <tr><th class="px-5 py-3">TIKET</th><th class="px-5 py-3">LAPORAN</th><th class="px-5 py-3">KONTAK</th><th class="px-5 py-3">STATUS</th><th class="px-5 py-3">AKSI</th></tr>
+          </thead>
+          <tbody id="tbody" class="text-[13px]"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Edit -->
+<div id="modalEdit" class="hidden fixed inset-0 z-[100] bg-black/50 flex items-center justify-center p-4">
+  <div class="w-full max-w-[560px] bg-white rounded-[24px] overflow-hidden shadow-xl max-h-[90vh] overflow-y-auto">
+    <div class="p-6 border-b flex justify-between items-center">
+      <div><div class="font-extrabold text-[#0F2D52]">Edit Laporan</div><div class="text-[11px] text-slate-500 font-mono" id="eTiket">LAPOR-XXXX</div></div>
+      <button onclick="closeEdit()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">✕</button>
+    </div>
+    <div class="p-6 space-y-4">
+      <div><div class="text-[11px] font-bold text-slate-500 tracking-wide">JUDUL</div><div class="mt-1 font-semibold text-[14px]" id="eJudul"></div></div>
+      <div><div class="text-[11px] font-bold text-slate-500 tracking-wide">DESKRIPSI</div><div class="mt-1 text-[13px] text-slate-600 bg-[#F8FAFC] border rounded-xl p-3" id="eDesc"></div></div>
+      <div id="eFoto" class="flex gap-2 flex-wrap"></div>
+      <div id="eKontak"></div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="text-[11px] font-bold">Status</label><select id="eStatus" class="w-full mt-1 h-11 border rounded-xl px-3 text-[14px]"><option>Menunggu</option><option>Diverifikasi</option><option>Diproses</option><option>Selesai</option></select></div>
+        <div><label class="text-[11px] font-bold">Urgensi</label><select id="eUrgensi" class="w-full mt-1 h-11 border rounded-xl px-3 text-[14px]"><option>Rendah</option><option>Sedang</option><option>Tinggi</option></select></div>
+      </div>
+      <div><label class="text-[11px] font-bold">Catatan / Feedback Admin (akan muncul di halaman siswa)</label><textarea id="eCatatan" placeholder="Tulis feedback..." class="w-full mt-1 h-24 border rounded-xl p-3 text-[14px]"></textarea></div>
+      <div id="waAction" class="hidden flex gap-2">
+        <a id="btnWA" target="_blank" class="flex-1 h-11 rounded-full bg-emerald-600 text-white font-bold text-[13px] flex items-center justify-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> WA</a>
+        <a id="btnEmail" target="_blank" class="flex-1 h-11 rounded-full bg-blue-600 text-white font-bold text-[13px] flex items-center justify-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> Email</a>
+      </div>
+      <button onclick="saveEdit()" class="w-full h-12 rounded-full bg-[#0F2D52] text-white font-bold">Simpan & Sinkron ke Siswa</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCBw7cC2wAxAMNfEJyPD-_62_qmlIw5ZyE",
+  authDomain: "smpn1-brondong.firebaseapp.com",
+  projectId: "smpn1-brondong",
+  storageBucket: "smpn1-brondong.firebasestorage.app",
+  messagingSenderId: "918473388225",
+  appId: "1:918473388225:web:10074c05297aa3c9dce440"
+};
+let db=null;
+try{ firebase.initializeApp(firebaseConfig); db=firebase.firestore(); console.log("Admin KONEK"); }catch(e){ console.log(e); }
+
+let allDocs=[]; let filtered=[]; let unsub=null;
+
+function login(){
+  const pass=document.getElementById("passInput").value;
+  if(pass!=="admin123"){ const err=document.getElementById("loginErr"); err.classList.remove("hidden"); err.innerText="Password salah! Default: admin123"; return; }
+  document.getElementById("loginPage").classList.add("hidden");
+  document.getElementById("adminPage").classList.remove("hidden");
+  listenAdmin();
+}
+window.login=login;
+
+function logout(){
+  if(unsub) unsub();
+  document.getElementById("adminPage").classList.add("hidden");
+  document.getElementById("loginPage").classList.remove("hidden");
+  document.getElementById("passInput").value="";
+  allDocs=[]; filtered=[];
+  console.log("Logout");
+}
+window.logout=logout;
+
+function refreshData(){
+  if(db) listenAdmin();
+  else location.reload();
+}
+window.refreshData=refreshData;
+
+function listenAdmin(){
+  if(unsub) unsub();
+  const tbody=document.getElementById("tbody");
+  if(tbody) tbody.innerHTML="<tr><td colspan='5' class='text-center py-10 text-slate-400'>Memuat data dari Firebase...</td></tr>";
+  unsub = db.collection("laporan_smpn1_brondong").onSnapshot(snap=>{
+    allDocs=[];
+    snap.forEach(docSnap=>{
+      const d=docSnap.data();
+      allDocs.push({ docId: docSnap.id, tiket: d.tiket||d.id, id: d.tiket||d.id, judul: d.judul, deskripsi: d.deskripsi||d.desc, desc: d.deskripsi||d.desc, kategori: d.kategori, urgensi: d.urgensi, status: d.status||"Menunggu", tanggal: d.tanggal, lokasi: d.lokasi, anonim: d.anonim, nama: d.nama, wa: d.wa, email: d.email, allowContact: d.allowContact, fotoUrls: d.fotoUrls||[], catatanAdmin: d.catatanAdmin||"", createdAt: d.createdAt||null });
+    });
+    allDocs.sort((a,b)=> (b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+    render();
+    console.log("Admin real-time", allDocs.length);
+  }, err=>{
+    console.error("Snapshot error", err);
+    alert("Gagal load: "+err.message+" - Cek Rules Firebase harus allow read, write: if true");
+  });
+}
+
+function render(){
+  const q=(document.getElementById("search")?.value||"").toLowerCase();
+  const f=document.getElementById("filterStatus")?.value||"Semua";
+  filtered=allDocs.filter(d=>{
+    const matchQ = (d.judul||"").toLowerCase().includes(q) || (d.tiket||"").toLowerCase().includes(q) || (d.kategori||"").toLowerCase().includes(q);
+    const matchF = f==="Semua" || d.status===f;
+    return matchQ && matchF;
+  });
+
+  // Update 4 cards - INI YANG TADI GABISA UPDATE
+  const total=allDocs.length;
+  const menunggu=allDocs.filter(d=>d.status==="Menunggu").length;
+  const diproses=allDocs.filter(d=>d.status==="Diproses"||d.status==="Diverifikasi").length;
+  const selesai=allDocs.filter(d=>d.status==="Selesai").length;
+
+  const elTotal=document.getElementById("statTotal"); if(elTotal) elTotal.innerText=total;
+  const elMenunggu=document.getElementById("statMenunggu"); if(elMenunggu) elMenunggu.innerText=menunggu;
+  const elProses=document.getElementById("statProses"); if(elProses) elProses.innerText=diproses;
+  const elSelesai=document.getElementById("statSelesai"); if(elSelesai) elSelesai.innerText=selesai;
+
+  // Update bar width
+  const pct = (v)=> total>0 ? Math.round(v/total*100) : 0;
+  const barM=document.getElementById("barMenunggu"); if(barM) barM.style.width=pct(menunggu)+"%";
+  const barP=document.getElementById("barProses"); if(barP) barP.style.width=pct(diproses)+"%";
+  const barS=document.getElementById("barSelesai"); if(barS) barS.style.width=pct(selesai)+"%";
+
+  const tbody=document.getElementById("tbody"); if(!tbody) return;
+  tbody.innerHTML="";
+  filtered.forEach(d=>{
+    const warna = d.status==="Selesai"?"bg-emerald-50 border-emerald-200 text-emerald-700":d.status==="Diproses"||d.status==="Diverifikasi"?"bg-amber-50 border-amber-200 text-amber-700":"bg-amber-50 border-amber-200 text-amber-700";
+    let kontak = "";
+    if(d.wa) kontak += `<div class="flex items-center gap-1"><i data-lucide="phone" class="w-3 h-3"></i> ${d.wa}</div>`;
+    if(d.email) kontak += `<div class="flex items-center gap-1 mt-1"><i data-lucide="mail" class="w-3 h-3"></i> ${d.email}</div>`;
+    if(!d.wa && !d.email) kontak = "<span class='text-slate-400 text-[11px]'>Anonim via tiket</span>";
+    const hasFoto = (d.fotoUrls||[]).length>0 ? `<span class="text-[10px] bg-slate-100 border px-1.5 rounded-full ml-1">${d.fotoUrls.length} foto</span>` : "";
+    tbody.innerHTML+=`<tr class="hover:bg-[#F8FAFC] border-b"><td class="px-5 py-4"><div class="font-mono text-[11px] font-bold text-[#0F2D52]">${d.tiket||d.id}</div><div class="text-[10px] text-slate-400 mt-1">${(d.tanggal||"").slice(0,16)}</div></td><td class="px-5 py-4 max-w-[320px]"><div class="font-semibold text-[13px] text-[#0F2D52]">${d.judul} ${hasFoto}</div><div class="text-[11px] text-slate-500 mt-1"><span class="px-2 py-0.5 rounded-full bg-slate-100 border text-[10px]">${d.kategori||"Umum"}</span> ${d.urgensi||""}</div>${d.catatanAdmin?`<div class="mt-2 text-[11px] bg-emerald-50 border border-emerald-200 rounded-xl p-2.5"><b>Feedback:</b> ${d.catatanAdmin}</div>`:""}</td><td class="px-5 py-4 text-[11px]"><div class="bg-[#F8FAFC] border rounded-xl p-2.5 min-w-[160px]">${kontak}</div></td><td class="px-5 py-4"><span class="px-2.5 py-1 rounded-full text-[11px] font-bold border ${warna}">${d.status}</span></td><td class="px-5 py-4"><div class="flex flex-col gap-1.5"><button onclick="openEdit('${d.docId}')" class="h-8 px-3.5 rounded-full bg-[#0F2D52] text-white text-[11px] font-bold">Edit</button><button onclick="hapus('${d.docId}')" class="h-8 px-3.5 rounded-full bg-white border border-red-200 text-red-600 text-[11px]">Hapus</button></div></td></tr>`;
+  });
+  if(filtered.length===0) tbody.innerHTML="<tr><td colspan='5' class='text-center py-14'><div class='w-12 h-12 mx-auto bg-slate-100 rounded-full flex items-center justify-center'><i data-lucide='inbox' class='w-6 h-6 text-slate-400'></i></div><div class='mt-3 text-[13px] font-semibold text-slate-600'>Belum ada laporan</div></td></tr>";
+  lucide.createIcons();
+}
+
+let editId=null;
+window.openEdit=(docId)=>{
+  const d=allDocs.find(x=>x.docId===docId); if(!d) return; editId=docId;
+  document.getElementById("eTiket").innerText=d.tiket||d.id;
+  document.getElementById("eJudul").innerText=d.judul;
+  document.getElementById("eDesc").innerText=d.deskripsi||d.desc||"";
+  document.getElementById("eStatus").value=d.status||"Menunggu";
+  document.getElementById("eUrgensi").value=d.urgensi||"Sedang";
+  document.getElementById("eCatatan").value=d.catatanAdmin||"";
+  const fotoDiv=document.getElementById("eFoto"); fotoDiv.innerHTML=""; (d.fotoUrls||[]).forEach(url=>{ fotoDiv.innerHTML+=`<a href="${url}" target="_blank"><img src="${url}" class="w-20 h-20 object-cover rounded-xl border"></a>`; });
+  const kontakDiv=document.getElementById("eKontak"); let html="";
+  if(d.wa) html+=`<div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-[12px]"><b>WA:</b> ${d.wa}</div>`;
+  if(d.email) html+=`<div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-[12px] mt-2"><b>Email:</b> ${d.email}</div>`;
+  if(!d.wa && !d.email) html="<div class='bg-slate-50 border rounded-xl p-3 text-[11px] text-slate-500'>Anonim penuh</div>";
+  kontakDiv.innerHTML=html;
+  const waAction=document.getElementById("waAction");
+  if(d.wa || d.email){ waAction.classList.remove("hidden"); document.getElementById("btnWA").href=d.wa?`https://wa.me/${d.wa.replace(/[^0-9]/g,'')}?text=${encodeURIComponent(`Halo, laporan ${d.tiket} status: ${document.getElementById("eStatus").value}. ${document.getElementById("eCatatan").value}`)}`:"#"; document.getElementById("btnWA").style.display=d.wa?"flex":"none"; document.getElementById("btnEmail").href=d.email?`mailto:${d.email}?subject=Feedback ${d.tiket}`:"#"; document.getElementById("btnEmail").style.display=d.email?"flex":"none"; } else { waAction.classList.add("hidden"); }
+  document.getElementById("modalEdit").classList.remove("hidden");
+  lucide.createIcons();
+};
+window.closeEdit=()=>{ document.getElementById("modalEdit").classList.add("hidden"); editId=null; };
+window.saveEdit=async()=>{
+  if(!editId) return;
+  const btn=document.querySelector('#modalEdit button[onclick="saveEdit()"]'); const orig=btn?btn.innerHTML:""; if(btn){ btn.innerHTML="Menyimpan..."; btn.disabled=true; }
+  await db.collection("laporan_smpn1_brondong").doc(editId).update({ status: document.getElementById("eStatus").value, urgensi: document.getElementById("eUrgensi").value, catatanAdmin: document.getElementById("eCatatan").value });
+  closeEdit(); alert("✅ Update! Halaman siswa auto-sync."); if(btn){ btn.innerHTML=orig; btn.disabled=false; }
+};
+window.hapus=async(docId)=>{ if(!confirm("Hapus permanen?")) return; await db.collection("laporan_smpn1_brondong").doc(docId).delete(); };
+
+document.getElementById("search")?.addEventListener("input", render);
+document.getElementById("filterStatus")?.addEventListener("change", render);
+document.getElementById("passInput")?.addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
+lucide.createIcons();
+</script>
+</body>
+</html>
