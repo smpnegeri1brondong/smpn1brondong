@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="logo-smp.png" />
+<link rel="icon" type="image/png" href="logo-smp2.png" />
 <title>Admin Buku Tamu - SMPN 1 Brondong</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -25,7 +25,6 @@ tr:hover td{background:#f8fbff}
 @media(max-width:900px){.grid-stats{grid-template-columns:1fr 1fr !important}.grid-main{grid-template-columns:1fr !important}.filter-bar{flex-direction:column !important;align-items:stretch !important}}
 @media(max-width:600px){.grid-stats{grid-template-columns:1fr 1fr !important}}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -54,7 +53,6 @@ tr:hover td{background:#f8fbff}
 <div style="max-width:1200px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between">
 <div style="display:flex;align-items:center;gap:10px"><img src="logo-smp.png" style="width:32px;height:32px;object-fit:contain"><div><div style="font-weight:700;color:#1a4d8f;font-size:14px;line-height:1">SMPN 1 BRONDONG</div><div style="font-size:11px;color:#64748b">Admin • Buku Tamu</div></div></div>
 <div style="display:flex;gap:8px;align-items:center">
-<div id="fbStatusWrap" style="display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;padding:6px 12px;border-radius:999px;font-size:11px;font-weight:600"><span id="fbDot" style="width:8px;height:8px;border-radius:50%;background:#f59e0b;display:inline-block"></span><span id="fbStatus">Menghubungkan Firebase...</span></div>
 <button class="btn btn-white" onclick="loadData()">🔄 Refresh</button>
 <button class="btn btn-white" onclick="logout()">Logout</button>
 </div>
@@ -76,7 +74,7 @@ tr:hover td{background:#f8fbff}
 <input id="searchInput" class="input" placeholder="Cari nama / instansi..." style="flex:1;min-width:120px" oninput="renderTamu()">
 <input id="filterTanggal" class="input" type="date" style="width:150px" onchange="renderTamu()">
 <button class="btn btn-white" onclick="clearFilter()">Clear</button>
-<button class="btn btn-blue" onclick="exportExcel()">Export Excel</button>
+<button class="btn btn-blue" onclick="exportCSV()">Export CSV</button>
 </div>
 </div>
 
@@ -102,7 +100,7 @@ tr:hover td{background:#f8fbff}
 <div class="card" style="padding:0;overflow:hidden;position:sticky;top:84px;height:fit-content">
 <div style="padding:14px 16px;border-bottom:1px solid #eef2f7;display:flex;justify-content:space-between;align-items:center">
 <div style="font-weight:700;font-size:13px">Preview Foto</div>
-<div style="display:flex;gap:6px"><a id="detailDownload" href="#" target="_blank" class="btn btn-white" style="padding:6px 10px;font-size:11px">Download</a><button class="btn btn-red" style="padding:6px 10px;font-size:11px" onclick="hapusTamu()">Hapus</button></div>
+<div style="display:flex;gap:6px"><button id="detailDownload" class="btn btn-white" style="padding:6px 10px;font-size:11px" onclick="downloadFoto()">Download</button><button class="btn btn-red" style="padding:6px 10px;font-size:11px" onclick="hapusTamu()">Hapus</button></div>
 </div>
 <div id="detailEmpty" style="padding:40px 20px;text-align:center;color:#94a3b8;font-size:12px">Klik foto untuk lihat besar. Centang untuk hapus banyak.</div>
 <div id="detailFotoWrap" style="display:none;padding:14px">
@@ -200,6 +198,38 @@ function toggleAll(el){ if(el.checked){ lastFiltered.forEach(t=>selectedIds.add(
 function updateBulkBar(){ const bar=document.getElementById('bulkBar'); const cnt=document.getElementById('bulkCount'); if(selectedIds.size>0){ bar.style.display='flex'; cnt.textContent=selectedIds.size; } else { bar.style.display='none'; } }
 function clearSelection(){ selectedIds.clear(); renderTamu(); }
 function clearFilter(){ document.getElementById('searchInput').value=''; document.getElementById('filterTanggal').value=''; renderTamu(); }
+function dataURLtoBlob(dataURL){
+  const arr = dataURL.split(','), mime = arr[0].match(/:(.*?);/)[1], bstr = atob(arr[1]);
+  let n = bstr.length; const u8arr = new Uint8Array(n);
+  while(n--){ u8arr[n]=bstr.charCodeAt(n); }
+  return new Blob([u8arr], {type:mime});
+}
+function downloadFoto(){
+  const imgEl=document.getElementById('detailFoto');
+  const src=imgEl.src||'';
+  if(!src){ alert('Tidak ada foto'); return; }
+  try{
+    let blob, filename;
+    const t = (selectedIndex!==null && allData[selectedIndex]) ? allData[selectedIndex] : {};
+    const safeName = (t.nama||'foto').replace(/[^a-z0-9]/gi,'_').substring(0,20);
+    const dateStr = (t.tanggal||new Date().toISOString().split('T')[0]);
+    filename = `${safeName}-${dateStr}.jpg`;
+    if(src.startsWith('data:')){
+      blob = dataURLtoBlob(src);
+    }else{
+      // if http url, fetch it
+      fetch(src).then(r=>r.blob()).then(b=>{
+        const url=URL.createObjectURL(b);
+        const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); setTimeout(()=>{document.body.removeChild(a); URL.revokeObjectURL(url);},1000);
+      }).catch(()=>{ window.open(src,'_blank'); });
+      return;
+    }
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click();
+    setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+  }catch(e){ alert('Gagal download: '+e.message); }
+}
+
 function selectTamu(idx){
   selectedIndex=idx;
   const t=allData[idx];
@@ -242,26 +272,23 @@ async function hapusTerpilih(){
   document.getElementById('detailEmpty').style.display='block';
   renderTamu();
 }
-function exportToExcel(data, filename){
-  const header=['Waktu','Nama','Instansi','Tanggal','Jam','Tujuan','Keperluan'];
-  const rows=data.map(t=>[t.createdLocal||t.created||'', t.nama||'', t.instansi||'', t.tanggal||'', t.jam||'', t.tujuan||'', t.keperluan||t.pesan||'']);
-  const ws = XLSX.utils.aoa_to_sheet([header, ...rows]);
-  ws['!cols']=[{wch:20},{wch:20},{wch:20},{wch:12},{wch:8},{wch:20},{wch:30}];
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Buku Tamu");
-  XLSX.writeFile(wb, filename);
-}
-function exportExcel(){
+function exportCSV(){
   if(allData.length===0){ alert('Tidak ada data'); return; }
-  exportToExcel(allData, 'buku-tamu-'+new Date().toISOString().split('T')[0]+'.xlsx');
+  const header=['Waktu','Nama','Instansi','Tanggal','Jam','Tujuan','Keperluan'];
+  const rows=allData.map(t=>[t.createdLocal||t.created||'',t.nama,t.instansi,t.tanggal,t.jam,t.tujuan,t.keperluan||t.pesan||'']);
+  const csv=[header,...rows].map(r=>r.map(v=>'"'+(v||'').toString().replace(/"/g,'""')+'"').join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='buku-tamu.csv'; a.click();
 }
 function exportSelected(){
   if(selectedIds.size===0){ alert('Centang dulu!'); return; }
   const data=[...selectedIds].map(i=>allData[i]);
-  exportToExcel(data, 'buku-tamu-terpilih-'+new Date().toISOString().split('T')[0]+'.xlsx');
+  const header=['Waktu','Nama','Instansi','Tanggal','Jam','Tujuan','Keperluan'];
+  const rows=data.map(t=>[t.createdLocal||t.created||'',t.nama,t.instansi,t.tanggal,t.jam,t.tujuan,t.keperluan||t.pesan||'']);
+  const csv=[header,...rows].map(r=>r.map(v=>'"'+(v||'').toString().replace(/"/g,'""')+'"').join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='buku-tamu-terpilih.csv'; a.click();
 }
-// backward compat alias
-function exportCSV(){ exportExcel(); }
 document.getElementById('passInput').addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
 </script>
 
@@ -278,26 +305,14 @@ const firebaseConfig = {
    measurementId: "G-N7ZYV6X6D2"
  };
 let db=null;
-let fbConnected=false;
-function setFbStatus(state, msg){
-  const dot=document.getElementById('fbDot');
-  const st=document.getElementById('fbStatus');
-  if(!dot||!st) return;
-  if(state==='connected'){ dot.style.background='#22c55e'; st.textContent=msg||'Terhubung Firebase • Realtime ON'; st.style.color='#16a34a'; }
-  else if(state==='error'){ dot.style.background='#ef4444'; st.textContent=msg||'Gagal konek Firebase'; st.style.color='#dc2626'; }
-  else { dot.style.background='#f59e0b'; st.textContent=msg||'Menghubungkan...'; st.style.color='#d97706'; }
-}
-try{ const app=initializeApp(firebaseConfig); db=getFirestore(app); fbConnected=true; setFbStatus('connected','Terhubung Firebase • Realtime ON'); }catch(e){ setFbStatus('error','Error: '+e.message); }
+try{ const app=initializeApp(firebaseConfig); db=getFirestore(app); }catch(e){}
 window.firebaseGetAll = async ()=>{
-  setFbStatus('connected','Sinkron data...');
-
   if(!db) return [];
   try{
     const q=query(collection(db,'buku_tamu'), orderBy('created','desc'));
     const snap=await getDocs(q);
-    const res = snap.docs.map(d=>({id:d.id, data:d.data()})); setFbStatus('connected','Terhubung Firebase • '+res.length+' data'); return res;
-  }catch(e){ setFbStatus('connected','Terhubung (fallback)');
-
+    return snap.docs.map(d=>({id:d.id, data:d.data()}));
+  }catch(e){
     const snap=await getDocs(collection(db,'buku_tamu'));
     return snap.docs.map(d=>({id:d.id, data:d.data()}));
   }
