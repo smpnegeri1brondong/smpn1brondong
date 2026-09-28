@@ -24,7 +24,10 @@ td{padding:10px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top}
 tr:hover td{background:#f8fbff}
 .badge{font-size:11px;font-weight:600;padding:5px 10px;border-radius:999px;background:#f1f5f9;color:#475569}
 .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}70%{box-shadow:0 0 0 6px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+/* >>> INI YANG DITARO DI <style> - HILANGIN MATA BAWAAN EDGE BIAR GA DOUBLE <<< */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear{display:none !important}
+input::-webkit-credentials-auto-fill-button{visibility:hidden;pointer-events:none;position:absolute;right:0}
 @media(max-width:900px){.grid-stats{grid-template-columns:1fr 1fr !important}.grid-main{grid-template-columns:1fr !important}.filter-bar{flex-direction:column !important;align-items:stretch !important}}
 @media(max-width:600px){.grid-stats{grid-template-columns:1fr 1fr !important}}
 </style>
@@ -44,7 +47,18 @@ tr:hover td{background:#f8fbff}
     </div>
     <div class="card" style="padding:22px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.25)">
       <div style="text-align:center;margin-bottom:16px"><div style="width:52px;height:52px;border-radius:14px;background:#1a4d8f;display:grid;place-items:center;margin:0 auto"><img src="logo-smp.png" style="width:32px;height:32px;object-fit:contain" alt="logo"></div><h3 style="margin:10px 0 4px;font-size:16px">Masuk Admin</h3><div style="font-size:11px;color:#64748b"></div></div>
-      <div style="display:grid;gap:12px"><input id="passInput" class="input" type="password" placeholder="Password admin"><button class="btn btn-blue" style="width:100%;padding:12px;justify-content:center" onclick="login()">Masuk Dashboard →</button><div id="loginError" style="font-size:11px;color:#dc2626;text-align:center;min-height:14px"></div></div>
+      <div style="display:grid;gap:12px">
+        <!-- >>> INI DITARO DI LINE 44-53 - GANTI INPUT PASSWORD LAMA <<< -->
+        <div style="position:relative">
+          <input id="passInput" class="input" type="password" placeholder="Password admin" style="padding-right:44px">
+          <button type="button" onclick="togglePass()" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);width:32px;height:32px;border:0;background:#fff;cursor:pointer;display:grid;place-items:center;border-radius:8px;color:#64748b">
+            <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <svg id="eyeClose" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.53 9.53a3 3 0 1 0 4.24 4.24"></path><path d="M1 1l22 22"></path></svg>
+          </button>
+        </div>
+        <button class="btn btn-blue" style="width:100%;padding:12px;justify-content:center" onclick="login()">Masuk Dashboard →</button>
+        <div id="loginError" style="font-size:11px;color:#dc2626;text-align:center;min-height:14px"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -60,7 +74,6 @@ tr:hover td{background:#f8fbff}
 </div>
 </div>
 </header>
-
 <main style="max-width:1200px;margin:0 auto;padding:20px">
 <div style="display:grid;grid-template-columns:1fr 340px;gap:16px;margin-bottom:20px" class="grid-main">
 <div class="grid-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
@@ -76,7 +89,6 @@ tr:hover td{background:#f8fbff}
 <button class="btn btn-blue" onclick="exportExcel()">Export Excel</button>
 </div>
 </div>
-
 <div style="display:grid;grid-template-columns:1.7fr 0.8fr;gap:16px" class="grid-main">
 <div class="card" style="padding:0;overflow:hidden">
 <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eef2f7">
@@ -84,8 +96,7 @@ tr:hover td{background:#f8fbff}
 <label style="font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="checkAll" onchange="toggleAll(this)"> Pilih Semua</label>
 </div>
 <div style="overflow:auto;max-height:65vh">
-<table>
-<thead><tr><th style="width:32px">✓</th><th style="width:56px">Foto</th><th>Nama & Waktu</th><th>Instansi</th><th style="width:90px">Aksi</th></tr></thead>
+<table><thead><tr><th style="width:32px">✓</th><th style="width:56px">Foto</th><th>Nama & Waktu</th><th>Instansi</th><th style="width:90px">Aksi</th></tr></thead>
 <tbody id="tableBody"><tr><td colspan="5" style="text-align:center;padding:30px;color:#94a3b8">Belum ada data tamu.</td></tr></tbody>
 </table>
 </div>
@@ -94,13 +105,12 @@ tr:hover td{background:#f8fbff}
 <div style="display:flex;gap:8px"><button class="btn btn-white" onclick="clearSelection()">Batal</button><button class="btn btn-blue" onclick="exportSelected()">Export Terpilih</button><button class="btn btn-red" onclick="hapusTerpilih()">Hapus Terpilih</button></div>
 </div>
 </div>
-
 <div class="card" style="padding:0;overflow:hidden;position:sticky;top:84px;height:fit-content">
 <div style="padding:14px 16px;border-bottom:1px solid #eef2f7;display:flex;justify-content:space-between;align-items:center">
 <div style="font-weight:700;font-size:13px">Preview Foto</div>
 <div style="display:flex;gap:6px"><button id="detailDownload" class="btn btn-white" style="padding:6px 10px;font-size:11px" onclick="downloadFoto()">Download</button><button class="btn btn-red" style="padding:6px 10px;font-size:11px" onclick="hapusTamu()">Hapus</button></div>
 </div>
-<div id="detailEmpty" style="padding:40px 20px;text-align:center;color:#94a3b8;font-size:12px">Klik foto untuk lihat besar. Centang untuk hapus banyak.</div>
+<div id="detailEmpty" style="padding:40px 20px;text-align:center;color:#94a3b8;font-size:12px">Klik foto untuk lihat besar.</div>
 <div id="detailFotoWrap" style="display:none;padding:14px">
 <img id="detailFoto" src="" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;background:#f1f5f9">
 <div id="detailInfo" style="font-size:12px;line-height:18px;margin-top:10px;color:#334155"></div>
@@ -113,6 +123,13 @@ tr:hover td{background:#f8fbff}
 <script>
 const ADMIN_PASS="snebron555";
 let allData=[]; let docIds=[]; let selectedIds=new Set(); let selectedIndex=null; let lastFiltered=[];
+function togglePass(){
+  const inp=document.getElementById('passInput');
+  const open=document.getElementById('eyeOpen');
+  const close=document.getElementById('eyeClose');
+  if(inp.type==='password'){ inp.type='text'; open.style.display='none'; close.style.display='block'; }
+  else { inp.type='password'; open.style.display='block'; close.style.display='none'; }
+}
 function login(){
   const p=document.getElementById('passInput').value;
   if(p===ADMIN_PASS || p==="smpn1brondong"){
@@ -138,7 +155,7 @@ async function loadData(){
         return;
       }
     }
-  }catch(e){ console.log('FB error',e); window.setFbStatus && window.setFbStatus('error','Error: '+e.message); }
+  }catch(e){ console.log('FB error',e); }
   allData = combined;
   docIds = allData.map((_,i)=>'local-'+i);
   renderTamu();
@@ -169,7 +186,7 @@ function renderTamu(){
     tbody.innerHTML=filtered.map(t=>{
       const checked = selectedIds.has(t._realIdx)?'checked':'';
       const foto = t.fotoURL||t.foto||'';
-      return `<tr><td><input type="checkbox" ${checked} onchange="toggleOne(${t._realIdx}, this.checked)"></td><td><img src="${foto}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;cursor:pointer;background:#f1f5f9" onclick="selectTamu(${t._realIdx})" onerror="this.src='https://via.placeholder.com/40'"></td><td><div style="font-weight:600;font-size:13px">${t.nama||'-'}</div><div style="font-size:11px;color:#64748b">${t.tanggal||''} ${t.jam||''}<br>${t.tujuan||''}</div></td><td><span class="badge">${t.instansi||'-'}</span></td><td><button class="btn btn-white" style="padding:6px 10px;font-size:11px" onclick="selectTamu(${t._realIdx})">Lihat</button></td></tr>`;
+      return `<tr><td><input type="checkbox" ${checked} onchange="toggleOne(${t._realIdx}, this.checked)"></td><td><img src="${foto}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;cursor:pointer;background:#f1f5f9" onclick="selectTamu(${t._realIdx})"></td><td><div style="font-weight:600;font-size:13px">${t.nama||'-'}</div><div style="font-size:11px;color:#64748b">${t.tanggal||''} ${t.jam||''}<br>${t.tujuan||''}</div></td><td><span class="badge">${t.instansi||'-'}</span></td><td><button class="btn btn-white" style="padding:6px 10px;font-size:11px" onclick="selectTamu(${t._realIdx})">Lihat</button></td></tr>`;
     }).join('');
   }
   updateBulkBar();
@@ -191,23 +208,21 @@ function downloadFoto(){
   const imgEl=document.getElementById('detailFoto');
   const src=imgEl.src||'';
   if(!src){ alert('Tidak ada foto'); return; }
-  try{
-    const t = (selectedIndex!==null && allData[selectedIndex]) ? allData[selectedIndex] : {};
-    const safeName = (t.nama||'foto').replace(/[^a-z0-9]/gi,'_').substring(0,20);
-    const dateStr = (t.tanggal||new Date().toISOString().split('T')[0]);
-    const filename = `${safeName}-${dateStr}.jpg`;
-    if(src.startsWith('data:')){
-      const blob = dataURLtoBlob(src);
-      const url=URL.createObjectURL(blob);
+  const t = (selectedIndex!==null && allData[selectedIndex]) ? allData[selectedIndex] : {};
+  const safeName = (t.nama||'foto').replace(/[^a-z0-9]/gi,'_').substring(0,20);
+  const dateStr = (t.tanggal||new Date().toISOString().split('T')[0]);
+  const filename = `${safeName}-${dateStr}.jpg`;
+  if(src.startsWith('data:')){
+    const blob = dataURLtoBlob(src);
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click();
+    setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+  }else{
+    fetch(src).then(r=>r.blob()).then(b=>{
+      const url=URL.createObjectURL(b);
       const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click();
-      setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
-    }else{
-      fetch(src).then(r=>r.blob()).then(b=>{
-        const url=URL.createObjectURL(b);
-        const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); setTimeout(()=>{document.body.removeChild(a); URL.revokeObjectURL(url);},1000);
-      }).catch(()=>{ window.open(src,'_blank'); });
-    }
-  }catch(e){ alert('Gagal download: '+e.message); }
+    });
+  }
 }
 function selectTamu(idx){
   selectedIndex=idx;
@@ -217,8 +232,7 @@ function selectTamu(idx){
   const fsrc=t.fotoURL||t.foto||'';
   const imgEl=document.getElementById('detailFoto');
   imgEl.src=fsrc||'https://via.placeholder.com/400x500?text=No+Foto';
-  imgEl.onerror=function(){ this.src='https://via.placeholder.com/400x500?text=No+Foto'; };
-  document.getElementById('detailInfo').innerHTML=`<b>${t.nama||'-'}</b><br>Instansi: ${t.instansi||'-'}<br>Tanggal: ${t.tanggal||''} ${t.jam||''}<br>Tujuan: ${t.tujuan||'-'}<br>Keperluan: ${t.keperluan||t.pesan||'-'}<br><small style="color:#94a3b8">${t.createdLocal||t.created||''}</small>`;
+  document.getElementById('detailInfo').innerHTML=`<b>${t.nama||'-'}</b><br>Instansi: ${t.instansi||'-'}<br>Tanggal: ${t.tanggal||''} ${t.jam||''}<br>Tujuan: ${t.tujuan||'-'}<br>Keperluan: ${t.keperluan||t.pesan||'-'}`;
 }
 async function hapusTamu(){
   if(selectedIndex===null) return;
@@ -236,7 +250,7 @@ async function hapusTamu(){
 }
 async function hapusTerpilih(){
   if(selectedIds.size===0) return;
-  if(!confirm('Hapus '+selectedIds.size+' data terpilih? Akan dihapus permanen dari Firebase!')) return;
+  if(!confirm('Hapus '+selectedIds.size+' data terpilih?')) return;
   const sorted=[...selectedIds].sort((a,b)=>b-a);
   for(const idx of sorted){
     const id=docIds[idx];
@@ -289,9 +303,9 @@ window.setFbStatus = (state, msg)=>{
   const dot=document.getElementById('fbDot');
   const st=document.getElementById('fbStatus');
   if(!dot||!st) return;
-  if(state==='connected'){ dot.style.background='#22c55e'; dot.style.animation='pulse 2s infinite'; st.textContent=msg||'Terhubung Firebase • Realtime ON'; st.style.color='#16a34a'; }
-  else if(state==='error'){ dot.style.background='#ef4444'; dot.style.animation='none'; st.textContent=msg||'Gagal konek Firebase'; st.style.color='#dc2626'; }
-  else { dot.style.background='#f59e0b'; dot.style.animation='none'; st.textContent=msg||'Menghubungkan...'; st.style.color='#d97706'; }
+  if(state==='connected'){ dot.style.background='#22c55e'; st.textContent=msg||'Terhubung Firebase • Realtime ON'; st.style.color='#16a34a'; }
+  else if(state==='error'){ dot.style.background='#ef4444'; st.textContent=msg||'Gagal konek Firebase'; st.style.color='#dc2626'; }
+  else { dot.style.background='#f59e0b'; st.textContent=msg||'Menghubungkan...'; st.style.color='#d97706'; }
 };
 try{
   const app=initializeApp(firebaseConfig);
@@ -310,7 +324,6 @@ window.firebaseGetAll = async ()=>{
     window.setFbStatus('connected','Terhubung Firebase • '+res.length+' data');
     return res;
   }catch(e){
-    console.warn(e);
     window.setFbStatus('connected','Terhubung (fallback)');
     const snap=await getDocs(collection(db,'buku_tamu'));
     const res = snap.docs.map(d=>({id:d.id, data:d.data()}));
