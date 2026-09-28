@@ -12,7 +12,7 @@
 .input:focus{border-color:#0e4a8a} video{width:100%;height:100%;object-fit:cover;display:block;transform:scaleX(-1)} #canvasFoto{display:none} .btn{border:0;cursor:pointer;border-radius:999px;font-weight:600}
 </style>
 <script type="importmap">
-{"imports":{"firebase/app":"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js","firebase/firestore":"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"}}
+{"imports":{"firebase/app":"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js","firebase/firestore":"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js"}}
 </script>
 <script>
 const TELEGRAM_BOT_TOKEN="8698871747:AAEx0uaQQJDnav9w489HyXkND9D5v-Gknog"; const TELEGRAM_CHAT_ID="-1004475454449";
@@ -107,14 +107,15 @@ async function kirimTelegram(data){const cap=`🔔 TAMU BARU - SMPN 1 BRONDONG\n
 </section>
 <script type="module">
 import {initializeApp} from 'firebase/app'; import {getFirestore, collection, addDoc, serverTimestamp} from 'firebase/firestore';
-const firebaseConfig = {
-  apiKey: "AIzaSyCBw7cC2wAxAMNfEJyPD-_62_qmlIw5ZyE",
-  authDomain: "smpn1-brondong.firebaseapp.com",
-  projectId: "smpn1-brondong",
-  storageBucket: "smpn1-brondong.firebasestorage.app",
-  messagingSenderId: "918473388225",
-  appId: "1:918473388225:web:10074c05297aa3c9dce440",
-};
+ const firebaseConfig = {
+   apiKey: "AIzaSyD2altkh4JhI6uVESIAvd8wCyBDDwam6qw",
+   authDomain: "smpn1-brondong-bukutamu.firebaseapp.com",
+   projectId: "smpn1-brondong-bukutamu",
+   storageBucket: "smpn1-brondong-bukutamu.firebasestorage.app",
+   messagingSenderId: "34578499159",
+   appId: "1:34578499159:web:37c7570af0c35b3b18c512",
+   measurementId: "G-N7ZYV6X6D2"
+ };
 let db; try{const app=initializeApp(firebaseConfig); db=getFirestore(app); document.getElementById('fbStatus').textContent='Terhubung';}catch(e){document.getElementById('fbStatus').textContent='Error: '+e.message;}
 let stream=null, fotoBase64=null;
 window.aktifkanKamera=async()=>{const v=document.getElementById('video'),o=document.getElementById('cameraOff');try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:480},height:{ideal:640}}}); v.srcObject=stream; o.style.display='none';}catch(e){alert(e.message);}};
