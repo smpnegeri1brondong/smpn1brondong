@@ -55,6 +55,21 @@ input::-webkit-credentials-auto-fill-button{visibility:hidden;pointer-events:non
   .header-actions .btn{flex:1}
   #fbStatusWrap{width:100%;justify-content:center}
 }
+
+/* FIX HANYA UNTUK TOMBOL BAWAH YANG LINGKARAN MERAH - JANGAN SENTUH LAIN */
+#bulkBar{flex-wrap:wrap !important}
+#bulkBar .bulk-actions{flex-wrap:wrap !important}
+@media(max-width:600px){
+  #bulkBar{flex-direction:column !important;align-items:stretch !important;padding:10px 12px !important}
+  #bulkBar > div:first-child{font-weight:600;padding:2px 4px}
+  #bulkBar .bulk-actions{display:grid !important;grid-template-columns:80px 1fr 1fr;gap:6px !important;width:100% !important;justify-content:stretch !important}
+  #bulkBar .bulk-actions .btn{width:100% !important;min-width:0 !important;white-space:nowrap !important;font-size:11px !important;padding:8px 6px !important;min-height:36px !important}
+}
+@media(max-width:360px){
+  #bulkBar .bulk-actions{grid-template-columns:1fr 1fr;gap:6px}
+  #bulkBar .bulk-actions .btn:last-child{grid-column:1 / -1}
+}
+
 </style>
 </head>
 <body>
@@ -125,9 +140,9 @@ input::-webkit-credentials-auto-fill-button{visibility:hidden;pointer-events:non
 <tbody id="tableBody"><tr><td colspan="5" style="text-align:center;padding:30px;color:#94a3b8">Belum ada data tamu.</td></tr></tbody>
 </table>
 </div>
-<div id="bulkBar" style="display:none;padding:10px 16px;background:#f8fafc;border-top:1px solid #eef2f7;align-items:center;justify-content:space-between">
-<div style="font-size:12px"><span id="bulkCount">0</span> terpilih</div>
-<div style="display:flex;gap:8px"><button class="btn btn-white" onclick="clearSelection()">Batal</button><button class="btn btn-blue" onclick="exportSelected()">Export Terpilih</button><button class="btn btn-red" onclick="hapusTerpilih()">Hapus Terpilih</button></div>
+<div id="bulkBar" style="display:none;padding:10px 16px;background:#f8fafc;border-top:1px solid #eef2f7;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+<div style="font-size:12px;white-space:nowrap"><span id="bulkCount">0</span> terpilih</div>
+<div class="bulk-actions" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><button class="btn btn-white" onclick="clearSelection()">Batal</button><button class="btn btn-blue" onclick="exportSelected()">Export Terpilih</button><button class="btn btn-red" onclick="hapusTerpilih()">Hapus Terpilih</button></div>
 </div>
 </div>
 <div class="card" style="padding:0;overflow:hidden;position:sticky;top:84px;height:fit-content">
