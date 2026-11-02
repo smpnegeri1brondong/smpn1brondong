@@ -9,20 +9,23 @@
 *{font-family:Poppins,system-ui;box-sizing:border-box} body{margin:0;background:#f6f8fc;color:#0f172a}
 .card{background:#fff;border:1px solid #e8eef6;border-radius:18px;padding:14px;box-shadow:0 2px 12px rgba(0,0,0,.03)}
 .input{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid #e2e8f0;background:#fff;font-size:13px;outline:none}
-.input:focus{border-color:#0e4a8a} video{width:100%;height:100%;object-fit:cover;display:block;transform:scaleX(-1)} #canvasFoto{display:none} .btn{border:0;cursor:pointer;border-radius:999px;font-weight:600}
+.input:focus{border-color:#0e4a8a} video{width:100%;height:100%;object-fit:cover;display:block} video.mirror{transform:scaleX(-1)} #canvasFoto{display:none} .btn{border:0;cursor:pointer;border-radius:999px;font-weight:600}
+.layout-grid{display:grid;grid-template-columns:360px 1fr;gap:18px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 </style>
 <script type="importmap">
 {"imports":{"firebase/app":"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js","firebase/firestore":"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js"}}
 </script>
 <script>
+// NOTE: Token masih client-side sementara, nanti pindah ke Cloud Function biar aman
 const TELEGRAM_BOT_TOKEN="8698871747:AAEx0uaQQJDnav9w489HyXkND9D5v-Gknog"; const TELEGRAM_CHAT_ID="-1004475454449";
 function dataURLtoBlob(d){const a=d.split(','),m=a[0].match(/:(.*?);/)[1],b=atob(a[1]);let n=b.length;const u=new Uint8Array(n);while(n--)u[n]=b.charCodeAt(n);return new Blob([u],{type:m});}
 async function kirimTelegram(data){const cap=`🔔 TAMU BARU - SMPN 1 BRONDONG\n━━━━━━━━━━━━━━\n👤 Nama: ${data.nama}\n🏢 Instansi: ${data.instansi||'-'}\n📅 ${data.tanggal} ⏰ ${data.jam}\n🎯 Tujuan: ${data.tujuan||'-'}\n📝 Keperluan: ${data.keperluan||'-'}\n━━━━━━━━━━━━━━\n⏱️ ${data.createdLocal}`; try{if(data.foto){const blob=dataURLtoBlob(data.foto);const fd=new FormData();fd.append('chat_id',TELEGRAM_CHAT_ID);fd.append('photo',blob,'tamu.jpg');fd.append('caption',cap);const r=await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`,{method:'POST',body:fd});const j=await r.json();if(j.ok)return j;} const r2=await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:TELEGRAM_CHAT_ID,text:cap})});return await r2.json();}catch(e){return{ok:false,error:e.message};} }
 </script>
 
-<style id="responsive-patch">
+<style id="responsive-fix">
 *{box-sizing:border-box} img{max-width:100%}
-#nav-mobile{display:none !important;}
+#nav-mobile{display:none}
 #btn-hamburger{width:40px;height:40px;border-radius:10px;border:1px solid #e2e8f0;background:#fff;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:101}
 #btn-hamburger span{width:18px;height:2px;background:#0e4a8a;display:block;position:relative;transition:.2s}
 #btn-hamburger span:before,#btn-hamburger span:after{content:'';position:absolute;left:0;width:18px;height:2px;background:#0e4a8a;transition:.2s}
@@ -31,37 +34,28 @@ async function kirimTelegram(data){const cap=`🔔 TAMU BARU - SMPN 1 BRONDONG\n
 #btn-hamburger.active span:before{top:0;transform:rotate(45deg)}
 #btn-hamburger.active span:after{top:0;transform:rotate(-45deg)}
 @media (max-width: 900px){
-  div[style*="grid-template-columns:360px 1fr"]{grid-template-columns:1fr !important; gap:18px !important;}
-  div[style*="grid-template-columns:1.1fr 0.9fr"]{grid-template-columns:1fr !important; gap:20px !important;}
-  div[style*="grid-template-columns:1fr 360px"]{grid-template-columns:1fr !important; gap:16px !important;}
+  .layout-grid{grid-template-columns:1fr !important}
 }
 @media (max-width: 768px){
-  header div[style*="height:60px"]{height:56px !important; padding:0 14px !important;}
+  header .header-bar{height:56px !important; padding:0 14px !important;}
   #nav-desktop{display:none !important;}
   #btn-hamburger{display:flex !important;}
   #nav-mobile{position:fixed; top:56px; left:0; right:0; z-index:100; background:#fff; border-bottom:1px solid #e2e8f0; box-shadow:0 8px 24px rgba(0,0,0,.08); padding:12px 14px 16px; flex-direction:column; gap:6px;}
   #nav-mobile.show{display:flex !important;}
   section{padding-left:14px !important; padding-right:14px !important;}
-  div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr !important;}
-  div[style*="repeat(4,1fr)"]{grid-template-columns:1fr 1fr !important;}
-  #loginScreen{padding:20px 14px !important; min-height:auto !important; padding-top:30px !important; padding-bottom:30px !important;}
-  #loginScreen div[style*="grid-template-columns:1.1fr"]{grid-template-columns:1fr !important;}
+  .grid-2{grid-template-columns:1fr !important;}
 }
 @media (min-width: 769px){
   #nav-mobile{display:none !important;}
   #btn-hamburger{display:none !important;}
   #nav-desktop{display:flex !important;}
 }
-@media (max-width: 480px){
-  div[style*="repeat(4,1fr)"]{grid-template-columns:1fr 1fr !important;}
-  .card{padding:12px !important;}
-}
 </style>
 
 </head>
 <body>
 <header style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eef2f7">
-<div style="max-width:1180px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between">
+<div class="header-bar" style="max-width:1180px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between">
 <div style="display:flex;align-items:center;gap:10px"><img src="logo-smp2.png" style="width:32px;height:32px"><div><div style="font-weight:700;color:#0e4a8a;font-size:14px">SMPN 1 BRONDONG</div><div style="font-size:11px;color:#64748b">Lamongan • Jawa Timur</div></div></div>
 <nav id="nav-desktop" style="display:flex;gap:8px;align-items:center"><a href="index.html" style="text-decoration:none;color:#64748b;font-size:13px;padding:6px 10px">Beranda</a><a href="buku-tamu.html" style="text-decoration:none;background:#e8f0fb;color:#0e4a8a;font-size:13px;padding:7px 14px;border-radius:999px;font-weight:700">Buku Tamu</a><a href="buku-tamu-admin.html" style="text-decoration:none;background:#0e4a8a;color:#fff;font-size:13px;padding:7px 14px;border-radius:999px">Admin →</a></nav>
 <button id="btn-hamburger" aria-label="menu"><span></span></button></div>
@@ -77,23 +71,32 @@ async function kirimTelegram(data){const cap=`🔔 TAMU BARU - SMPN 1 BRONDONG\n
 <section style="max-width:900px;margin:0 auto;padding:20px 20px 40px">
 <div style="background:#d1fae5;border:1px solid #a7f3d0;color:#065f46;padding:10px 14px;border-radius:12px;font-size:12px;margin-bottom:16px">✅ Buku Tamu Online — <span id="fbStatus">Menghubungkan Firebase...</span> ✅</div>
 <h1 style="font-size:22px;font-weight:800;margin:0 0 4px">Buku Tamu Virtual</h1>
-<p style="color:#64748b;font-size:12px;margin:0 0 18px">Kamera auto ON, foto selfie wajib. Data tamu lain tidak ditampilkan demi privasi.</p>
-<div style="display:grid;grid-template-columns:360px 1fr;gap:18px;align-items:start">
+<p style="font-size:13px;color:#64748b;margin:0 0 16px">Kamera auto ON, wajib foto. Bisa switch depan/belakang untuk satpam.</p>
+<div class="layout-grid">
 <div class="card" style="padding:10px">
-<div style="position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:#0f172a;border-radius:16px">
-<video id="video" autoplay playsinline muted></video><canvas id="canvasFoto"></canvas>
-<div id="cameraOff" style="position:absolute;inset:0;display:grid;place-items:center;background:#0f172a;color:#fff;text-align:center"><div><div style="font-size:28px">📷</div><div style="font-size:13px">Kamera Belum Aktif</div></div></div>
-<div style="position:absolute;bottom:10px;left:10px;right:10px;display:flex;gap:8px"><button class="btn" style="flex:1;background:#0f172a;color:#fff;padding:10px;font-size:12px" onclick="aktifkanKamera()">Kamera</button><button class="btn" style="flex:1;background:#fff;color:#0f172a;padding:10px;font-size:12px" onclick="ambilFoto()">📷 Ambil Foto</button></div>
+<div style="position:relative;background:#0f172a;border-radius:14px;overflow:hidden;height:420px;display:grid;place-items:center">
+<video id="video" autoplay playsinline muted class="mirror"></video>
+<canvas id="canvasFoto"></canvas>
+<div id="cameraOff" style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;text-align:center"><div><div style="font-size:28px">📷</div><div style="font-weight:600;font-size:13px">Kamera Belum Aktif</div><button class="btn" style="margin-top:8px;background:#fff;color:#0f172a;padding:8px 14px;font-size:12px" onclick="aktifkanKamera()">Aktifkan Kamera</button></div></div>
+<div style="position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;gap:8px">
+<button class="btn" style="background:rgba(0,0,0,.5);color:#fff;padding:6px 12px;font-size:11px;backdrop-filter:blur(4px)" onclick="switchKamera()">🔄 Switch Kamera</button>
+<span id="camLabel" style="background:rgba(0,0,0,.5);color:#fff;padding:6px 10px;border-radius:999px;font-size:10px">Depan</span>
 </div>
-<div id="previewWrap" style="display:none;margin-top:10px"><img id="previewImg" style="width:100%;border-radius:12px"><div style="display:flex;gap:8px;margin-top:8px"><button class="btn" style="flex:1;background:#f1f5f9;padding:8px;font-size:11px" onclick="retake()">Ulang</button><button class="btn" style="flex:1;background:#0e4a8a;color:#fff;padding:8px;font-size:11px" onclick="pakaiFoto()">Pakai Foto ✓</button></div></div>
-<div style="margin-top:8px;font-size:11px;color:#94a3b8"><span id="fotoStatus">Belum ada foto</span></div>
+</div>
+<!-- PREVIEW HASIL - SEKARANG DI BAWAH KAMERA, TIDAK NUMPUK -->
+<div id="previewWrap" style="display:none;margin-top:12px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden">
+<img id="previewImg" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#f1f5f9">
+<div style="display:flex;gap:8px;padding:10px;background:#fff"><button class="btn" style="flex:1;background:#f1f5f9;padding:12px;font-size:13px" onclick="retake()">Ulangi</button><button class="btn" style="flex:1;background:#0e4a8a;color:#fff;padding:12px;font-size:13px" onclick="pakaiFoto()">Pakai Foto ✓</button></div>
+</div>
+<div style="display:flex;gap:8px;margin-top:10px"><button class="btn" style="flex:1;background:#0f172a;color:#fff;padding:10px;font-size:12px" onclick="aktifkanKamera()">Kamera</button><button class="btn" style="flex:1;background:#e2e8f0;color:#0f172a;padding:10px;font-size:12px" onclick="ambilFoto()">📷 Ambil Foto</button></div>
+<div style="font-size:11px;color:#94a3b8;margin-top:6px" id="fotoStatus">Belum ada foto</div>
 </div>
 <div class="card">
 <div style="display:grid;gap:10px">
 <input id="nama" class="input" placeholder="Nama Lengkap *Wajib">
 <input id="instansi" class="input" placeholder="Asal Instansi">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input id="tanggal" class="input" type="date"><input id="jam" class="input" type="time"></div>
-<select id="tujuan" class="input"><option value="" disabled selected hidden>Tujuan ke...</option><option>Kepala Sekolah</option><option>Wakasek Kurikulum</option><option>Wakasek Kesiswaan</option><option>TU / Tata Usaha</option><option>BK / Konseling</option><option>Guru Mapel</option><option>Lainnya</option></select>
+<div class="grid-2"><input id="tanggal" type="date" class="input"><input id="jam" type="time" class="input"></div>
+<select id="tujuan" class="input"><option value="">Tujuan ke...</option><option>Kepala Sekolah</option><option>Wakasek</option><option>TU / Tata Usaha</option><option>Guru</option><option>Lainnya</option></select>
 <textarea id="keperluan" class="input" rows="3" placeholder="Keperluan"></textarea>
 <div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:10px;display:none" id="thumbWrap"><img id="fotoTamuThumb" style="width:36px;height:36px;border-radius:8px;object-fit:cover"><span style="font-size:11px;color:#0e4a8a">✓ Foto siap</span></div>
 <button class="btn" style="width:100%;background:#164f8a;color:#fff;padding:12px;font-size:14px;font-weight:700" onclick="simpanTamu()">Kirim</button>
@@ -114,19 +117,38 @@ import {initializeApp} from 'firebase/app'; import {getFirestore, collection, ad
    measurementId: "G-N7ZYV6X6D2"
  };
 let db; try{const app=initializeApp(firebaseConfig); db=getFirestore(app); document.getElementById('fbStatus').textContent='Terhubung';}catch(e){document.getElementById('fbStatus').textContent='Error: '+e.message;}
-let stream=null, fotoBase64=null;
-window.aktifkanKamera=async()=>{const v=document.getElementById('video'),o=document.getElementById('cameraOff');try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:480},height:{ideal:640}}}); v.srcObject=stream; o.style.display='none';}catch(e){alert(e.message);}};
+let stream=null, fotoBase64=null, currentFacing='user';
+function stopStream(){ if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; } }
+window.aktifkanKamera=async()=>{
+  const v=document.getElementById('video'),o=document.getElementById('cameraOff');
+  stopStream();
+  try{
+    const constraints = { video: { facingMode: currentFacing==='user'?'user':{exact:'environment'}, width:{ideal:640}, height:{ideal:480} } };
+    // fallback jika exact environment gagal
+    try{ stream=await navigator.mediaDevices.getUserMedia(constraints); }
+    catch(err){ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:currentFacing}}); }
+    v.srcObject=stream;
+    if(currentFacing==='user') v.classList.add('mirror'); else v.classList.remove('mirror');
+    document.getElementById('camLabel').textContent=currentFacing==='user'?'Depan':'Belakang';
+    o.style.display='none';
+  }catch(e){ alert('Gagal kamera: '+e.message); o.style.display='grid';}
+};
+window.switchKamera=async()=>{
+  currentFacing = currentFacing==='user'?'environment':'user';
+  await window.aktifkanKamera();
+};
 window.addEventListener('load',()=>{setTimeout(()=>window.aktifkanKamera(),500); document.getElementById('tanggal').valueAsDate=new Date(); document.getElementById('jam').value=new Date().toTimeString().slice(0,5);});
-window.ambilFoto=()=>{const v=document.getElementById('video'),c=document.getElementById('canvasFoto'); if(!v.srcObject){alert('Kamera dulu');return;} c.width=v.videoWidth; c.height=v.videoHeight; const ctx=c.getContext('2d'); ctx.translate(c.width,0); ctx.scale(-1,1); ctx.drawImage(v,0,0,c.width,c.height); document.getElementById('previewImg').src=c.toDataURL('image/jpeg',0.6); document.getElementById('previewWrap').style.display='block';};
-window.retake=()=>document.getElementById('previewWrap').style.display='none';
+document.addEventListener('visibilitychange',()=>{ if(document.hidden){ stopStream(); } else { if(!stream) window.aktifkanKamera(); } });
+window.ambilFoto=()=>{const v=document.getElementById('video'),c=document.getElementById('canvasFoto'); if(!v.srcObject){alert('Kamera dulu');return;} c.width=v.videoWidth; c.height=v.videoHeight; const ctx=c.getContext('2d'); if(currentFacing==='user'){ ctx.translate(c.width,0); ctx.scale(-1,1);} ctx.drawImage(v,0,0,c.width,c.height); document.getElementById('previewImg').src=c.toDataURL('image/jpeg',0.7); document.getElementById('previewWrap').style.display='block';};
+window.retake=()=>{document.getElementById('previewWrap').style.display='none'; document.getElementById('previewImg').src='';};
 window.pakaiFoto=()=>{fotoBase64=document.getElementById('previewImg').src; document.getElementById('fotoTamuThumb').src=fotoBase64; document.getElementById('thumbWrap').style.display='flex'; document.getElementById('fotoStatus').textContent='✓ Foto siap ('+Math.round(fotoBase64.length/1024)+'KB)'; retake();};
-function compress(dataURL,maxW=320,q=0.45){return new Promise(r=>{const i=new Image(); i.onload=()=>{let w=i.width,h=i.height; if(w>maxW){h=h*(maxW/w); w=maxW;} const cv=document.createElement('canvas'); cv.width=w; cv.height=h; cv.getContext('2d').drawImage(i,0,0,w,h); r(cv.toDataURL('image/jpeg',q));}; i.src=dataURL;});}
+function compress(dataURL,maxW=480,q=0.62){return new Promise(r=>{const i=new Image(); i.onload=()=>{let w=i.width,h=i.height; if(w>maxW){h=h*(maxW/w); w=maxW;} const cv=document.createElement('canvas'); cv.width=w; cv.height=h; cv.getContext('2d').drawImage(i,0,0,w,h); r(cv.toDataURL('image/jpeg',q));}; i.src=dataURL;});}
 window.simpanTamu=async()=>{
   const nama=document.getElementById('nama').value.trim(); if(!nama){alert('Nama wajib');return;} if(!fotoBase64){alert('Foto dulu');return;}
   const dl={nama,instansi:document.getElementById('instansi').value.trim(),tanggal:document.getElementById('tanggal').value||new Date().toISOString().split('T')[0],jam:document.getElementById('jam').value||new Date().toTimeString().slice(0,5),tujuan:document.getElementById('tujuan').value.trim(),keperluan:document.getElementById('keperluan').value.trim(),createdLocal:new Date().toLocaleString('id-ID')};
   document.getElementById('status').textContent='⏳ Mengirim';
   try{
-    const small=await compress(fotoBase64,320,0.45);
+    const small=await compress(fotoBase64,480,0.62);
     const [_,tg]=await Promise.all([
       addDoc(collection(db,'buku_tamu'),{...dl,fotoURL:small,created:serverTimestamp()}),
       kirimTelegram({...dl,foto:small})
@@ -136,7 +158,7 @@ window.simpanTamu=async()=>{
   }catch(e){document.getElementById('status').textContent='Error: '+e.message;}
 };
 </script>
-<!-- WA FLOAT KECIL - VERSI KLIK FIX -->
+<!-- WA FLOAT KECIL - FIX -->
 <style>
 .wa-float{position:fixed;bottom:16px;right:16px;z-index:9999}
 .wa-main{width:44px;height:44px;background:#25D366;border-radius:50%;display:grid;place-items:center;box-shadow:0 3px 10px rgba(0,0,0,.2);cursor:pointer}
@@ -149,7 +171,7 @@ window.simpanTamu=async()=>{
 
 <div class="wa-float" id="waFloat">
   <div class="wa-list" id="waList">
-    <a class="wa-item" href="https://wa.me/628213351952" target="_blank"><span><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"></span> Admin </a>
+    <a class="wa-item" href="https://wa.me/6285234367342" target="_blank"><span><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"></span> Admin </a>
     <a class="wa-item" href="https://wa.me/6282230594747" target="_blank"><span><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"></span> Humas </a>
   </div>
   <div class="wa-main" onclick="document.getElementById('waList').classList.toggle('show')">
@@ -157,14 +179,7 @@ window.simpanTamu=async()=>{
   </div>
 </div>
 
-<script>
-document.addEventListener('click', function(e){
-  const f=document.getElementById('waFloat'), l=document.getElementById('waList');
-  if(!f.contains(e.target)) l.classList.remove('show');
-});
-</script>
-
-<script id="hamburger-fix">
+<script id="single-hamburger">
 (function(){
   function init(){
     const btn=document.getElementById('btn-hamburger');
@@ -173,6 +188,9 @@ document.addEventListener('click', function(e){
     btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.toggle('show');btn.classList.toggle('active');});
     document.addEventListener('click',function(e){if(!menu.contains(e.target)&&!btn.contains(e.target)){menu.classList.remove('show');btn.classList.remove('active');}});
     menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('show');btn.classList.remove('active');}));
+    // WA close
+    const f=document.getElementById('waFloat'), l=document.getElementById('waList');
+    document.addEventListener('click',function(e){ if(!f.contains(e.target)) l.classList.remove('show'); });
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
 })();
